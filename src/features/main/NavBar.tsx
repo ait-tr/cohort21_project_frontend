@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 import { useAppDispatch } from '../../store';
 import { logout } from '../auth/authSlice';
 import { selectUser } from '../auth/selectors';
@@ -21,8 +22,11 @@ function NavBar(): JSX.Element {
     },
     [dispatch, navigate]
   );
+  const categories = ['Education', 'Care', 'Home'];
   return (
     <div className="mb-3">
+      <Button variant="text">GetHelp</Button>
+
       <p>{user?.email}</p>
       {user && (
         <div className="mb-3">
@@ -33,6 +37,9 @@ function NavBar(): JSX.Element {
         </div>
       )}
       <div>
+        {categories.map((el) => (
+          <Button color="secondary">{el}</Button>
+        ))}
         {!user ? (
           <>
             <Link className="btn btn-light btn-lg ms-3" to="/auth/login">
@@ -43,26 +50,20 @@ function NavBar(): JSX.Element {
             </Link>
           </>
         ) : location.pathname === '/' ? (
-          (
-            user.role === 'ADMIN' ?
-              (
-                <Link className="btn btn-light btn-lg" to="/admin/tasks">
-                  Задачи всех пользователей
-                </Link>
-              )
-              :
-              (
-                <Link className="btn btn-light btn-lg" to="/tasks">
-                  Задачи текущего пользователя
-                </Link>
-              )
-          )
-        ) :
-          (
-            <Link className="btn btn-light btn-lg" to="/">
-              На главную
+          user.role === 'ADMIN' ? (
+            <Link className="btn btn-light btn-lg" to="/admin/tasks">
+              Задачи всех пользователей
             </Link>
-          )}
+          ) : (
+            <Link className="btn btn-light btn-lg" to="/tasks">
+              Задачи текущего пользователя
+            </Link>
+          )
+        ) : (
+          <Link className="btn btn-light btn-lg" to="/">
+            На главную
+          </Link>
+        )}
       </div>
     </div>
   );
