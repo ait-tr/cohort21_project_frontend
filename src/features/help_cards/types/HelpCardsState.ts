@@ -1,6 +1,6 @@
 import HelpCard from './HelpCard';
 
 export default interface HelpCardState {
-  tasks: HelpCard[];
+  helpCards: HelpCard[];
   error?: string;
 }

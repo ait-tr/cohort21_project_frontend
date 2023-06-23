@@ -30,7 +30,6 @@ function Header(): JSX.Element {
             GetHelp
           </Typography>
         </Toolbar>
-
         <div style={{ display: 'flex', justifyContent: 'right' }}>
           <Button color="inherit" href="#/auth/register" endIcon={<Check />}>
             Sign Up

@@ -12,6 +12,7 @@ import { useAppDispatch } from '../store';
 import AdminCabinet from '../features/main/AdminCabinet';
 import Homepage from '../features/main/Homepage';
 import Main from '../features/main/Main';
+import HelpCard from '../features/help_cards/HelpCard';
 import Tasks from '../features/tasks/Tasks';
 
 function App(): JSX.Element {
@@ -36,6 +37,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route path="/" element={<Homepage />} />
+          <Route path="/cards" element={<HelpCard />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
