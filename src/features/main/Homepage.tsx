@@ -1,15 +1,17 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Header from './Header';
-import Category from './Category';
+import HelpCard from '../help_cards/HelpCard';
+import { Container } from '@mui/material';
 
 function Homepage(): JSX.Element {
   return (
-    <>
-      <Header />
-      <Category />
-      <Outlet />
-    </>
+    <Container>
+      <HelpCard />
+      <HelpCard />
+      <HelpCard />
+      <HelpCard />
+      <HelpCard />
+      <HelpCard />
+    </Container>
   );
 }
 
