@@ -25,10 +25,10 @@ function NavBar(): JSX.Element {
 
   return (
     <div className="mb-3">
-      <p>{user?.email}</p>
+      <p>{user?.username}</p>
       {user && (
         <div className="mb-3">
-          Добрый день, {user.email}.{' '}
+          Добрый день, {user.username}.{' '}
           <a href="#" role="button" tabIndex={0} onClick={handleLogout}>
             Выйти
           </a>
