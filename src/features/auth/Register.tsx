@@ -9,7 +9,7 @@ function Register(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error = useSelector(selectRegisterFormError);
-  const [email, setEmail] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [passwordRepeat, setPasswordRepeat] = React.useState('');
 
@@ -19,23 +19,23 @@ function Register(): JSX.Element {
 
       const dispatchResult = await dispatch(
         register({
-          email,
+          username,
           password,
           passwordRepeat,
         })
       );
 
       if (register.fulfilled.match(dispatchResult)) {
-        dispatch(login({ email, password }));
+        dispatch(login({ username, password }));
         navigate('/');
       }
     },
-    [dispatch, email, navigate, password, passwordRepeat]
+    [dispatch, username, navigate, password, passwordRepeat]
   );
 
   const handleNameChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setEmail(event.target.value);
+      setUsername(event.target.value);
       dispatch(resetRegisterFormError());
     },
     [dispatch]
@@ -74,7 +74,7 @@ function Register(): JSX.Element {
           className={`form-control ${error ? 'is-invalid' : ''}`}
           id="name-input"
           name="username"
-          value={email}
+          value={username}
           onChange={handleNameChange}
         />
       </div>
