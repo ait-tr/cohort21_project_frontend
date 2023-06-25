@@ -59,7 +59,7 @@ function Register(): JSX.Element {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      <h2>Регистрация</h2>
+      <h2>Registration</h2>
       {error && (
         <div className="invalid-feedback mb-3" style={{ display: 'block' }}>
           {error}
@@ -67,7 +67,7 @@ function Register(): JSX.Element {
       )}
       <div className="mb-3">
         <label htmlFor="name-input" className="form-label">
-          Имя
+          Name
         </label>
         <input
           type="text"
@@ -80,7 +80,7 @@ function Register(): JSX.Element {
       </div>
       <div className="mb-3">
         <label htmlFor="password-input" className="form-label">
-          Пароль
+          Password
         </label>
         <input
           type="password"
@@ -93,7 +93,7 @@ function Register(): JSX.Element {
       </div>
       <div className="mb-3">
         <label htmlFor="password-repeat-input" className="form-label">
-          Повторите пароль
+          Repeat password
         </label>
         <input
           type="password"
@@ -105,7 +105,7 @@ function Register(): JSX.Element {
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Зарегистрироваться
+        Sign Up
       </button>
     </form>
   );

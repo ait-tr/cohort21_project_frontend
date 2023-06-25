@@ -20,8 +20,8 @@ function Header(): JSX.Element {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'Nunito Sans',
-              fontWeight: 400,
+              fontFamily: 'Nunito+Sans',
+              fontWeight: 600,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
@@ -31,10 +31,20 @@ function Header(): JSX.Element {
           </Typography>
         </Toolbar>
         <div style={{ display: 'flex', justifyContent: 'right' }}>
-          <Button color="inherit" href="#/auth/register" endIcon={<Check />}>
+          <Button
+            sx={{ mb: '1rem', mr: '1rem' }}
+            color="inherit"
+            href="#/auth/register"
+            endIcon={<Check />}
+          >
             Sign Up
           </Button>
-          <Button color="inherit" href="#/auth/login" endIcon={<Login />}>
+          <Button
+            sx={{ mb: '1rem' }}
+            color="inherit"
+            href="#/auth/login"
+            endIcon={<Login />}
+          >
             Login
           </Button>
         </div>
