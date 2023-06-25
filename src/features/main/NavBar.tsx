@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+
 import { useAppDispatch } from '../../store';
 import { logout } from '../auth/authSlice';
 import { selectUser } from '../auth/selectors';
@@ -22,24 +22,21 @@ function NavBar(): JSX.Element {
     },
     [dispatch, navigate]
   );
-  const categories = ['Education', 'Care', 'Home'];
+ 
+  
+
   return (
     <div className="mb-3">
-      <Button variant="text">GetHelp</Button>
-
-      <p>{user?.email}</p>
+      <p>{user?.username}</p>
       {user && (
         <div className="mb-3">
-          Добрый день, {user.email}.{' '}
+          Добрый день, {user.username}.{' '}
           <a href="#" role="button" tabIndex={0} onClick={handleLogout}>
             Выйти
           </a>
         </div>
       )}
       <div>
-        {categories.map((el) => (
-          <Button color="secondary">{el}</Button>
-        ))}
         {!user ? (
           <>
             <Link className="btn btn-light btn-lg ms-3" to="/auth/login">
