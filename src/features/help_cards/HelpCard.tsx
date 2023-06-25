@@ -1,33 +1,35 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material';
+import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 
 export default function HelpCard(): JSX.Element {
   return (
     <Grid item xs={12} md={4}>
-      <Card sx={{ height: '100%' }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          component="img"
-          image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
-          title="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Lizard
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lizards are a widespread group of squamate reptiles, with over
+              6,000 species, ranging across all continents except Antarctica
+            </Typography>
+          </CardContent>
+        </CardActionArea>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small" color="primary">
+            Learn more
+          </Button>
         </CardActions>
       </Card>
     </Grid>
