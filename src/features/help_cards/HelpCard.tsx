@@ -40,11 +40,13 @@ export default function HelpCard(): JSX.Element {
           </CardContent>
         </CardActionArea>
         <CardActions>
+
           <Button size="small" color="primary" onClick={handleOpenModal}>
             Learn more
           </Button>
         </CardActions>
       </Card>
+
       <HelpCardModal
         open={modalOpen}
         onClose={handleCloseModal}

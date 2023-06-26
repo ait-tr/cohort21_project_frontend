@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Container, Grid, Typography } from '@mui/material';
-import HelpCard from '../help_cards/HelpCard';
-import CategoryNavTab from './CategoryNavTab';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Header from './Header';
+import Category from './Category';
 
 function Homepage(): JSX.Element {
   const [filter, setFilter] = useState('');
@@ -34,19 +34,11 @@ function Homepage(): JSX.Element {
   );
 
   return (
-    <Container>
-      <CategoryNavTab handleFilter={handleFilter} />
-      {searchedCategory && (
-        <Typography variant="h6">Search Results for: {searchedCategory}</Typography>
-      )}
-      <Grid container sx={{ mt: '1rem' }} spacing={2}>
-        {filteredHelpCardData.map((card, index) => (
-          <>
-            <HelpCard category={card.category} title={card.title} />
-          </>
-        ))}
-      </Grid>
-    </Container>
+    <>
+      <Header />
+      <Category />
+      <Outlet />
+    </>
   );
 }
 

@@ -22,8 +22,11 @@ function NavBar(): JSX.Element {
     },
     [dispatch, navigate]
   );
+<<<<<<< HEAD
  
   
+=======
+>>>>>>> 138f628dc56ec471129d981b1db1344592d49f6e
 
   return (
     <div className="mb-3">

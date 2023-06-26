@@ -9,7 +9,7 @@ function Login(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error = useSelector(selectLoginFormError);
-  const [email, setName] = React.useState('');
+  const [username, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleSubmit = React.useCallback(
@@ -18,7 +18,7 @@ function Login(): JSX.Element {
       // 332 делаем диспатч санка
       const dispatchResult = await dispatch(
         login({
-          email,
+          username,
           password,
         })
       );
@@ -34,7 +34,7 @@ function Login(): JSX.Element {
         console.error(dispatchResult.error.message);
       }
     },
-    [dispatch, email, navigate, password]
+    [dispatch, username, navigate, password]
   );
 
   const handleNameChange = React.useCallback(
@@ -57,7 +57,7 @@ function Login(): JSX.Element {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      <h2>Вход</h2>
+      <h2>Log in</h2>
       {error && (
         <div className="invalid-feedback mb-3" style={{ display: 'block' }}>
           {error}
@@ -65,20 +65,20 @@ function Login(): JSX.Element {
       )}
       <div className="mb-3">
         <label htmlFor="name-input" className="form-label">
-          Имя
+          Name
         </label>
         <input
           type="text"
           className={`form-control ${error ? 'is-invalid' : ''}`}
           id="name-input"
           name="username"
-          value={email}
+          value={username}
           onChange={handleNameChange}
         />
       </div>
       <div className="mb-3">
         <label htmlFor="password-input" className="form-label">
-          Пароль
+          Password
         </label>
         <input
           type="password"
@@ -90,7 +90,7 @@ function Login(): JSX.Element {
         />
       </div>
       <button type="submit" className="btn btn-primary">
-        Войти
+        Log in
       </button>
     </form>
   );
