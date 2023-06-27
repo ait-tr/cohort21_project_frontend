@@ -14,6 +14,7 @@ import Homepage from '../features/main/Homepage';
 import Main from '../features/main/Main';
 import HelpCard from '../features/help_cards/HelpCard';
 import Tasks from '../features/tasks/Tasks';
+import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
 
 function App(): JSX.Element {
@@ -41,6 +42,7 @@ function App(): JSX.Element {
           <Route path="/api/users/my/profile" element={<ProfilePage />} />
           <Route path="/cards" element={<HelpCard />} />
           <Route path="/tasks" element={<Tasks />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/admin/tasks" element={<AdminCabinet />} />

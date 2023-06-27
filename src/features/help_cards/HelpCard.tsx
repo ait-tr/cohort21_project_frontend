@@ -27,6 +27,7 @@ export default function HelpCard(): JSX.Element {
           </CardContent>
         </CardActionArea>
         <CardActions>
+
           <Button size="small" color="primary">
             Learn more
           </Button>
