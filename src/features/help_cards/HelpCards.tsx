@@ -101,7 +101,9 @@ export default function HelpCards(): JSX.Element {
       <ul>
         {helpCards?.map((element) => (
           <li key={element.id}>
-            {element.subCategoryId} {element.description}
+            Card id:{element.id}, CategoryID:{element.categoryId}, SubCategoryID:
+            {element.subCategoryId} <div>Description:</div>{' '}
+            <div>{element.description}</div>
           </li>
         ))}
       </ul>

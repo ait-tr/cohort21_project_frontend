@@ -47,12 +47,11 @@ const helpCardsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(createHelpCard.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.helpCards.push(action.payload);
       })
 
       .addCase(getHelpCards.fulfilled, (state, action) => {
-        state.helpCards = action.payload.helpCards;
+        state.helpCards = action.payload.cards;
       });
 
     // .addCase(updateTask.fulfilled, (state, action) => {
