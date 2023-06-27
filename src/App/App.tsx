@@ -14,6 +14,7 @@ import Homepage from '../features/main/Homepage';
 import Main from '../features/main/Main';
 import HelpCard from '../features/help_cards/HelpCard';
 import Tasks from '../features/tasks/Tasks';
+import ProfilePage from '../features/profile/Profile';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -37,6 +38,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route path="/" element={<Homepage />} />
+          <Route path="/api/users/my/profile" element={<ProfilePage />} />
           <Route path="/cards" element={<HelpCard />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/auth/login" element={<Login />} />

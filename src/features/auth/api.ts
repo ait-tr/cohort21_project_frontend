@@ -1,3 +1,4 @@
+import HelpCard from '../help_cards/types/HelpCard';
 import Credentials from './types/Credentials';
 import RegisterData from './types/RegisterData';
 import User from './types/User';
@@ -5,7 +6,11 @@ import User from './types/User';
 export async function user(): Promise<{
   id: number;
   username: string;
-  role: string;
+  role?: string;
+  email?: string;
+  phone?: string;
+  isHelper?: boolean;
+  cards?: HelpCard[];
 }> {
   const res = await fetch('/api/users/my/profile');
   if (res.status >= 400) {
