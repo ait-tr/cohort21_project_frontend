@@ -3,6 +3,7 @@ import AuthState from './types/AuthState';
 import Credentials from './types/Credentials';
 import * as api from './api';
 import RegisterData from './types/RegisterData';
+import User from './types/User';
 
 const initialState: AuthState = {
   authChecked: false,
@@ -11,19 +12,16 @@ const initialState: AuthState = {
   registerFormError: undefined,
 };
 
-export const getUser = createAsyncThunk('api/users/my/profile', () =>
-  api.user()
+export const getProfile = createAsyncThunk('api/users/my/profile', () =>
+  api.getProfile()
 );
 
-export const login = createAsyncThunk(
-  'login',
-  async (credentials: Credentials) => {
-    if (!credentials.username.trim() || !credentials.password.trim()) {
-      throw new Error('Не все поля заполнены');
-    }
-    return api.login(credentials);
+export const login = createAsyncThunk('login', async (credentials: Credentials) => {
+  if (!credentials.username.trim() || !credentials.password.trim()) {
+    throw new Error('Не все поля заполнены');
   }
-);
+  return api.login(credentials);
+});
 
 export const register = createAsyncThunk(
   'api/register',
@@ -41,11 +39,17 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk('logout', api.logout);
 
+export const editProfile = createAsyncThunk(
+  'users/editProfile',
+  async (profile: User) => api.editProfile(profile)
+  // TODO переделать стартовый(тестовый) вариант
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // 332 редьюсер для очистки ошибки
+    // редьюсер для очистки ошибки
     resetLoginFormError: (state) => {
       state.loginFormError = undefined;
     },
@@ -55,17 +59,17 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.fulfilled, (state, action) => {
+      .addCase(getProfile.fulfilled, (state, action) => {
         state.authChecked = true;
         state.user = action.payload;
       })
-      .addCase(getUser.rejected, (state) => {
+      .addCase(getProfile.rejected, (state) => {
         state.authChecked = true;
       })
       .addCase(login.fulfilled, (state) => {
         state.loginFormError = undefined;
       })
-      // 332 так изменяется стэйт если вернулась ошибка
+      // так изменяется стэйт если вернулась ошибка
       .addCase(login.rejected, (state, action) => {
         state.loginFormError = action.error.message;
       })
@@ -81,11 +85,15 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.registerFormError = action.error.message;
+      })
+
+      .addCase(editProfile.fulfilled, (state, action) => {
+        state.user = action.payload;
       });
+    // TODO добавить форму ошибки для editProfile и case под неё
   },
 });
 
-export const { resetLoginFormError, resetRegisterFormError } =
-  authSlice.actions;
+export const { resetLoginFormError, resetRegisterFormError } = authSlice.actions;
 
 export default authSlice.reducer;

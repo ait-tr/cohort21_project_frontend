@@ -6,7 +6,7 @@ import './App.css';
 // import TasksList from '../features/tasks/TasksList';
 import Login from '../features/auth/Login';
 import Register from '../features/auth/Register';
-import { getUser } from '../features/auth/authSlice';
+import { getProfile } from '../features/auth/authSlice';
 import { selectAuthChecked } from '../features/auth/selectors';
 import { useAppDispatch } from '../store';
 import AdminCabinet from '../features/main/AdminCabinet';
@@ -21,7 +21,7 @@ function App(): JSX.Element {
   const authChecked = useSelector(selectAuthChecked);
 
   React.useEffect(() => {
-    dispatch(getUser());
+    dispatch(getProfile());
     // console.log(authChecked);
   }, [dispatch]);
 

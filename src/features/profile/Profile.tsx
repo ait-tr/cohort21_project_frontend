@@ -3,7 +3,7 @@ import { Button, Container, FormControl, Grid, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
-import { editProfile, getProfile } from './profileSlice';
+import { editProfile, getProfile } from '../auth/authSlice';
 
 function ProfilePage(): JSX.Element {
   const user = useSelector(selectUser);
@@ -15,7 +15,15 @@ function ProfilePage(): JSX.Element {
     async (event: React.FormEvent) => {
       event.preventDefault();
 
-      const dispatchResult = await dispatch(editProfile({ ...user, email, phone }));
+      const dispatchResult = await dispatch(
+        editProfile({
+          ...user,
+          id: user?.id as number,
+          username: user?.username as string,
+          email,
+          phone,
+        })
+      );
       if (editProfile.fulfilled.match(dispatchResult)) {
         setEmail('');
         setPhone('');
