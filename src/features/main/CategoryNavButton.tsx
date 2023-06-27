@@ -1,38 +1,38 @@
 import React, { useEffect } from 'react';
-import Box from '@mui/material/Box';
 import { useSelector } from 'react-redux';
-import { selectError, selectCategories } from '../categories/selectors';
+import { Button, Grid } from '@mui/material';
+import { selectCategories } from '../categories/selectors';
+import { loadCategories } from '../categories/categoriesSlice';
+import { useAppDispatch } from '../../store';
 
 interface CategoryNavButtonProps {
-    handleFilter: (value: string) => void;
+  handleFilter: (value: string) => void;
 }
 
-const CategoryNavButton: React.FC<CategoryNavButtonProps> = ({ handleFilter }) => {
-    useEffect(() => {
-        // Fetch categories data using loadCategoriesOfAll or any other method
-    }, []);
+function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
+  const categories = useSelector(selectCategories);
+  const dispatch = useAppDispatch();
 
-    const categories = useSelector(selectCategories);
+  useEffect(() => {
+    dispatch(loadCategories());
+  }, [dispatch]);
 
-    const buttonStyle = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    };
-
-    return (
-        <Box sx={{ display: 'flex' }}>
-            {categories.map((category) => (
-                <ul>
-                    {categories?.map((element) => (
-                        <li key={element.id}>
-                            {element.id} {element.title} {element.description}
-                        </li>
-                    ))}
-                </ul>
-            ))}
-        </Box>
-    );
-};
+  return (
+    <Grid container spacing={1}>
+      {categories?.map((element) => (
+        <Grid item key={element.id}>
+          <Button
+            variant="contained"
+            color="primary"
+            key={element.id}
+            onClick={() => handleFilter(element.title)}
+          >
+            {element.title}
+          </Button>
+        </Grid>
+      ))}
+    </Grid>
+  );
+}
 
 export default CategoryNavButton;
