@@ -27,7 +27,7 @@ function Register(): JSX.Element {
 
       if (register.fulfilled.match(dispatchResult)) {
         dispatch(login({ username, password }));
-        navigate('/');
+        navigate('/api/users/my/profile');
       }
     },
     [dispatch, username, navigate, password, passwordRepeat]

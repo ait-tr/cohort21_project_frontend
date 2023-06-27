@@ -6,7 +6,7 @@ import './App.css';
 // import TasksList from '../features/tasks/TasksList';
 import Login from '../features/auth/Login';
 import Register from '../features/auth/Register';
-import { getUser } from '../features/auth/authSlice';
+import { getProfile } from '../features/auth/authSlice';
 import { selectAuthChecked } from '../features/auth/selectors';
 import { useAppDispatch } from '../store';
 import AdminCabinet from '../features/main/AdminCabinet';
@@ -15,13 +15,14 @@ import Main from '../features/main/Main';
 import HelpCard from '../features/help_cards/HelpCard';
 import Tasks from '../features/tasks/Tasks';
 import Categories from '../features/categories/Categories';
+import ProfilePage from '../features/profile/Profile';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const authChecked = useSelector(selectAuthChecked);
 
   React.useEffect(() => {
-    dispatch(getUser());
+    dispatch(getProfile());
     // console.log(authChecked);
   }, [dispatch]);
 
@@ -38,6 +39,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route path="/" element={<Homepage />} />
+          <Route path="/api/users/my/profile" element={<ProfilePage />} />
           <Route path="/cards" element={<HelpCard />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/categories" element={<Categories />} />

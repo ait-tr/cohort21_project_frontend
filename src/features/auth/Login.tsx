@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUser, login, resetLoginFormError } from './authSlice';
+import { getProfile, login, resetLoginFormError } from './authSlice';
 import { selectLoginFormError } from './selectors';
 import { useAppDispatch } from '../../store';
 
@@ -25,8 +25,8 @@ function Login(): JSX.Element {
 
       // 332 проверяем, что санк login зарезолвился успешно
       if (login.fulfilled.match(dispatchResult)) {
-        dispatch(getUser());
-        navigate('/');
+        dispatch(getProfile());
+        navigate('/api/users/my/profile');
       }
 
       // 332 выводим в консоль ошибку если санк login зареджектился

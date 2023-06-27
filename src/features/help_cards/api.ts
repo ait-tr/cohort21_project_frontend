@@ -1,16 +1,14 @@
-// все запросы на сервер касательно тасков объединены в этом файлике
-// в остальной программе, мы будем делать запросы только опосредованно через api
-
 import HelpCard from './types/HelpCard';
 
-// запрос на создание таска
 export async function createHelpCard(
-  name: string,
+  categoryId: number,
+  subCategoryId: number,
+  price: number,
   description: string
 ): Promise<HelpCard> {
   const res = await fetch('/api/cards', {
     method: 'POST',
-    body: JSON.stringify({ name, description }),
+    body: JSON.stringify({ categoryId, subCategoryId, price, description }),
     headers: {
       'Content-Type': 'application/json',
     },
@@ -23,7 +21,6 @@ export async function createHelpCard(
 
   return res.json();
 }
-// пример запроса на обновление таска
 export async function updateHelpCard(helpCard: HelpCard): Promise<void> {
   await fetch(`/api/cards/${helpCard.id}`, {
     method: 'PUT',
@@ -34,8 +31,8 @@ export async function updateHelpCard(helpCard: HelpCard): Promise<void> {
   });
 }
 
-// доступ у юзера - таски текущего пользователя
-export async function getHelpCards(): Promise<{ helpCards: HelpCard[] }> {
-  const result = await fetch('/api/users/my/cards');
+export async function getHelpCards(): Promise<{ cards: HelpCard[] }> {
+  // TODO исправить на получение только для пользователя (+бэк)
+  const result = await fetch('/api/cards');
   return result.json();
 }

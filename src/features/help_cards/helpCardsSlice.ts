@@ -1,7 +1,4 @@
-// tasks/tasksSlice.ts
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import { logout } from '../auth/authSlice';
-// import Task, { TaskId } from './types/Task';
 import HelpCardsState from './types/HelpCardsState';
 import * as api from './api';
 
@@ -12,15 +9,27 @@ const initialState: HelpCardsState = {
 
 export const createHelpCard = createAsyncThunk(
   'helpCards/createHelpCard',
-  async ({ name, description }: { name: string; description: string }) => {
-    if (!name.trim() || !description.trim()) {
-      throw new Error('Заголовок и описание не должны быть пустыми');
+  async ({
+    categoryId,
+    subCategoryId,
+    price,
+    description,
+  }: {
+    categoryId: number;
+    subCategoryId: number;
+    price: number;
+    description: string;
+  }) => {
+    if (categoryId === 0 || subCategoryId === 0) {
+      throw new Error('Категория или подкатегория не выбраны');
     }
-    return api.createHelpCard(name, description);
+    if (!description.trim()) {
+      throw new Error('Описание не должно быть пустым');
+    }
+    return api.createHelpCard(categoryId, subCategoryId, price, description);
   }
 );
-// обращается к api для загрузки тасков пользователя
-export const loadHelpCards = createAsyncThunk('helpCards/loadHelpCards', () =>
+export const getHelpCards = createAsyncThunk('helpCards/getHelpCards', () =>
   api.getHelpCards()
 );
 
@@ -41,8 +50,8 @@ const helpCardsSlice = createSlice({
         state.helpCards.push(action.payload);
       })
 
-      .addCase(loadHelpCards.fulfilled, (state, action) => {
-        state.helpCards = action.payload.helpCards;
+      .addCase(getHelpCards.fulfilled, (state, action) => {
+        state.helpCards = action.payload.cards;
       });
 
     // .addCase(updateTask.fulfilled, (state, action) => {

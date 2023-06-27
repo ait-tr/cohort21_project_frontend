@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-// Слайсы - это отдельные модули нашего приложения. У каждого слайса - свой редьюсер.
 import authSlice from './features/auth/authSlice';
 import helpCardsSlice from './features/help_cards/helpCardsSlice';
 import tasksSlice from './features/tasks/tasksSlice';

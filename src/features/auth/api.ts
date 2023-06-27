@@ -1,16 +1,19 @@
+import HelpCard from '../help_cards/types/HelpCard';
 import Credentials from './types/Credentials';
 import RegisterData from './types/RegisterData';
 import User from './types/User';
 
-export async function user(): Promise<{
+export async function getProfile(): Promise<{
   id: number;
   username: string;
-  role: string;
+  role?: string;
+  email?: string;
+  phone?: string;
+  isHelper?: boolean;
+  cards?: HelpCard[];
 }> {
   const res = await fetch('/api/users/my/profile');
   if (res.status >= 400) {
-    // const { message } = await res.json();
-    // throw new Error(message);
     const answer = await res.json();
     throw new Error(answer.message);
   }
@@ -26,7 +29,7 @@ export async function login(credentials: Credentials): Promise<User> {
     },
   });
 
-  // 332 реджектим промис если вернулся ошибочный статус
+  // реджектим промис если вернулся ошибочный статус
   if (res.status >= 400) {
     const { error } = await res.json();
     throw error;
@@ -55,4 +58,19 @@ export async function logout(): Promise<void> {
   await fetch('/logout', {
     method: 'PUT',
   });
+}
+
+export async function editProfile(editedUser: User): Promise<User> {
+  const res = await fetch('/api/users/my/profile', {
+    method: 'PUT',
+    body: JSON.stringify(editedUser),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  if (res.status >= 400) {
+    const { error } = await res.json();
+    throw error;
+  }
+  return res.json();
 }
