@@ -1,7 +1,9 @@
 export default interface HelpCard {
   id: number;
-  name: string;
+  userId: number;
+  categoryId: number;
+  subCategoryId: number;
+  price: number;
   description: string;
+  isActive: boolean;
 }
-
-export type HelpCardId = HelpCard['id'];

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
 import { editProfile, getProfile } from '../auth/authSlice';
+import HelpCards from '../help_cards/HelpCards';
 
 function ProfilePage(): JSX.Element {
   const user = useSelector(selectUser);
@@ -47,7 +48,13 @@ function ProfilePage(): JSX.Element {
               <div> role: {user.role}</div>
               <div> email: {user.email}</div>
               <div> phone: {user.phone}</div>
-              <div> isHelper: {user.isHelper}</div>
+              <div> isHelper: {user.isHelper?.toString()}</div>
+              <div>
+                cards:{' '}
+                {user.cards && user.cards.length > 0
+                  ? user.cards[0].description
+                  : 'нет карточки'}
+              </div>
 
               <div>
                 <TextField
@@ -84,6 +91,8 @@ function ProfilePage(): JSX.Element {
             <div>Loading...</div>
           )}
         </Grid>
+        <div>--------------------------------</div>
+        <HelpCards />
       </FormControl>
     </Container>
   );
