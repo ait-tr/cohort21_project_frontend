@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 import authSlice from './features/auth/authSlice';
 import helpCardsSlice from './features/help_cards/helpCardsSlice';
 import tasksSlice from './features/tasks/tasksSlice';
+import categoriesSlice from './features/categories/categoriesSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
     helpCards: helpCardsSlice,
     tasks: tasksSlice,
+    categories: categoriesSlice,
   },
 });
 
