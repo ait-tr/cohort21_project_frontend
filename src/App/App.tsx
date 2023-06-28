@@ -12,7 +12,7 @@ import { useAppDispatch } from '../store';
 import AdminCabinet from '../features/main/AdminCabinet';
 import Homepage from '../features/main/Homepage';
 import Main from '../features/main/Main';
-import HelpCard from '../features/help_cards/HelpCard';
+import HelpCardsAll from '../features/help_cards/HelpCardsAll';
 import Tasks from '../features/tasks/Tasks';
 import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
@@ -40,7 +40,7 @@ function App(): JSX.Element {
         <Route path="/" element={<Main />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/api/users/my/profile" element={<ProfilePage />} />
-          <Route path="/cards" element={<HelpCard />} />
+          <Route path="/cards" element={<HelpCardsAll selectedCategory={null} />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/auth/login" element={<Login />} />
