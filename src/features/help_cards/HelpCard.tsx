@@ -3,18 +3,22 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
+import { CardActionArea, CardActions, Grid } from '@mui/material';
 
 function HelpCard({
   id,
+  userId,
   categoryId,
   subCategoryId,
   description,
+  price,
 }: {
   id: number;
+  userId: number;
   categoryId: number;
   subCategoryId: number;
   description: string;
+  price: number;
 }): JSX.Element {
   return (
     <Grid item xs={12} md={4} key={categoryId}>
@@ -31,6 +35,8 @@ function HelpCard({
               Card id: {id}
             </Typography>
             <Typography variant="body2" color="text.secondary">
+              User: {userId}
+              <br />
               Category: {categoryId}
               <br />
               Subcategory: {subCategoryId}
@@ -39,11 +45,7 @@ function HelpCard({
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Learn more
-          </Button>
-        </CardActions>
+        <CardActions>Price: {price}</CardActions>
       </Card>
     </Grid>
   );

@@ -29,9 +29,11 @@ export default function HelpCardsAll({
         <HelpCard
           key={helpCard.id}
           id={helpCard.id}
+          userId={helpCard.userId}
           categoryId={helpCard.categoryId}
           subCategoryId={helpCard.subCategoryId}
           description={helpCard.description}
+          price={helpCard.price}
         />
       ))}
     </Grid>
