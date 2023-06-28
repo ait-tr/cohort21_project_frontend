@@ -23,6 +23,7 @@ export default function Categories(): JSX.Element {
           updateCategory({
             id: Number(categoryId),
             updatedCategory: {
+              id: Number(categoryId), // Add the id property here
               title,
               description
             }
