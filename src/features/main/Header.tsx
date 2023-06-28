@@ -1,25 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { Check, Login } from '@mui/icons-material';
 
-function Header(): JSX.Element {
+export default function Header(): JSX.Element {
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="sticky">
         <Toolbar>
           <Typography
-            variant="h4"
             noWrap
-            align="right"
+            variant="h4"
             component="a"
             href="/"
             sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              flexGrow: 1,
               fontFamily: 'Nunito+Sans',
               fontWeight: 600,
               letterSpacing: '.3rem',
@@ -29,10 +27,8 @@ function Header(): JSX.Element {
           >
             GetHelp
           </Typography>
-        </Toolbar>
-        <div style={{ display: 'flex', justifyContent: 'right' }}>
           <Button
-            sx={{ mb: '1rem', mr: '1rem' }}
+            sx={{ mt: '1rem', mr: '1rem' }}
             color="inherit"
             href="#/auth/register"
             endIcon={<Check />}
@@ -40,16 +36,15 @@ function Header(): JSX.Element {
             Sign Up
           </Button>
           <Button
-            sx={{ mb: '1rem' }}
+            sx={{ mt: '1rem' }}
             color="inherit"
             href="#/auth/login"
             endIcon={<Login />}
           >
             Login
           </Button>
-        </div>
-      </Container>
-    </AppBar>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
-export default Header;

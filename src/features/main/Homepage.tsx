@@ -11,7 +11,7 @@ function Homepage(): JSX.Element {
   };
 
   return (
-    <Container>
+    <Container sx={{ mt: '0.5rem' }}>
       <CategoryNavButton handleFilter={handleFilter} />
       <Grid container sx={{ mt: '1rem' }} spacing={2}>
         <HelpCardsAll selectedCategory={selectedCategory} />
