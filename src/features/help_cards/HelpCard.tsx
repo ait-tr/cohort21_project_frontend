@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 
 export default function HelpCard(): JSX.Element {
   return (
-    <Grid item xs={12} md={4}>
+    <Grid item xs={12} md={2}>
       <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
           <CardMedia
@@ -21,13 +21,12 @@ export default function HelpCard(): JSX.Element {
               Lizard
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over 6,000
-              species, ranging across all continents except Antarctica
+              Lizards are a widespread group of squamate reptiles, with over
+              6,000 species, ranging across all continents except Antarctica
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-
           <Button size="small" color="primary">
             Learn more
           </Button>

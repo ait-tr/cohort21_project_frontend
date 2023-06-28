@@ -9,7 +9,9 @@ interface CategoryNavButtonProps {
   handleFilter: (value: string) => void;
 }
 
-function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
+function CategoryNavButton({
+  handleFilter,
+}: CategoryNavButtonProps): JSX.Element {
   const categories = useSelector(selectCategories);
   const dispatch = useAppDispatch();
 
