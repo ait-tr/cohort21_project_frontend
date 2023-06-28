@@ -7,9 +7,11 @@ import { useAppDispatch } from '../../store';
 import HelpCard from './HelpCard';
 
 interface HelpCardsAllProps {
-    selectedCategory: number | null;
-  }
-export default function HelpCardsAll({ selectedCategory }: HelpCardsAllProps): JSX.Element {
+  selectedCategory: number | null;
+}
+export default function HelpCardsAll({
+  selectedCategory,
+}: HelpCardsAllProps): JSX.Element {
   const helpCards = useSelector(selectHelpCards);
   const dispatch = useAppDispatch();
 
@@ -18,23 +20,20 @@ export default function HelpCardsAll({ selectedCategory }: HelpCardsAllProps): J
   }, [dispatch]);
 
   const filteredHelpCards = selectedCategory
-  ? helpCards?.filter((helpCard) => helpCard.categoryId === selectedCategory)
-  : helpCards;
+    ? helpCards?.filter((helpCard) => helpCard.categoryId === selectedCategory)
+    : helpCards;
 
   return (
-    <>
-     
-      <Grid container spacing={2}>
-        {filteredHelpCards?.map((helpCard) => (
-          <HelpCard
-            key={helpCard.id}
-            id={helpCard.id}
-            categoryId={helpCard.categoryId}
-            subCategoryId={helpCard.subCategoryId}
-            description={helpCard.description}
-          />
-        ))}
-      </Grid>
-    </>
+    <Grid container spacing={2}>
+      {filteredHelpCards?.map((helpCard) => (
+        <HelpCard
+          key={helpCard.id}
+          id={helpCard.id}
+          categoryId={helpCard.categoryId}
+          subCategoryId={helpCard.subCategoryId}
+          description={helpCard.description}
+        />
+      ))}
+    </Grid>
   );
 }

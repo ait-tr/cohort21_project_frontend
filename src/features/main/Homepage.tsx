@@ -6,16 +6,15 @@ import CategoryNavButton from './CategoryNavButton';
 function Homepage(): JSX.Element {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
-  const handleFilter = (value: number | null) => {
+  const handleFilter = (value: number | null): void => {
     setSelectedCategory(value);
   };
 
- 
   return (
     <Container>
       <CategoryNavButton handleFilter={handleFilter} />
       <Grid container sx={{ mt: '1rem' }} spacing={2}>
-      <HelpCardsAll selectedCategory={selectedCategory} />
+        <HelpCardsAll selectedCategory={selectedCategory} />
       </Grid>
     </Container>
   );

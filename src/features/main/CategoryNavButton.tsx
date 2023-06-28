@@ -19,21 +19,18 @@ function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Elemen
 
   return (
     <Grid container spacing={1}>
-      {categories?.map((element) => (
-        <Grid item key={element.id}>
-          <Button
-            variant="contained"
-            color="primary"
-            key={element.id}
-            onClick={() => handleFilter(element.id)}
-          >
-            {element.title}
-          </Button>
-          <Button variant="contained" onClick={() => handleFilter(null)}>
+      <Button variant="contained" onClick={() => handleFilter(null)}>
         Show All Cards
       </Button>
-      
-        </Grid>
+      {categories?.map((element) => (
+        <Button
+          variant="contained"
+          color="primary"
+          key={element.id}
+          onClick={() => handleFilter(element.id)}
+        >
+          {element.title}
+        </Button>
       ))}
     </Grid>
   );
