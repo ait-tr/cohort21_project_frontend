@@ -71,6 +71,7 @@
           "allowDirectConstAssertionInArrowFunctions": true
         }
       ],
+      
       "no-await-in-loop": 0,
       "@typescript-eslint/consistent-type-definitions": [
         "error",

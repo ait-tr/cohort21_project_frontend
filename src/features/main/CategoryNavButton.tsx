@@ -6,7 +6,7 @@ import { loadCategories } from '../categories/categoriesSlice';
 import { useAppDispatch } from '../../store';
 
 interface CategoryNavButtonProps {
-  handleFilter: (value: string) => void;
+  handleFilter: (value: number | null) => void;
 }
 
 function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
@@ -25,10 +25,14 @@ function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Elemen
             variant="contained"
             color="primary"
             key={element.id}
-            onClick={() => handleFilter(element.title)}
+            onClick={() => handleFilter(element.id)}
           >
             {element.title}
           </Button>
+          <Button variant="contained" onClick={() => handleFilter(null)}>
+        Show All Cards
+      </Button>
+      
         </Grid>
       ))}
     </Grid>
