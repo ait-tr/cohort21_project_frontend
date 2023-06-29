@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectError, selectHelpCards } from './selectors';
-import { createHelpCard, getHelpCards } from './helpCardsSlice';
+import { createHelpCard } from './helpCardsSlice';
 import { useAppDispatch } from '../../store';
+import { selectUserCards } from '../auth/selectors';
+import { getUserCards } from '../auth/authSlice';
 
 export default function HelpCards(): JSX.Element {
   const error = useSelector(selectError);
+  const helpCards2 = useSelector(selectUserCards);
   const helpCards = useSelector(selectHelpCards);
+  console.log('selectUserCards');
+  console.log(helpCards2);
+  console.log('selectHelpCards');
+  console.log(helpCards);
+
   const [categoryId, setCategoryId] = useState<number>(0);
   const [subCategoryId, setSubCategoryId] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
@@ -31,7 +39,7 @@ export default function HelpCards(): JSX.Element {
     [dispatch, categoryId, subCategoryId, price, description]
   );
   useEffect(() => {
-    dispatch(getHelpCards());
+    dispatch(getUserCards());
   }, [dispatch]);
 
   return (
@@ -99,7 +107,7 @@ export default function HelpCards(): JSX.Element {
       </form>
       <h3>Карточки пользователя</h3>
       <ul>
-        {helpCards?.map((element) => (
+        {helpCards.map((element) => (
           <li key={element.id}>
             Card id:{element.id}, CategoryID:{element.categoryId}, SubCategoryID:
             {element.subCategoryId} <div>Description:</div>{' '}

@@ -44,6 +44,10 @@
       "airbnb-typescript"
     ],
     "rules": {
+      "linebreak-style": [
+        "error",
+        "windows"
+      ],
       "jsx-a11y/interactive-supports-focus": 0,
       "jsx-a11y/control-has-associated-label": 0,
       "react/jsx-indent": 0,
@@ -71,7 +75,6 @@
           "allowDirectConstAssertionInArrowFunctions": true
         }
       ],
-      
       "no-await-in-loop": 0,
       "@typescript-eslint/consistent-type-definitions": [
         "error",

@@ -39,6 +39,10 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk('logout', api.logout);
 
+export const getUserCards = createAsyncThunk('api/users/my/cards', () =>
+  api.getUserCards()
+);
+
 export const editProfile = createAsyncThunk(
   'users/editProfile',
   async (profile: User) => api.editProfile(profile)
@@ -69,7 +73,6 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state) => {
         state.loginFormError = undefined;
       })
-      // так изменяется стэйт если вернулась ошибка
       .addCase(login.rejected, (state, action) => {
         state.loginFormError = action.error.message;
       })
@@ -86,6 +89,12 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.registerFormError = action.error.message;
       })
+      .addCase(getUserCards.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user.cards = action.payload.cards;
+        }
+      })
+      // TODO добавить форму ошибки для getUserCards и case под неё
 
       .addCase(editProfile.fulfilled, (state, action) => {
         state.user = action.payload;

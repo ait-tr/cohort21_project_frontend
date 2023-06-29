@@ -60,6 +60,15 @@ export async function logout(): Promise<void> {
   });
 }
 
+export async function getUserCards(): Promise<{ cards: HelpCard[] }> {
+  const res = await fetch('/api/users/my/cards');
+  if (res.status >= 400) {
+    const answer = await res.json();
+    throw new Error(answer.message);
+  }
+  return res.json();
+}
+
 export async function editProfile(editedUser: User): Promise<User> {
   const res = await fetch('/api/users/my/profile', {
     method: 'PUT',

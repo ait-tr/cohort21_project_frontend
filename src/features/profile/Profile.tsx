@@ -32,6 +32,7 @@ function ProfilePage(): JSX.Element {
     },
     [dispatch, email, phone]
   );
+
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
