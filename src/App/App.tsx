@@ -16,6 +16,7 @@ import HelpCard from '../features/help_cards/HelpCard';
 import Tasks from '../features/tasks/Tasks';
 import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
+import Subcategories from '../features/subcategories/Subcategories';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -43,6 +44,7 @@ function App(): JSX.Element {
           <Route path="/cards" element={<HelpCard />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/subcategories" element={<Subcategories />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/admin/tasks" element={<AdminCabinet />} />
