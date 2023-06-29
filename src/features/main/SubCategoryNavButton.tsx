@@ -36,4 +36,4 @@ function SubCategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Ele
   );
 }
 
-export default CategoryNavButton;
+export default SubCategoryNavButton;
