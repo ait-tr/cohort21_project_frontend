@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Grid } from '@mui/material';
-import HelpCardsAll from '../help_cards/HelpCardsAll';
+import HelpCardsAll from '../help_cards/HelpCards';
 import CategoryNavButton from './CategoryNavButton';
 
 function Homepage(): JSX.Element {

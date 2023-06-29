@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
 import { editProfile, getProfile } from '../auth/authSlice';
-import HelpCards from '../help_cards/HelpCards';
+import UserHelpCards from '../help_cards/UserHelpCards';
+import AddHelpCard from '../help_cards/AddHelpCard';
 
 function ProfilePage(): JSX.Element {
   const user = useSelector(selectUser);
@@ -93,7 +94,8 @@ function ProfilePage(): JSX.Element {
           )}
         </Grid>
         <div>--------------------------------</div>
-        <HelpCards />
+        <UserHelpCards />
+        <AddHelpCard />
       </FormControl>
     </Container>
   );

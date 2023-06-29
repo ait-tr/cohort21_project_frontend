@@ -12,7 +12,7 @@ import { useAppDispatch } from '../store';
 import AdminCabinet from '../features/main/AdminCabinet';
 import Homepage from '../features/main/Homepage';
 import Main from '../features/main/Main';
-import HelpCardsAll from '../features/help_cards/HelpCardsAll';
+import HelpCardsAll from '../features/help_cards/HelpCards';
 import Tasks from '../features/tasks/Tasks';
 import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
