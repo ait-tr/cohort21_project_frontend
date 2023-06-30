@@ -38,12 +38,14 @@ export default function Header(): JSX.Element {
         <Toolbar>
           <Typography
             noWrap
-            variant="h4"
+            variant="h3"
             component="a"
             href="/"
             sx={{
+              ml: '1.2rem',
               flexGrow: 1,
-              fontFamily: 'Nunito+Sans',
+              fontSize: '1.8rem',
+              fontFamily: 'Exo',
               fontWeight: 600,
               letterSpacing: '.3rem',
               color: 'inherit',
@@ -55,7 +57,7 @@ export default function Header(): JSX.Element {
           {user ? (
             <>
               <Button
-                sx={{ mt: '1rem', mr: '1rem' }}
+                sx={{ mr: '1rem' }}
                 color="inherit"
                 href="#/api/users/my/profile"
                 endIcon={<AccountCircle />}
@@ -64,7 +66,7 @@ export default function Header(): JSX.Element {
               </Button>
               <Button
                 onClick={handleLogout}
-                sx={{ mt: '1rem' }}
+                sx={{ mr: '1rem' }}
                 color="inherit"
                 href="#/auth/login"
                 endIcon={<Logout />}
@@ -75,7 +77,7 @@ export default function Header(): JSX.Element {
           ) : (
             <>
               <Button
-                sx={{ mt: '1rem', mr: '1rem' }}
+                sx={{ mr: '1rem' }}
                 color="inherit"
                 href="#/auth/register"
                 endIcon={<Check />}
@@ -83,7 +85,7 @@ export default function Header(): JSX.Element {
                 Sign Up
               </Button>
               <Button
-                sx={{ mt: '1rem' }}
+                sx={{ mr: '1rem' }}
                 color="inherit"
                 href="#/auth/login"
                 endIcon={<Login />}
