@@ -8,17 +8,9 @@ import { getUserCards } from '../auth/authSlice';
 export default function UserHelpCards(): JSX.Element {
   const userHelpCards = useSelector(selectUserCards);
   const dispatch = useAppDispatch();
-  console.log('userHelpCards:', userHelpCards);
 
   useEffect(() => {
-    dispatch(getUserCards())
-      .unwrap()
-      .then((result) => {
-        console.log('getUserCards result:', result); // Add this line
-      })
-      .catch((error) => {
-        console.log('getUserCards error:', error); // Add this line
-      });
+    dispatch(getUserCards());
   }, [dispatch]);
 
  return (
@@ -40,4 +32,5 @@ export default function UserHelpCards(): JSX.Element {
     </ul>
   </Container>
 );
+
 }
