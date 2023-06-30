@@ -13,6 +13,7 @@ import AdminCabinet from '../features/main/AdminCabinet';
 import Homepage from '../features/main/Homepage';
 import Main from '../features/main/Main';
 import HelpCards from '../features/help_cards/HelpCards';
+import UserHelpCards from '../features/help_cards/UserHelpCards';
 import Tasks from '../features/tasks/Tasks';
 import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
@@ -41,10 +42,8 @@ function App(): JSX.Element {
         <Route path="/" element={<Main />}>
           <Route path="/" element={<Homepage />} />
           <Route path="/api/users/my/profile" element={<ProfilePage />} />
-          <Route
-            path="/cards"
-            element={<HelpCards selectedCategory={null} />}
-          />
+          <Route path="/users/my/cards" element={<UserHelpCards />} />
+          <Route path="/cards" element={<HelpCards selectedCategory={null} />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/subcategories" element={<Subcategories />} />
