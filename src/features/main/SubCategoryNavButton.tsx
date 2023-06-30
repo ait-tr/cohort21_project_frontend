@@ -9,7 +9,9 @@ interface CategoryNavButtonProps {
   handleFilter: (value: number | null) => void;
 }
 
-function SubCategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
+function SubCategoryNavButton({
+  handleFilter,
+}: CategoryNavButtonProps): JSX.Element {
   const categories = useSelector(selectCategories);
   const dispatch = useAppDispatch();
 

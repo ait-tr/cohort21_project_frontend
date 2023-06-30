@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions, Grid } from '@mui/material';
+import DetailHelpCard from './DetailHelpCard';
 
 function HelpCard({
   id,
@@ -45,7 +46,7 @@ function HelpCard({
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>Price: {price}</CardActions>
+        <CardActions onClick={<DetailHelpCard />}>Price: {price}</CardActions>
       </Card>
     </Grid>
   );
