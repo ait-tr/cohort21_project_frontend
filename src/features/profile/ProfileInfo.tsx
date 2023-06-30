@@ -49,8 +49,8 @@ function ProfileInfo(): JSX.Element {
           <div>id: {user.id}</div>
           <div>username: {user.username}</div>
           <div>role: {user.role}</div>
-          <div>email: {isEditingProfile ? email : user.email}</div>
-          <div>phone: {isEditingProfile ? phone : user.phone}</div>
+          <div>email: { user.email}</div>
+          <div>phone: { user.phone}</div>
           <div>isHelper: {user.isHelper?.toString()}</div>
           {!isEditingProfile && (
             <button type="button" onClick={() => setIsEditingProfile(true)}>Edit Profile</button>
