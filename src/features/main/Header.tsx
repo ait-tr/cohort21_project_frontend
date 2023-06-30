@@ -38,7 +38,7 @@ export default function Header(): JSX.Element {
         <Toolbar>
           <Typography
             noWrap
-            variant="h3"
+            variant="body1"
             component="a"
             href="/"
             sx={{

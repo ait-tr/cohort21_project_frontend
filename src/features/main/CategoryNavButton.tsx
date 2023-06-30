@@ -17,9 +17,6 @@ function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Elemen
     dispatch(loadCategories());
   }, [dispatch]);
 
-  console.log('categories');
-  console.log(categories);
-
   return (
     <Box
       sx={{

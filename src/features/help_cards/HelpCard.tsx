@@ -38,7 +38,7 @@ export default function HelpCard({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = (): void => {
-    navigate('/card-details');
+    navigate(`/card-details/${id}`);
   };
 
   useEffect(() => {

@@ -2,14 +2,11 @@ import { Routes, Route, HashRouter } from 'react-router-dom';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './App.css';
-
-// import TasksList from '../features/tasks/TasksList';
 import Login from '../features/auth/Login';
 import Register from '../features/auth/Register';
 import { getProfile } from '../features/auth/authSlice';
 import { selectAuthChecked } from '../features/auth/selectors';
 import { useAppDispatch } from '../store';
-import AdminCabinet from '../features/main/AdminCabinet';
 import Homepage from '../features/main/Homepage';
 import Main from '../features/main/Main';
 import HelpCards from '../features/help_cards/HelpCards';
@@ -18,6 +15,7 @@ import Tasks from '../features/tasks/Tasks';
 import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
 import Subcategories from '../features/subcategories/Subcategories';
+import DetailHelpCard from '../features/help_cards/DetailHelpCard';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -49,7 +47,7 @@ function App(): JSX.Element {
           <Route path="/subcategories" element={<Subcategories />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
-          <Route path="/admin/tasks" element={<AdminCabinet />} />
+          <Route path="/card-details/:id" element={<DetailHelpCard />} />
         </Route>
       </Routes>
     </HashRouter>

@@ -9,8 +9,6 @@ function Homepage(): JSX.Element {
   const handleFilter = (value: number | null): void => {
     setSelectedCategory(value);
   };
-  console.log('Homepage');
-  console.log(selectedCategory);
 
   return (
     <Box sx={{ mt: '0.5rem' }}>

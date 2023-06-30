@@ -20,9 +20,6 @@ export default function HelpCards({
     dispatch(getHelpCards());
   }, [dispatch]);
 
-  console.log('HelpCards');
-  console.log(selectedCategory);
-
   const filteredHelpCards = selectedCategory
     ? helpCards?.filter((helpCard) => helpCard.category.id === selectedCategory)
     : helpCards;
