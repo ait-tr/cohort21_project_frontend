@@ -1,9 +1,15 @@
+import User from '../../auth/types/User';
+import Category from '../../categories/types/Category';
+import Subcategory from '../../subcategories/types/Subcategory';
+
 export default interface HelpCard {
   id: number;
-  userId: number;
-  categoryId: number;
-  subCategoryId: number;
+  user: User;
+  title: string;
+  category: Category;
+  subCategory: Subcategory;
   price: number;
   description: string;
+  fullDescription: string;
   isActive: boolean;
 }

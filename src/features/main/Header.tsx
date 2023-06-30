@@ -4,9 +4,34 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Check, Login } from '@mui/icons-material';
+import { AccountCircle, Check, Login, Logout } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectUser } from '../auth/selectors';
+import { useAppDispatch } from '../../store';
+import { getProfile, logout } from '../auth/authSlice';
 
 export default function Header(): JSX.Element {
+  const user = useSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = React.useCallback(
+    async (event: React.FormEvent) => {
+      event.preventDefault();
+      const dispatchResult = await dispatch(logout());
+
+      if (logout.fulfilled.match(dispatchResult)) {
+        dispatch(getProfile());
+        navigate('/auth/login');
+      }
+
+      if (logout.rejected.match(dispatchResult)) {
+        console.error(dispatchResult.error.message);
+      }
+    },
+    [dispatch, navigate]
+  );
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
@@ -27,22 +52,46 @@ export default function Header(): JSX.Element {
           >
             GetHelp
           </Typography>
-          <Button
-            sx={{ mt: '1rem', mr: '1rem' }}
-            color="inherit"
-            href="#/auth/register"
-            endIcon={<Check />}
-          >
-            Sign Up
-          </Button>
-          <Button
-            sx={{ mt: '1rem' }}
-            color="inherit"
-            href="#/auth/login"
-            endIcon={<Login />}
-          >
-            Login
-          </Button>
+          {user ? (
+            <>
+              <Button
+                sx={{ mt: '1rem', mr: '1rem' }}
+                color="inherit"
+                href="#/api/users/my/profile"
+                endIcon={<AccountCircle />}
+              >
+                Account
+              </Button>
+              <Button
+                onClick={handleLogout}
+                sx={{ mt: '1rem' }}
+                color="inherit"
+                href="#/auth/login"
+                endIcon={<Logout />}
+              >
+                LogOut
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                sx={{ mt: '1rem', mr: '1rem' }}
+                color="inherit"
+                href="#/auth/register"
+                endIcon={<Check />}
+              >
+                Sign Up
+              </Button>
+              <Button
+                sx={{ mt: '1rem' }}
+                color="inherit"
+                href="#/auth/login"
+                endIcon={<Login />}
+              >
+                Login
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

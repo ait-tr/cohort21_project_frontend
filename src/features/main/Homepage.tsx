@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Grid } from '@mui/material';
-import HelpCardsAll from '../help_cards/HelpCards';
+import HelpCards from '../help_cards/HelpCards';
 import CategoryNavButton from './CategoryNavButton';
 
 function Homepage(): JSX.Element {
@@ -9,12 +9,14 @@ function Homepage(): JSX.Element {
   const handleFilter = (value: number | null): void => {
     setSelectedCategory(value);
   };
+  console.log('Homepage');
+  console.log(selectedCategory);
 
   return (
     <Box sx={{ mt: '0.5rem' }}>
       <CategoryNavButton handleFilter={handleFilter} />
       <Grid container sx={{ mt: '1rem' }} spacing={2}>
-        <HelpCardsAll selectedCategory={selectedCategory} />
+        <HelpCards selectedCategory={selectedCategory} />
       </Grid>
     </Box>
   );

@@ -1,14 +1,23 @@
 import HelpCard from './types/HelpCard';
 
 export async function createHelpCard(
+  title: string,
   categoryId: number,
   subCategoryId: number,
   price: number,
-  description: string
+  description: string,
+  fullDescription: string
 ): Promise<HelpCard> {
   const res = await fetch('/api/cards', {
     method: 'POST',
-    body: JSON.stringify({ categoryId, subCategoryId, price, description }),
+    body: JSON.stringify({
+      title,
+      categoryId,
+      subCategoryId,
+      price,
+      description,
+      fullDescription,
+    }),
     headers: {
       'Content-Type': 'application/json',
     },

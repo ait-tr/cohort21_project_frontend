@@ -9,9 +9,8 @@ interface CategoryNavButtonProps {
   handleFilter: (value: number | null) => void;
 }
 
-function CategoryNavButton({
-  handleFilter,
-}: CategoryNavButtonProps): JSX.Element {
+function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
+  const [value, setValue] = useState(0);
   const categories = useSelector(selectCategories);
   const dispatch = useAppDispatch();
 
@@ -19,9 +18,7 @@ function CategoryNavButton({
     dispatch(loadCategories());
   }, [dispatch]);
 
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
     setValue(newValue);
   };
 
@@ -33,7 +30,7 @@ function CategoryNavButton({
         centered
         onClick={() => handleFilter(null)}
       >
-        <Tab label="Show All Cards" />
+        <Tab label="Show All" />
         {categories?.map((element) => (
           <Tab
             key={element.id}

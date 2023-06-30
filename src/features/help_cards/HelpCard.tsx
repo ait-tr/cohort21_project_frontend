@@ -1,55 +1,87 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, Grid } from '@mui/material';
-import DetailHelpCard from './DetailHelpCard';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-function HelpCard({
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  Grid,
+  CardContent,
+  CardMedia,
+  Typography,
+  Container,
+} from '@mui/material';
+import User from '../auth/types/User';
+import Category from '../categories/types/Category';
+import Subcategory from '../subcategories/types/Subcategory';
+
+export default function HelpCard({
   id,
-  userId,
-  categoryId,
-  subCategoryId,
-  description,
+  user,
+  title,
+  category,
+  subCategory,
+  fullDescription,
   price,
+  isActive,
 }: {
   id: number;
-  userId: number;
-  categoryId: number;
-  subCategoryId: number;
-  description: string;
+  user: User;
+  title: string;
+  category: Category;
+  subCategory: Subcategory;
+  fullDescription: string;
   price: number;
+  isActive: boolean;
 }): JSX.Element {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleClick = (): void => {
+    navigate('/card-details');
+  };
+
+  useEffect(() => {
+    const cardData = (data: any): { type: string; payload: number } => ({
+      type: 'CardData',
+      payload: data,
+    });
+    dispatch(cardData(id));
+  }, [dispatch, id]);
+
   return (
-    <Grid item xs={12} md={4} key={categoryId}>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
-            alt="green iguana"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Card id: {id}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              User: {userId}
-              <br />
-              Category: {categoryId}
-              <br />
-              Subcategory: {subCategoryId}
-              <br />
-              Description: {description}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions onClick={<DetailHelpCard />}>Price: {price}</CardActions>
-      </Card>
+    <Grid item xs={12} md={3}>
+      <Container onClick={handleClick}>
+        <Card sx={{ maxWidth: 345 }} key={id}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="140"
+              image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+              alt="green iguana"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Card id: {id}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Title: {title}
+                <br />
+                User: {user.username}
+                <br />
+                Category: {category.title}
+                <br />
+                Subcategory: {subCategory.title}
+                <br />
+                Description: {fullDescription}
+                <br />
+                isActive: {isActive.toString()}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>Price: {price}</CardActions>
+        </Card>
+      </Container>
     </Grid>
   );
 }
-
-export default HelpCard;

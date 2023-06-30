@@ -9,6 +9,7 @@ import HelpCard from './HelpCard';
 interface HelpCardsProps {
   selectedCategory: number | null;
 }
+
 export default function HelpCards({
   selectedCategory,
 }: HelpCardsProps): JSX.Element {
@@ -20,20 +21,23 @@ export default function HelpCards({
   }, [dispatch]);
 
   const filteredHelpCards = selectedCategory
-    ? helpCards?.filter((helpCard) => helpCard.categoryId === selectedCategory)
+    ? helpCards?.filter((helpCard) => helpCard.category.id === selectedCategory)
     : helpCards;
+  console.log(selectedCategory);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
       {filteredHelpCards?.map((helpCard) => (
         <HelpCard
           key={helpCard.id}
           id={helpCard.id}
-          userId={helpCard.userId}
-          categoryId={helpCard.categoryId}
-          subCategoryId={helpCard.subCategoryId}
-          description={helpCard.description}
+          user={helpCard.user}
+          title={helpCard.title}
+          category={helpCard.category}
+          subCategory={helpCard.subCategory}
+          fullDescription={helpCard.fullDescription}
           price={helpCard.price}
+          isActive={helpCard.isActive}
         />
       ))}
     </Grid>

@@ -10,6 +10,7 @@ const initialState: AuthState = {
   user: undefined,
   loginFormError: undefined,
   registerFormError: undefined,
+  userCards: undefined,
 };
 
 export const getProfile = createAsyncThunk('api/users/my/profile', () =>
@@ -91,7 +92,7 @@ const authSlice = createSlice({
       })
       .addCase(getUserCards.fulfilled, (state, action) => {
         if (state.user) {
-          state.user.cards = action.payload.cards;
+          state.userCards = { helpCards: action.payload.cards };
         }
       })
       // TODO добавить форму ошибки для getUserCards и case под неё

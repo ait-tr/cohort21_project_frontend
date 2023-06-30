@@ -10,15 +10,19 @@ const initialState: HelpCardsState = {
 export const createHelpCard = createAsyncThunk(
   'helpCards/createHelpCard',
   async ({
+    title,
     categoryId,
     subCategoryId,
     price,
     description,
+    fullDescription,
   }: {
+    title: string;
     categoryId: number;
     subCategoryId: number;
     price: number;
     description: string;
+    fullDescription: string;
   }) => {
     if (categoryId === 0 || subCategoryId === 0) {
       throw new Error('Категория или подкатегория не выбраны');
@@ -26,7 +30,14 @@ export const createHelpCard = createAsyncThunk(
     if (!description.trim()) {
       throw new Error('Описание не должно быть пустым');
     }
-    return api.createHelpCard(categoryId, subCategoryId, price, description);
+    return api.createHelpCard(
+      title,
+      categoryId,
+      subCategoryId,
+      price,
+      description,
+      fullDescription
+    );
   }
 );
 export const getHelpCards = createAsyncThunk('helpCards/getHelpCards', () =>

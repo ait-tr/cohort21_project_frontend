@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
 import { editProfile, getUserCards } from '../auth/authSlice';
@@ -13,7 +13,10 @@ function ProfileInfo(): JSX.Element {
   const dispatch = useAppDispatch();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
 
-  const handleProfileUpdate = async (updatedEmail: string, updatedPhone: string): Promise<void> => {
+  const handleProfileUpdate = async (
+    updatedEmail: string,
+    updatedPhone: string
+  ): Promise<void> => {
     try {
       await dispatch(
         editProfile({
@@ -49,11 +52,19 @@ function ProfileInfo(): JSX.Element {
           <div>id: {user.id}</div>
           <div>username: {user.username}</div>
           <div>role: {user.role}</div>
-          <div>email: {isEditingProfile ? email : user.email}</div>
-          <div>phone: {isEditingProfile ? phone : user.phone}</div>
+          <div>email: {user.email}</div>
+          <div>phone: {user.phone}</div>
           <div>isHelper: {user.isHelper?.toString()}</div>
           {!isEditingProfile && (
-            <button type="button" onClick={() => setIsEditingProfile(true)}>Edit Profile</button>
+            <Button
+              type="button"
+              variant="contained"
+              fullWidth={false}
+              sx={{ mt: '0.3rem', mb: '1.5rem', maxWidth: '10rem' }}
+              onClick={() => setIsEditingProfile(true)}
+            >
+              Edit Profile
+            </Button>
           )}
           {isEditingProfile && (
             <ProfileEdit
