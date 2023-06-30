@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Button, TextField } from '@mui/material';
+import { Container } from '@mui/material';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
-import { editProfile, getProfile } from '../auth/authSlice';
+import { editProfile, getUserCards } from '../auth/authSlice';
+import ProfileEdit from './ProfileEdit';
 
 function ProfileInfo(): JSX.Element {
   const user = useSelector(selectUser);
@@ -12,31 +13,27 @@ function ProfileInfo(): JSX.Element {
   const dispatch = useAppDispatch();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
 
-  const handleProfileUpdate = async (newEmail: string, newPhone: string) => {
-    const dispatchResult = await dispatch(
-      editProfile({
-        ...user,
-        id: user?.id as number,
-        username: user?.username as string,
-        email: newEmail,
-        phone: newPhone,
-      })
-    );
-
-    if (editProfile.fulfilled.match(dispatchResult)) {
-      setEmail(newEmail);
-      setPhone(newPhone);
+  const handleProfileUpdate = async (updatedEmail: string, updatedPhone: string): Promise<void> => {
+    try {
+      await dispatch(
+        editProfile({
+          ...user,
+          id: user?.id as number,
+          username: user?.username as string,
+          email: updatedEmail,
+          phone: updatedPhone,
+        })
+      );
+      dispatch(getUserCards()); // !!!!!
       setIsEditingProfile(false);
+    } catch (error) {
+      console.log('Error updating profile:', error);
     }
   };
 
-  const handleSave = () => {
+  const handleSave = (): void => {
     setIsEditingProfile(false);
   };
-
-  useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
 
   useEffect(() => {
     if (user) {
@@ -47,7 +44,7 @@ function ProfileInfo(): JSX.Element {
 
   return (
     <Container>
-      {user ? (
+      {user && (
         <div>
           <div>id: {user.id}</div>
           <div>username: {user.username}</div>
@@ -55,30 +52,20 @@ function ProfileInfo(): JSX.Element {
           <div>email: {isEditingProfile ? email : user.email}</div>
           <div>phone: {isEditingProfile ? phone : user.phone}</div>
           <div>isHelper: {user.isHelper?.toString()}</div>
-          <button onClick={() => setIsEditingProfile(true)}>Edit Profile</button>
+          {!isEditingProfile && (
+            <button type="button" onClick={() => setIsEditingProfile(true)}>Edit Profile</button>
+          )}
           {isEditingProfile && (
-            <div>
-              <TextField
-                id="email"
-                label="Email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <TextField
-                id="phone"
-                label="Phone"
-                variant="outlined"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <Button onClick={() => handleProfileUpdate(email, phone)}>Save</Button>
-              <Button onClick={handleSave}>Cancel</Button>
-            </div>
+            <ProfileEdit
+              email={email}
+              phone={phone}
+              setEmail={setEmail}
+              setPhone={setPhone}
+              handleProfileUpdate={handleProfileUpdate}
+              handleSave={handleSave}
+            />
           )}
         </div>
-      ) : (
-        <div>Loading...</div>
       )}
     </Container>
   );
