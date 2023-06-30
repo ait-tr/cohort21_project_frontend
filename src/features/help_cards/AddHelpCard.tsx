@@ -29,6 +29,7 @@ export default function HelpCards(): JSX.Element {
       await dispatch(
         createHelpCard({ categoryId, subCategoryId, price, description })
       );
+      dispatch(getUserCards());
       // if (createHelpCard.fulfilled.match(dispatchResult)) {
       setCategoryId(0);
       setSubCategoryId(0);
