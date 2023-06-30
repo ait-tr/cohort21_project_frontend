@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Grid } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import { selectCategories } from '../categories/selectors';
 import { loadCategories } from '../categories/categoriesSlice';
 import { useAppDispatch } from '../../store';
@@ -9,7 +9,9 @@ interface CategoryNavButtonProps {
   handleFilter: (value: number | null) => void;
 }
 
-function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
+function CategoryNavButton({
+  handleFilter,
+}: CategoryNavButtonProps): JSX.Element {
   const categories = useSelector(selectCategories);
   const dispatch = useAppDispatch();
 
@@ -17,22 +19,30 @@ function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Elemen
     dispatch(loadCategories());
   }, [dispatch]);
 
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
-    <Grid container spacing={1}>
-      <Button variant="contained" onClick={() => handleFilter(null)}>
-        Show All Cards
-      </Button>
-      {categories?.map((element) => (
-        <Button
-          variant="contained"
-          color="primary"
-          key={element.id}
-          onClick={() => handleFilter(element.id)}
-        >
-          {element.title}
-        </Button>
-      ))}
-    </Grid>
+    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        centered
+        onClick={() => handleFilter(null)}
+      >
+        <Tab label="Show All Cards" />
+        {categories?.map((element) => (
+          <Tab
+            key={element.id}
+            onClick={() => handleFilter(element.id)}
+            label={element.title}
+          />
+        ))}
+      </Tabs>
+    </Box>
   );
 }
 

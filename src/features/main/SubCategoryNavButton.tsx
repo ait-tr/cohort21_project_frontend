@@ -9,7 +9,9 @@ interface CategoryNavButtonProps {
   handleFilter: (value: number | null) => void;
 }
 
-function SubCategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
+function SubCategoryNavButton({
+  handleFilter,
+}: CategoryNavButtonProps): JSX.Element {
   const categories = useSelector(selectCategories);
   const dispatch = useAppDispatch();
 
@@ -36,4 +38,4 @@ function SubCategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Ele
   );
 }
 
-export default CategoryNavButton;
+export default SubCategoryNavButton;

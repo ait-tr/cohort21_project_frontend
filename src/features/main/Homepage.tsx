@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import HelpCardsAll from '../help_cards/HelpCards';
 import CategoryNavButton from './CategoryNavButton';
 
@@ -11,12 +11,12 @@ function Homepage(): JSX.Element {
   };
 
   return (
-    <Container sx={{ mt: '0.5rem' }}>
+    <Box sx={{ mt: '0.5rem' }}>
       <CategoryNavButton handleFilter={handleFilter} />
       <Grid container sx={{ mt: '1rem' }} spacing={2}>
         <HelpCardsAll selectedCategory={selectedCategory} />
       </Grid>
-    </Container>
+    </Box>
   );
 }
 
