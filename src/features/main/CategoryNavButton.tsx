@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import { selectCategories } from '../categories/selectors';
 import { loadCategories } from '../categories/categoriesSlice';
 import { useAppDispatch } from '../../store';
@@ -10,7 +10,6 @@ interface CategoryNavButtonProps {
 }
 
 function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
-  const [value, setValue] = useState(0);
   const categories = useSelector(selectCategories);
   const dispatch = useAppDispatch();
 
@@ -18,27 +17,48 @@ function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Elemen
     dispatch(loadCategories());
   }, [dispatch]);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number): void => {
-    setValue(newValue);
-  };
+  console.log('categories');
+  console.log(categories);
 
   return (
-    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        centered
-        onClick={() => handleFilter(null)}
-      >
-        <Tab label="Show All" />
+    <Box
+      sx={{
+        ml: '3rem',
+        width: '100%',
+        textAlign: 'center',
+        bgcolor: 'background.paper',
+      }}
+    >
+      <Grid container spacing={1}>
+        <Button
+          sx={{
+            borderBottom: '1px solid',
+            borderRadius: '0',
+            borderColor: 'primary',
+            m: '0.5rem',
+          }}
+          variant="text"
+          onClick={() => handleFilter(null)}
+        >
+          Show All
+        </Button>
         {categories?.map((element) => (
-          <Tab
+          <Button
+            sx={{
+              borderBottom: '1px solid',
+              borderRadius: '0',
+              borderColor: 'primary',
+              m: '0.5rem',
+            }}
+            variant="text"
+            color="primary"
             key={element.id}
             onClick={() => handleFilter(element.id)}
-            label={element.title}
-          />
+          >
+            {element.title}
+          </Button>
         ))}
-      </Tabs>
+      </Grid>
     </Box>
   );
 }
