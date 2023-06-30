@@ -5,6 +5,7 @@ import { selectUser } from '../auth/selectors';
 import ProfileInfo from './ProfileInfo';
 import UserHelpCards from '../help_cards/UserHelpCards';
 import AddHelpCard from '../help_cards/AddHelpCard';
+import Login from '../auth/Login';
 
 function ProfilePage(): JSX.Element {
   const user = useSelector(selectUser);
@@ -19,7 +20,7 @@ function ProfilePage(): JSX.Element {
           <AddHelpCard />
         </>
       ) : (
-        <div>Loading...</div>
+        <div><Login /></div>
       )}
     </Container>
   );
