@@ -47,7 +47,7 @@ export default function Header(): JSX.Element {
               fontSize: '1.8rem',
               fontFamily: 'Exo',
               fontWeight: 600,
-              letterSpacing: '.3rem',
+              letterSpacing: '.15rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
