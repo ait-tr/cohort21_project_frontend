@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import User from '../auth/types/User';
 import Category from '../categories/types/Category';
-import Subcategory from '../subcategories/types/SubCategory';
+import Subcategory from '../subcategories/types/SubСategory';
 
 export default function HelpCard({
   id,

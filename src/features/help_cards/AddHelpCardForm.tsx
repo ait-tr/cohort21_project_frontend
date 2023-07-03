@@ -6,7 +6,7 @@ import { createHelpCard } from './helpCardsSlice';
 import { useAppDispatch } from '../../store';
 import { getUserCards } from '../auth/authSlice';
 import { selectCategories } from '../categories/selectors';
-import { selectSubcategories } from '../subcategories/selectors';
+import { selectSubCategories } from '../subcategories/selectors';
 import { loadCategories } from '../categories/categoriesSlice';
 import { SelectChangeEvent } from '@mui/material';
 
@@ -18,7 +18,7 @@ export default function AddHelpCardForm(): JSX.Element {
 
   const [title, setTitle] = useState<string>('');
   const categories = useSelector(selectCategories);
-  const subCategories = useSelector(selectSubcategories);
+  const subCategories = useSelector(selectSubCategories);
   const [categoryId, setCategoryId] = useState<number>(0);
   const [subCategoryId, setSubCategoryId] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
