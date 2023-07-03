@@ -16,6 +16,7 @@ import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
 import Subcategories from '../features/subcategories/Subcategories';
 import DetailHelpCard from '../features/help_cards/DetailHelpCard';
+import AddHelpCard from '../features/help_cards/AddHelpCard';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -48,6 +49,9 @@ function App(): JSX.Element {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/card-details/:id" element={<DetailHelpCard />} />
+          <Route path="/card/" element={<AddHelpCard />} />
+
+          
         </Route>
       </Routes>
     </HashRouter>
