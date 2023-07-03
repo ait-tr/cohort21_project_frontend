@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 
 interface ProfileEditProps {
   email: string;
@@ -20,20 +20,24 @@ function ProfileEdit({
 }: ProfileEditProps): JSX.Element {
   return (
     <div>
-      <TextField
-        id="email"
-        label="Email"
-        variant="outlined"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <TextField
-        id="phone"
-        label="Phone"
-        variant="outlined"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-      />
+      <Box mt="1rem">
+        <TextField
+          id="email"
+          label="Email"
+          variant="standard"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Box>
+      <Box mt="1rem">
+        <TextField
+          id="phone"
+          label="Phone"
+          variant="standard"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+      </Box>
       <Button type="button" onClick={() => handleProfileUpdate(email, phone)}>
         Save
       </Button>

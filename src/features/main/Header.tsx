@@ -1,6 +1,5 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -33,69 +32,67 @@ export default function Header(): JSX.Element {
     [dispatch, navigate]
   );
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky">
-        <Toolbar>
-          <Typography
-            noWrap
-            variant="body1"
-            component="a"
-            href="/"
-            sx={{
-              ml: '1.2rem',
-              flexGrow: 1,
-              fontSize: '1.8rem',
-              fontFamily: 'Exo',
-              fontWeight: 600,
-              letterSpacing: '.15rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            GetHelp
-          </Typography>
-          {user ? (
-            <>
-              <Button
-                sx={{ mr: '1rem' }}
-                color="inherit"
-                href="#/api/users/my/profile"
-                endIcon={<AccountCircle />}
-              >
-                Account
-              </Button>
-              <Button
-                onClick={handleLogout}
-                sx={{ mr: '1rem' }}
-                color="inherit"
-                href="#/auth/login"
-                endIcon={<Logout />}
-              >
-                LogOut
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button
-                sx={{ mr: '1rem' }}
-                color="inherit"
-                href="#/auth/register"
-                endIcon={<Check />}
-              >
-                Sign Up
-              </Button>
-              <Button
-                sx={{ mr: '1rem' }}
-                color="inherit"
-                href="#/auth/login"
-                endIcon={<Login />}
-              >
-                Login
-              </Button>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <AppBar position="sticky">
+      <Toolbar>
+        <Typography
+          noWrap
+          variant="body1"
+          component="a"
+          href="/"
+          sx={{
+            ml: '1.2rem',
+            flexGrow: 1,
+            fontSize: '1.8rem',
+            fontFamily: 'Exo',
+            fontWeight: 600,
+            letterSpacing: '.15rem',
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >
+          GetHelp
+        </Typography>
+        {user ? (
+          <>
+            <Button
+              sx={{ mr: '1rem' }}
+              color="inherit"
+              href="#/api/users/my/profile"
+              endIcon={<AccountCircle />}
+            >
+              Account
+            </Button>
+            <Button
+              onClick={handleLogout}
+              sx={{ mr: '1rem' }}
+              color="inherit"
+              href="#/auth/login"
+              endIcon={<Logout />}
+            >
+              LogOut
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              sx={{ mr: '1rem' }}
+              color="inherit"
+              href="#/auth/register"
+              endIcon={<Check />}
+            >
+              Sign Up
+            </Button>
+            <Button
+              sx={{ mr: '1rem' }}
+              color="inherit"
+              href="#/auth/login"
+              endIcon={<Login />}
+            >
+              Login
+            </Button>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
