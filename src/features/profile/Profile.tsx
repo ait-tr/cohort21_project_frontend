@@ -19,7 +19,6 @@ function ProfilePage(): JSX.Element {
     navigate('/card'); // Replace '/new-page' with the actual path of the new page you want to navigate to
   };
   
-  const user = useSelector(selectUser);
   useEffect(() => {
     getProfile();
   }, [user]);

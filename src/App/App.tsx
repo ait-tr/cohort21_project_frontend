@@ -13,7 +13,7 @@ import HelpCards from '../features/help_cards/HelpCards';
 import UserHelpCards from '../features/help_cards/UserHelpCards';
 import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
-import Subcategories from '../features/subcategories/Subcategories';
+import Subcategories from '../features/subcategories/SubСategories';
 import DetailHelpCard from '../features/help_cards/DetailHelpCard';
 import AddHelpCard from '../features/help_cards/AddHelpCard';
 

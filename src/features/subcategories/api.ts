@@ -1,4 +1,4 @@
-import SubCategory from './types/SubCategory';
+import SubCategory from './types/SubСategory';
 
 export async function getSubCategories(): Promise<{
   subCategories: SubCategory[];

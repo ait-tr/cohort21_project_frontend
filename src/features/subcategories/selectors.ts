@@ -1,5 +1,5 @@
 import { RootState } from '../../store';
-import SubCategory from './types/SubCategory';
+import SubCategory from './types/SubСategory';
 
 export const selectSubCategories = (state: RootState): SubCategory[] =>
   state.subCategories.subCategories;

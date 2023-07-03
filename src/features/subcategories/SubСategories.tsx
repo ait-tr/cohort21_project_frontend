@@ -3,7 +3,7 @@ import { Box, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectSubCategories } from './selectors';
 import { useAppDispatch } from '../../store';
-import { loadSubCategories } from './subCategoriesSlice';
+import { loadSubCategories } from './subСategoriesSlice';
 
 export default function SubCategories(): JSX.Element {
   const subCategories = useSelector(selectSubCategories);
