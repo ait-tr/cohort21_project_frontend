@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardActionArea,
-  CardActions,
   Grid,
   CardContent,
   CardMedia,
   Typography,
   Container,
+  Box,
+  CardActions,
 } from '@mui/material';
 import User from '../auth/types/User';
 import Category from '../categories/types/Category';
@@ -22,8 +23,11 @@ export default function HelpCard({
   title,
   category,
   subCategory,
+  description,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   fullDescription,
   price,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isActive,
 }: {
   id: number;
@@ -31,6 +35,7 @@ export default function HelpCard({
   title: string;
   category: Category;
   subCategory: Subcategory;
+  description: string;
   fullDescription: string;
   price: number;
   isActive: boolean;
@@ -50,36 +55,59 @@ export default function HelpCard({
   }, [dispatch, id]);
 
   return (
-    <Grid item xs={12} md={3}>
+    <Grid item xs={12} md={2}>
       <Container onClick={handleClick}>
-        <Card sx={{ maxWidth: 345 }} key={id}>
+        <Card
+          sx={{
+            maxWidth: 345,
+            maxHeight: 460,
+            marginBottom: '2rem',
+            marginTop: '1rem',
+            marginLeft: '2rem',
+            marginRight: '2rem',
+          }}
+          key={id}
+        >
           <CardActionArea>
             <CardMedia
               component="img"
               height="140"
-              image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+              image="https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
               alt="green iguana"
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Card id: {id}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Title: {title}
-                <br />
-                User: {user.username}
-                <br />
-                Category: {category.title}
-                <br />
-                Subcategory: {subCategory.title}
-                <br />
-                Description: {fullDescription}
-                <br />
-                isActive: {isActive.toString()}
+              <Box>{user.username}</Box>
+
+              <Box
+                fontSize="h5.fontSize"
+                component="div"
+                overflow="hidden"
+                whiteSpace="pre-line"
+                textOverflow="ellipsis"
+                height={70}
+              >
+                {title}
+              </Box>
+              <Box sx={{ mb: 1.5 }} color="text.secondary">
+                {category.title} / {subCategory.title}
+              </Box>
+
+              <Typography
+                sx={{
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  WebkitLineClamp: '2',
+                  WebkitBoxOrient: 'vertical',
+                  height: 120,
+                }}
+              >
+                {description}
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>Price: {price}</CardActions>
+          <CardActions>
+            <Box>Price: {price} Euro</Box>
+          </CardActions>
         </Card>
       </Container>
     </Grid>

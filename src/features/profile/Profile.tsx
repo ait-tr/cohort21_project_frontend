@@ -2,19 +2,21 @@ import React from 'react';
 import { Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../auth/selectors';
-import ProfileInfo from './ProfileInfo';
 import UserHelpCards from '../help_cards/UserHelpCards';
 import AddHelpCard from '../help_cards/AddHelpCard';
+import ProfileInfo2 from './ProfileInfo2';
 
 function ProfilePage(): JSX.Element {
   const user = useSelector(selectUser);
+  useEffect(() => {
+    getProfile();
+  }, [user]);
 
   return (
     <Container>
-      <h3>My Profile Page</h3>
       {user ? (
         <>
-          <ProfileInfo />
+          <ProfileInfo2 />
           <UserHelpCards />
           <AddHelpCard />
         </>
