@@ -34,6 +34,7 @@ export default function HelpCards({
           title={helpCard.title}
           category={helpCard.category}
           subCategory={helpCard.subCategory}
+          description={helpCard.description}
           fullDescription={helpCard.fullDescription}
           price={helpCard.price}
           isActive={helpCard.isActive}

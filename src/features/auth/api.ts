@@ -10,7 +10,6 @@ export async function getProfile(): Promise<{
   email?: string;
   phone?: string;
   isHelper?: boolean;
-  cards?: HelpCard[];
 }> {
   const res = await fetch('/api/users/my/profile');
   if (res.status >= 400) {
@@ -29,7 +28,6 @@ export async function login(credentials: Credentials): Promise<User> {
     },
   });
 
-  // реджектим промис если вернулся ошибочный статус
   if (res.status >= 400) {
     const { error } = await res.json();
     throw error;
@@ -39,7 +37,7 @@ export async function login(credentials: Credentials): Promise<User> {
 
 export async function register(
   data: RegisterData
-): Promise<{ id: number; username: string }> {
+): Promise<{ id: number; username: string; role: string }> {
   const res = await fetch('/api/register', {
     method: 'POST',
     body: JSON.stringify(data),

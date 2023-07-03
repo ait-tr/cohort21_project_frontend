@@ -1,20 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import CategoriesState from './types/CategoriesState';
 import * as api from './api';
-import Categories, { CategoryId } from './types/Category';
+import Category, { CategoryId } from './types/Category';
 
 const initialState: CategoriesState = {
   categories: [],
   error: undefined,
 };
 
-export const createCategories = createAsyncThunk(
-  'categories/createCategories',
+export const createCategory = createAsyncThunk(
+  'categories/createCategory',
   async ({ title, description }: { title: string; description: string }) => {
     if (!title.trim() || !description.trim()) {
       throw new Error('Заголовок задачи и описание не должны быть пустыми');
     }
-    return api.createCategories(title, description);
+    return api.createCategory(title, description);
   }
 );
 
@@ -34,7 +34,7 @@ export const updateCategory = createAsyncThunk(
     updatedCategory,
   }: {
     id: CategoryId;
-    updatedCategory: Categories;
+    updatedCategory: Category;
   }) => {
     await api.updateCategory(id, updatedCategory);
     return { id, updatedCategory };
@@ -59,10 +59,10 @@ const categoriesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createCategories.rejected, (state, action) => {
+      .addCase(createCategory.rejected, (state, action) => {
         state.error = action.error.message;
       })
-      .addCase(createCategories.fulfilled, (state, action) => {
+      .addCase(createCategory.fulfilled, (state, action) => {
         state.categories.push(action.payload);
       })
 

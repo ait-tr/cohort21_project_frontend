@@ -1,36 +1,61 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import SubcategoriesState from "./types/SubcategoriesState";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import SubCategoriesState from './types/SubCategoriesState';
 import * as api from './api';
 
-const initialState: SubcategoriesState = {
-    subcategories: [],
-    error: undefined,
+const initialState: SubCategoriesState = {
+  subCategories: [],
+  error: undefined,
 };
 
-export const loadSubcategories = createAsyncThunk('subcategories/loadSubcategories', () => 
-api.getSubcategories()
+export const loadSubCategories = createAsyncThunk(
+  'subCategories/loadSubCategories',
+  () => api.getSubCategories()
 );
 
-const subcategoriesSlice = createSlice({
-    name: 'subcategories',
-    initialState,
-    reducers:{
-        resetError: (state) => {
-            state.error = undefined;
-        },
+export const createSubCategory = createAsyncThunk(
+  'subCategories/createSubCategory',
+  async ({
+    title,
+    description,
+    categoryId,
+  }: {
+    title: string;
+    description: string;
+    categoryId: number;
+  }) => {
+    if (!title.trim() || !description.trim()) {
+      throw new Error('Заголовок задачи и описание не должны быть пустыми');
+    }
+    return api.createSubCategory(title, description, categoryId);
+  }
+);
+
+const subCategoriesSlice = createSlice({
+  name: 'subCategories',
+  initialState,
+  reducers: {
+    resetError: (state) => {
+      state.error = undefined;
     },
-    extraReducers: (builder) => {
-        builder
-        .addCase(loadSubcategories.rejected, (state) => {
-            state.error = 'Нет подкатегорий';
-        })
-        .addCase(loadSubcategories.fulfilled, (state, action) => {
-            state.subcategories=action.payload.subcategories;
-        });
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadSubCategories.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(loadSubCategories.fulfilled, (state, action) => {
+        state.subCategories = action.payload.subCategories;
+      })
+
+      .addCase(createSubCategory.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(createSubCategory.fulfilled, (state, action) => {
+        state.subCategories.push(action.payload);
+      });
+  },
 });
 
-export const {resetError} = subcategoriesSlice.actions;
+export const { resetError } = subCategoriesSlice.actions;
 
-export default subcategoriesSlice.reducer;
-
+export default subCategoriesSlice.reducer;

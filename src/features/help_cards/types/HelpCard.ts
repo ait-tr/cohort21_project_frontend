@@ -1,6 +1,6 @@
 import User from '../../auth/types/User';
 import Category from '../../categories/types/Category';
-import Subcategory from '../../subcategories/types/Subcategory';
+import Subcategory from '../../subcategories/types/SubCategory';
 
 export default interface HelpCard {
   id: number;
