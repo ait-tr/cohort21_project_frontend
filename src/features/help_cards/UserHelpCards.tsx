@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
 import { useAppDispatch } from '../../store';
 import { getUserCards } from '../auth/authSlice';
 import { selectUserCards } from './selectors';
+import HelpCard from './HelpCard';
 
 export default function UserHelpCards(): JSX.Element {
   const userHelpCards = useSelector(selectUserCards);
@@ -16,26 +17,26 @@ export default function UserHelpCards(): JSX.Element {
   return (
     <Container>
       <h3>Карточки пользователя</h3>
-      <ul>
+      <div>
         {userHelpCards && Array.isArray(userHelpCards) ? (
-          userHelpCards.map((element) => (
-            <li key={element.id}>
-              <b>Card id:</b> {element.id},
-              <br />
-              <b>Category:</b> {element.category.title},
-              <br />
-              <b>SubCategory:</b>
-              {element.subCategory.title}
-              <div>
-                <b>Description:</b> {element.description}
-              </div>
-              <br />
-            </li>
+          userHelpCards.map((card) => (
+            <HelpCard
+              key={card.id}
+              id={card.id}
+              title={card.title}
+              user={card.user}
+              category={card.category}
+              subCategory={card.subCategory}
+              price={card.price}
+              description={card.description}
+              fullDescription={card.fullDescription}
+              isActive={card.isActive}
+            />
           ))
         ) : (
           <div>No user help cards available.</div>
         )}
-      </ul>
+      </div>
     </Container>
   );
 }

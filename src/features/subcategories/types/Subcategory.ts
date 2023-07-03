@@ -1,4 +1,4 @@
-export default interface Subcategory {
+export default interface SubCategory {
   id: number;
   title: string;
   description: string;

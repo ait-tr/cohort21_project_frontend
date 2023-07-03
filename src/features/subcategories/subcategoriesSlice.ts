@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import SubcategoriesState from './types/SubcategoriesState';
+import SubCategoriesState from './types/SubCategoriesState';
 import * as api from './api';
 
-const initialState: SubcategoriesState = {
-  subcategories: [],
+const initialState: SubCategoriesState = {
+  subCategories: [],
   error: undefined,
 };
 
-export const loadSubcategories = createAsyncThunk(
-  'subcategories/loadSubCategories',
-  () => api.getSubcategories()
+export const loadSubCategories = createAsyncThunk(
+  'subCategories/loadSubCategories',
+  () => api.getSubCategories()
 );
 
 export const createSubCategory = createAsyncThunk(
-  'categories/createSubCategory',
+  'subCategories/createSubCategory',
   async ({
     title,
     description,
@@ -30,8 +30,8 @@ export const createSubCategory = createAsyncThunk(
   }
 );
 
-const subcategoriesSlice = createSlice({
-  name: 'subcategories',
+const subCategoriesSlice = createSlice({
+  name: 'subCategories',
   initialState,
   reducers: {
     resetError: (state) => {
@@ -40,22 +40,22 @@ const subcategoriesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loadSubcategories.rejected, (state) => {
-        state.error = 'Нет подкатегорий';
+      .addCase(loadSubCategories.rejected, (state, action) => {
+        state.error = action.error.message;
       })
-      .addCase(loadSubcategories.fulfilled, (state, action) => {
-        state.subcategories = action.payload.subcategories;
+      .addCase(loadSubCategories.fulfilled, (state, action) => {
+        state.subCategories = action.payload.subCategories;
       })
 
       .addCase(createSubCategory.rejected, (state, action) => {
         state.error = action.error.message;
       })
       .addCase(createSubCategory.fulfilled, (state, action) => {
-        state.subcategories.push(action.payload);
+        state.subCategories.push(action.payload);
       });
   },
 });
 
-export const { resetError } = subcategoriesSlice.actions;
+export const { resetError } = subCategoriesSlice.actions;
 
-export default subcategoriesSlice.reducer;
+export default subCategoriesSlice.reducer;

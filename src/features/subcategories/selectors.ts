@@ -1,7 +1,7 @@
 import { RootState } from '../../store';
-import Subcategory from './types/Subcategory';
+import SubCategory from './types/SubCategory';
 
-export const selectSubcategories = (state: RootState): Subcategory[] =>
-  state.subcategories.subcategories;
+export const selectSubCategories = (state: RootState): SubCategory[] =>
+  state.subCategories.subCategories;
 export const selectError = (state: RootState): string | undefined =>
-  state.subcategories.error;
+  state.subCategories.error;

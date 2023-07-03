@@ -10,9 +10,7 @@ export default function DetailHelpCard(): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const helpCards = useSelector(selectHelpCards);
 
-  const selectedCard = helpCards.find(
-    (card: HelpCard) => card.id.toString() === id
-  );
+  const selectedCard = helpCards.find((card: HelpCard) => card.id.toString() === id);
 
   return (
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -36,7 +34,6 @@ export default function DetailHelpCard(): JSX.Element {
           </Box>
 
           <Box fontSize={24} sx={{ textAlign: 'justify', m: 1 }}>
-            {' '}
             {selectedCard.fullDescription}
           </Box>
         </Box>

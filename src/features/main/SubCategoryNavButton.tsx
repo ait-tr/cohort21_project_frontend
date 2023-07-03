@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Grid } from '@mui/material';
 import { useAppDispatch } from '../../store';
-import { selectSubcategories } from '../subcategories/selectors';
-import { loadSubcategories } from '../subcategories/subcategoriesSlice';
+import { selectSubCategories } from '../subcategories/selectors';
+import { loadSubCategories } from '../subcategories/subCategoriesSlice';
 
 interface SubCategoryNavButtonProps {
   handleFilter: (value: number | null) => void;
@@ -12,11 +12,11 @@ interface SubCategoryNavButtonProps {
 function SubCategoryNavButton({
   handleFilter,
 }: SubCategoryNavButtonProps): JSX.Element {
-  const subCategories = useSelector(selectSubcategories);
+  const subCategories = useSelector(selectSubCategories);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadSubcategories());
+    dispatch(loadSubCategories());
   }, [dispatch]);
 
   return (

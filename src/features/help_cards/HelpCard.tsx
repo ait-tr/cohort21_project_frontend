@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardActionArea,
-  Grid,
   CardContent,
   CardMedia,
   Typography,
@@ -15,7 +14,7 @@ import {
 } from '@mui/material';
 import User from '../auth/types/User';
 import Category from '../categories/types/Category';
-import Subcategory from '../subcategories/types/Subcategory';
+import Subcategory from '../subcategories/types/SubCategory';
 
 export default function HelpCard({
   id,
@@ -55,11 +54,12 @@ export default function HelpCard({
   }, [dispatch, id]);
 
   return (
-    <Grid item xs={12} md={2}>
+    <Box>
       <Container onClick={handleClick}>
         <Card
           sx={{
             maxWidth: 345,
+            minWidth: 345,
             maxHeight: 460,
             marginBottom: '2rem',
             marginTop: '1rem',
@@ -110,6 +110,6 @@ export default function HelpCard({
           </CardActions>
         </Card>
       </Container>
-    </Grid>
+    </Box>
   );
 }

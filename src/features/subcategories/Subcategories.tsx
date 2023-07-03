@@ -1,24 +1,24 @@
 import React, { useEffect } from 'react';
 import { Box, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { selectSubcategories } from './selectors';
+import { selectSubCategories } from './selectors';
 import { useAppDispatch } from '../../store';
-import { loadSubcategories } from './subcategoriesSlice';
+import { loadSubCategories } from './subCategoriesSlice';
 
-export default function Subcategories(): JSX.Element {
-  const subcategories = useSelector(selectSubcategories);
+export default function SubCategories(): JSX.Element {
+  const subCategories = useSelector(selectSubCategories);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(loadSubcategories());
+    dispatch(loadSubCategories());
   }, [dispatch]);
 
   return (
     <Box>
       <Container>
         <div>
-          {subcategories.map((subcategory) => (
-            <div key={subcategory.id}>{subcategory.description}</div>
+          {subCategories.map((subCategory) => (
+            <div key={subCategory.id}>{subCategory.description}</div>
           ))}
         </div>
       </Container>
