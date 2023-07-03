@@ -1,6 +1,6 @@
 import Categories, { CategoryId } from './types/Category';
 
-export async function createCategories(
+export async function createCategory(
   title: string,
   description: string
 ): Promise<Categories> {
@@ -45,13 +45,13 @@ export async function deleteCategories(id: CategoryId): Promise<void> {
 
 export async function getCategories(): Promise<{
   [x: string]: any;
-  tasks: Categories[];
+  categories: Categories[];
 }> {
   const result = await fetch('/api/categories');
   return result.json();
 }
 
-export async function getCategoriesOfAll(): Promise<{ tasks: Categories[] }> {
+export async function getCategoriesOfAll(): Promise<{ categories: Categories[] }> {
   const result = await fetch('/api/categories');
   return result.json();
 }

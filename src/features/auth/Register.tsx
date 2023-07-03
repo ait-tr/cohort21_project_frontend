@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { register, resetRegisterFormError, login } from './authSlice';
+import { register, resetRegisterFormError, login, getUserCards } from './authSlice';
 import { selectRegisterFormError } from './selectors';
 import { useAppDispatch } from '../../store';
 
@@ -26,7 +26,8 @@ function Register(): JSX.Element {
       );
 
       if (register.fulfilled.match(dispatchResult)) {
-        dispatch(login({ username, password }));
+        await dispatch(login({ username, password }));
+        await dispatch(getUserCards());
         navigate('/api/users/my/profile');
       }
     },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getProfile, login, resetLoginFormError } from './authSlice';
+import { getProfile, getUserCards, login, resetLoginFormError } from './authSlice';
 import { selectLoginFormError } from './selectors';
 import { useAppDispatch } from '../../store';
 
@@ -26,6 +26,7 @@ function Login(): JSX.Element {
       // 332 проверяем, что санк login зарезолвился успешно
       if (login.fulfilled.match(dispatchResult)) {
         dispatch(getProfile());
+        dispatch(getUserCards());
         navigate('/api/users/my/profile');
       }
 

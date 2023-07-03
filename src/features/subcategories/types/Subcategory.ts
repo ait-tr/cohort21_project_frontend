@@ -1,6 +1,6 @@
 export default interface Subcategory {
-    id: number;
-    title: string;
-    description: string;
-    categoryId: number;
+  id: number;
+  title: string;
+  description: string;
+  categoryId: number;
 }

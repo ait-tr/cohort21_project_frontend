@@ -3,7 +3,12 @@ import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { selectError, selectCategories } from './selectors';
-import { createCategories, loadCategories, updateCategory, deleteCategories } from './categoriesSlice';
+import {
+  createCategory,
+  loadCategories,
+  updateCategory,
+  deleteCategories,
+} from './categoriesSlice';
 import { useAppDispatch } from '../../store';
 
 export default function Categories(): JSX.Element {
@@ -23,10 +28,10 @@ export default function Categories(): JSX.Element {
           updateCategory({
             id: Number(categoryId),
             updatedCategory: {
-              id: Number(categoryId), // Add the id property here
+              id: Number(categoryId),
               title,
-              description
-            }
+              description,
+            },
           })
         );
         if (updateCategory.fulfilled.match(dispatchResult)) {
@@ -35,8 +40,10 @@ export default function Categories(): JSX.Element {
           setTitle('');
         }
       } else {
-        const dispatchResult = await dispatch(createCategories({ title, description }));
-        if (createCategories.fulfilled.match(dispatchResult)) {
+        const dispatchResult = await dispatch(
+          createCategory({ title, description })
+        );
+        if (createCategory.fulfilled.match(dispatchResult)) {
           setCategoryId(null);
           setDescription('');
           setTitle('');
@@ -46,31 +53,36 @@ export default function Categories(): JSX.Element {
     [dispatch, description, title]
   );
 
-  const handleUpdate = React.useCallback((categoryIdtoUpdate: number): void => {
-  const categoryToUpdate = categories.find((category) => category.id === categoryIdtoUpdate);
-  if (categoryToUpdate) {
-    setCategoryId(categoryToUpdate.id);
-    setTitle(categoryToUpdate.title);
-    setDescription(categoryToUpdate.description);
-  } else {
-    setCategoryId(null);
-    setTitle('');
-    setDescription('');
-  }
-}, [categories]);
-
-const handleDelete = React.useCallback(
-  (categoryIdToDelete: number): void => {
-    dispatch(deleteCategories(categoryIdToDelete)).then((dispatchResult) => {
-      if (deleteCategories.fulfilled.match(dispatchResult)) {
+  const handleUpdate = React.useCallback(
+    (categoryIdtoUpdate: number): void => {
+      const categoryToUpdate = categories.find(
+        (category) => category.id === categoryIdtoUpdate
+      );
+      if (categoryToUpdate) {
+        setCategoryId(categoryToUpdate.id);
+        setTitle(categoryToUpdate.title);
+        setDescription(categoryToUpdate.description);
+      } else {
         setCategoryId(null);
-        setDescription('');
         setTitle('');
+        setDescription('');
       }
-    });
-  },
-  [dispatch]
-);
+    },
+    [categories]
+  );
+
+  const handleDelete = React.useCallback(
+    (categoryIdToDelete: number): void => {
+      dispatch(deleteCategories(categoryIdToDelete)).then((dispatchResult) => {
+        if (deleteCategories.fulfilled.match(dispatchResult)) {
+          setCategoryId(null);
+          setDescription('');
+          setTitle('');
+        }
+      });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     dispatch(loadCategories());
@@ -131,7 +143,6 @@ const handleDelete = React.useCallback(
             >
               <EditIcon />
             </button>
-
             <button
               type="button"
               className="btn btn-primary"

@@ -1,6 +1,6 @@
-import Subcategory from "./Subcategory";
+import Subcategory from './Subcategory';
 
 export default interface SubcategoriesState {
-    subcategories: Subcategory[];
-    error?: string;
+  subcategories: Subcategory[];
+  error?: string;
 }

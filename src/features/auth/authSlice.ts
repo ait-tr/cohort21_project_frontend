@@ -81,11 +81,13 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = undefined;
         state.authChecked = true;
+        state.userCards = undefined;
       })
 
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload;
         state.registerFormError = undefined;
+        state.userCards = undefined;
       })
       .addCase(register.rejected, (state, action) => {
         state.registerFormError = action.error.message;
