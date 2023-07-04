@@ -9,7 +9,9 @@ interface CategoryNavButtonProps {
   handleFilter: (value: number | null) => void;
 }
 
-function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Element {
+function CategoryNavButton({
+  handleFilter,
+}: CategoryNavButtonProps): JSX.Element {
   const categories = useSelector(selectCategories);
   const dispatch = useAppDispatch();
 
@@ -18,14 +20,7 @@ function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Elemen
   }, [dispatch]);
 
   return (
-    <Box
-      sx={{
-        ml: '3rem',
-        width: '100%',
-        textAlign: 'center',
-        bgcolor: 'background.paper',
-      }}
-    >
+    <Box sx={{ ml: '2rem' }}>
       <Grid container spacing={1}>
         <Button
           sx={{

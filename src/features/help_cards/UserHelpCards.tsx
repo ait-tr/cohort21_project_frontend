@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Container } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import { useAppDispatch } from '../../store';
 import { getUserCards } from '../auth/authSlice';
 import { selectUserCards } from './selectors';
@@ -16,8 +16,10 @@ export default function UserHelpCards(): JSX.Element {
 
   return (
     <Container>
-      <h3>Карточки пользователя</h3>
-      <div>
+      <Typography variant="h4" gutterBottom textAlign="center">
+        You are ready to Help in...
+      </Typography>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
         {userHelpCards && Array.isArray(userHelpCards) ? (
           userHelpCards.map((card) => (
             <HelpCard
@@ -34,9 +36,11 @@ export default function UserHelpCards(): JSX.Element {
             />
           ))
         ) : (
-          <div>No user help cards available.</div>
+          <div>
+            <h3>Lets start to Help</h3>
+          </div>
         )}
-      </div>
+      </Grid>
     </Container>
   );
 }

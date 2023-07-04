@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import SubCategoriesState from './types/SubCategoriesState';
 import * as api from './api';
+import SubCategoriesState from './types/SubCategoriesState';
 
 const initialState: SubCategoriesState = {
   subCategories: [],

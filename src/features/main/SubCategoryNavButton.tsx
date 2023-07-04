@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Grid } from '@mui/material';
+import { Box, Button, Grid } from '@mui/material';
 import { useAppDispatch } from '../../store';
 import { selectSubCategories } from '../subcategories/selectors';
 import { loadSubCategories } from '../subcategories/subCategoriesSlice';
@@ -20,18 +20,20 @@ function SubCategoryNavButton({
   }, [dispatch]);
 
   return (
-    <Grid container spacing={1}>
-      {subCategories?.map((element) => (
-        <Button
-          variant="contained"
-          color="primary"
-          key={element.id}
-          onClick={() => handleFilter(element.id)}
-        >
-          {element.title}
-        </Button>
-      ))}
-    </Grid>
+    <Box sx={{ ml: '2rem' }}>
+      <Grid container spacing={1} mt="0.5rem">
+        {subCategories?.map((element) => (
+          <Button
+            variant="contained"
+            color="primary"
+            key={element.id}
+            onClick={() => handleFilter(element.id)}
+          >
+            {element.title}
+          </Button>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 

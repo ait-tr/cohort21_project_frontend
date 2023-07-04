@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Container } from '@mui/material';
+import { Box, Button, Divider } from '@mui/material';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
 import { editProfile, getUserCards } from '../auth/authSlice';
@@ -46,39 +46,70 @@ function ProfileInfo(): JSX.Element {
   }, [user]);
 
   return (
-    <Container>
+    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
       {user && (
-        <div>
-          <div>id: {user.id}</div>
-          <div>username: {user.username}</div>
-          <div>role: {user.role}</div>
-          <div>email: {user.email}</div>
-          <div>phone: {user.phone}</div>
-          <div>isHelper: {user.isHelper?.toString()}</div>
-          {!isEditingProfile && (
+        <Box sx={{ my: 3, mx: 2 }}>
+          <Box sx={{ mb: 1.5 }} color="text.secondary">
+            My Profile
+          </Box>
+          <Box
+            fontSize="h3.fontSize"
+            component="div"
+            textAlign="center"
+            bgcolor="#e4f5ca"
+          >
+            Welcome, {user.username}
+          </Box>
+          <Box mt="1rem">{user.email}</Box>
+          <Box mt="1rem">{user.phone}</Box>
+          <Box justifyItems="right">
             <Button
               type="button"
               variant="contained"
+              color="info"
               fullWidth={false}
-              sx={{ mt: '0.3rem', mb: '1.5rem', maxWidth: '10rem' }}
-              onClick={() => setIsEditingProfile(true)}
+              sx={{
+                mt: '0.3rem',
+                mb: '1.5rem',
+                maxWidth: '10rem',
+                mr: '1rem', // ? при сжатии переместить
+              }}
             >
-              Edit Profile
+              Add Help offer
             </Button>
-          )}
-          {isEditingProfile && (
-            <ProfileEdit
-              email={email}
-              phone={phone}
-              setEmail={setEmail}
-              setPhone={setPhone}
-              handleProfileUpdate={handleProfileUpdate}
-              handleSave={handleSave}
-            />
-          )}
-        </div>
+            {!isEditingProfile && (
+              <Button
+                type="button"
+                variant="contained"
+                color="info"
+                fullWidth={false}
+                sx={{
+                  mt: '0.3rem',
+                  mb: '1.5rem',
+                  maxWidth: '10rem',
+                  mr: '1rem',
+                }}
+                onClick={() => setIsEditingProfile(true)}
+              >
+                Edit Profile
+              </Button>
+            )}
+
+            <Divider variant="middle" />
+            {isEditingProfile && (
+              <ProfileEdit
+                email={email}
+                phone={phone}
+                setEmail={setEmail}
+                setPhone={setPhone}
+                handleProfileUpdate={handleProfileUpdate}
+                handleSave={handleSave}
+              />
+            )}
+          </Box>
+        </Box>
       )}
-    </Container>
+    </Box>
   );
 }
 

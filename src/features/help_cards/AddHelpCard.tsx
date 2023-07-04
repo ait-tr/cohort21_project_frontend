@@ -39,7 +39,15 @@ export default function HelpCards(): JSX.Element {
 
       dispatch(getUserCards());
     },
-    [dispatch, categoryId, subCategoryId, price, description]
+    [
+      dispatch,
+      title,
+      categoryId,
+      subCategoryId,
+      price,
+      description,
+      fullDescription,
+    ]
   );
   useEffect(() => {
     dispatch(getUserCards());
@@ -127,7 +135,10 @@ export default function HelpCards(): JSX.Element {
         </Button>
 
         {error && (
-          <div className="invalid-feedback text-end" style={{ display: 'block' }}>
+          <div
+            className="invalid-feedback text-end"
+            style={{ display: 'block' }}
+          >
             {error}
           </div>
         )}

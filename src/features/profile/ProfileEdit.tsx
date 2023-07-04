@@ -19,7 +19,7 @@ function ProfileEdit({
   handleSave,
 }: ProfileEditProps): JSX.Element {
   return (
-    <div>
+    <Box ml="15rem">
       <Box mt="1rem">
         <TextField
           id="email"
@@ -38,13 +38,22 @@ function ProfileEdit({
           onChange={(e) => setPhone(e.target.value)}
         />
       </Box>
-      <Button type="button" onClick={() => handleProfileUpdate(email, phone)}>
+
+      <Button
+        type="button"
+        sx={{ ml: '1rem', mt: '0.5rem' }}
+        onClick={() => handleProfileUpdate(email, phone)}
+      >
         Save
       </Button>
-      <Button type="button" onClick={handleSave}>
+      <Button
+        type="button"
+        sx={{ ml: '1rem', mt: '0.5rem' }}
+        onClick={handleSave}
+      >
         Cancel
       </Button>
-    </div>
+    </Box>
   );
 }
 

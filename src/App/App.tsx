@@ -13,8 +13,8 @@ import HelpCards from '../features/help_cards/HelpCards';
 import UserHelpCards from '../features/help_cards/UserHelpCards';
 import Categories from '../features/categories/Categories';
 import ProfilePage from '../features/profile/Profile';
-import Subcategories from '../features/subcategories/Subcategories';
 import DetailHelpCard from '../features/help_cards/DetailHelpCard';
+import SubCategories from '../features/subcategories/SubCategories';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -40,9 +40,12 @@ function App(): JSX.Element {
           <Route path="/" element={<Homepage />} />
           <Route path="/api/users/my/profile" element={<ProfilePage />} />
           <Route path="/users/my/cards" element={<UserHelpCards />} />
-          <Route path="/cards" element={<HelpCards selectedCategory={null} />} />
+          <Route
+            path="/cards"
+            element={<HelpCards selectedCategory={null} />}
+          />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/subcategories" element={<Subcategories />} />
+          <Route path="/subcategories" element={<SubCategories />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/card-details/:id" element={<DetailHelpCard />} />
