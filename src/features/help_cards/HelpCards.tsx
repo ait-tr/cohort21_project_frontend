@@ -5,25 +5,39 @@ import { selectHelpCards } from './selectors';
 import { getHelpCards } from './helpCardsSlice';
 import { useAppDispatch } from '../../store';
 import HelpCard from './HelpCard';
+import { trustedTypes } from 'trusted-types';
 
 interface HelpCardsProps {
   selectedCategory: number | null;
+  selectedSubCategory: number | null;
 }
 
 export default function HelpCards({
-  selectedCategory,
+
+ 
+  selectedCategory,selectedSubCategory
 }: HelpCardsProps): JSX.Element {
   const helpCards = useSelector(selectHelpCards);
   const dispatch = useAppDispatch();
+  console.log('selectedCategory' + selectedCategory);
+  console.log('selectedSubCategory' + selectedSubCategory);
 
   useEffect(() => {
     dispatch(getHelpCards());
   }, [dispatch]);
 
-  const filteredHelpCards = selectedCategory
-    ? helpCards?.filter((helpCard) => helpCard.category.id === selectedCategory)
-    : helpCards;
+  const filteredHelpCards = helpCards?.filter((helpCard) => {
+    if (selectedCategory && selectedCategory !== helpCard.category.id) {
+      return false;
+    }
+    if (selectedSubCategory && selectedSubCategory !== helpCard.subCategory.id) {
+      return false;
+    }
+    return true;
+  });
 
+ 
+  
   return (
     <Grid container spacing={1}>
       {filteredHelpCards?.map((helpCard) => (

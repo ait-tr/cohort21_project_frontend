@@ -3,7 +3,7 @@ import { Box, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { selectSubCategories } from './selectors';
 import { useAppDispatch } from '../../store';
-import { loadSubCategories } from './subCategoriesSlice';
+import { loadSubCategories } from './subcategoriesSlice';
 
 export default function SubCategories(): JSX.Element {
   const subCategories = useSelector(selectSubCategories);
@@ -18,7 +18,11 @@ export default function SubCategories(): JSX.Element {
       <Container>
         <div>
           {subCategories.map((subCategory) => (
-            <div key={subCategory.id}>{subCategory.description}</div>
+            <div key={subCategory.id}>
+              <div>Title: {subCategory.title}</div>
+              <div>Description: {subCategory.description}</div>
+              <div>CategoryId: {subCategory.categoryId}</div>
+              </div>
           ))}
         </div>
       </Container>

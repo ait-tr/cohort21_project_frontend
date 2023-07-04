@@ -6,17 +6,20 @@ import SubCategoryNavButton from './SubCategoryNavButton';
 
 function Homepage(): JSX.Element {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(null);
 
-  const handleFilter = (value: number | null): void => {
-    setSelectedCategory(value);
+  const handleFilter = (category: number | null, subCategory: number | null): void => {
+    setSelectedCategory(category);
+    setSelectedSubCategory(subCategory);
   };
+  
 
   return (
     <Box sx={{ mt: '0.5rem' }}>
       <CategoryNavButton handleFilter={handleFilter} />
-      <SubCategoryNavButton handleFilter={handleFilter} />
+
       <Grid container sx={{ mt: '1rem' }} spacing={2}>
-        <HelpCards selectedCategory={selectedCategory} />
+        <HelpCards selectedCategory={selectedCategory} selectedSubCategory={selectedSubCategory} />
       </Grid>
     </Box>
   );

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Button, Grid } from '@mui/material';
 import { useAppDispatch } from '../../store';
 import { selectSubCategories } from '../subcategories/selectors';
-import { loadSubCategories } from '../subcategories/subCategoriesSlice';
+import { loadSubCategories } from '../subcategories/subcategoriesSlice';
 
 interface SubCategoryNavButtonProps {
   handleFilter: (value: number | null) => void;

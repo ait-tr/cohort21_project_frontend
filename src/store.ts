@@ -4,7 +4,7 @@ import authSlice from './features/auth/authSlice';
 import helpCardsSlice from './features/help_cards/helpCardsSlice';
 import tasksSlice from './features/tasks/tasksSlice';
 import categoriesSlice from './features/categories/categoriesSlice';
-import subCategoriesSlice from './features/subcategories/subCategoriesSlice';
+import subCategoriesSlice from './features/subcategories/subcategoriesSlice';
 
 const store = configureStore({
   reducer: {
