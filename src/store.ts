@@ -6,7 +6,6 @@ import tasksSlice from './features/tasks/tasksSlice';
 import categoriesSlice from './features/categories/categoriesSlice';
 import subСategoriesSlice from './features/subcategories/subСategoriesSlice';
 
-
 const store = configureStore({
   reducer: {
     auth: authSlice,

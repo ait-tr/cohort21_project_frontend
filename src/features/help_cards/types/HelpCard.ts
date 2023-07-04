@@ -13,3 +13,5 @@ export default interface HelpCard {
   fullDescription: string;
   isActive: boolean;
 }
+
+export type HelpCardId = HelpCard['id'];

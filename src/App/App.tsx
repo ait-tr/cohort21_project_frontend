@@ -41,15 +41,18 @@ function App(): JSX.Element {
           <Route path="/" element={<Homepage />} />
           <Route path="/api/users/my/profile" element={<ProfilePage />} />
           <Route path="/users/my/cards" element={<UserHelpCards />} />
-          <Route path="/cards" element={<HelpCards selectedCategory={null} />} />
+          <Route
+            path="/cards"
+            element={
+              <HelpCards selectedCategory={null} selectedSubCategory={null} />
+            }
+          />
           <Route path="/categories" element={<Categories />} />
           <Route path="/subcategories" element={<Subcategories />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/card-details/:id" element={<DetailHelpCard />} />
           <Route path="/card/" element={<AddHelpCard />} />
-
-          
         </Route>
       </Routes>
     </HashRouter>

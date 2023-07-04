@@ -48,6 +48,9 @@ export default function Header(): JSX.Element {
             letterSpacing: '.15rem',
             color: 'inherit',
             textDecoration: 'none',
+            '&:hover': {
+              color: '#ff9444',
+            },
           }}
         >
           GetHelp

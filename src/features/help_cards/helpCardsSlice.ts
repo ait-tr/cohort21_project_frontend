@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import HelpCardsState from './types/HelpCardsState';
 import * as api from './api';
+import { HelpCardId } from './types/HelpCard';
 
 const initialState: HelpCardsState = {
   helpCards: [],
@@ -40,8 +41,17 @@ export const createHelpCard = createAsyncThunk(
     );
   }
 );
+
 export const getHelpCards = createAsyncThunk('helpCards/getHelpCards', () =>
   api.getHelpCards()
+);
+
+export const deleteHelpCard = createAsyncThunk(
+  'helpCards/deleteHelpCard',
+  async (id: HelpCardId) => {
+    await api.deleteHelpCard(id);
+    return id;
+  }
 );
 
 const helpCardsSlice = createSlice({
@@ -63,6 +73,18 @@ const helpCardsSlice = createSlice({
 
       .addCase(getHelpCards.fulfilled, (state, action) => {
         state.helpCards = action.payload.cards;
+      })
+      .addCase(getHelpCards.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+
+      .addCase(deleteHelpCard.fulfilled, (state, action) => {
+        state.helpCards = state.helpCards.filter(
+          (card) => card.id !== action.payload
+        );
+      })
+      .addCase(deleteHelpCard.rejected, (state, action) => {
+        state.error = action.error.message;
       });
 
     // .addCase(updateTask.fulfilled, (state, action) => {

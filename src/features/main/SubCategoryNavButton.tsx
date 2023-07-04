@@ -24,7 +24,7 @@ function SubCategoryNavButton({
       {subCategories?.map((element) => (
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           key={element.id}
           onClick={() => handleFilter(element.id)}
         >

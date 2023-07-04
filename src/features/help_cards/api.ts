@@ -1,4 +1,4 @@
-import HelpCard from './types/HelpCard';
+import HelpCard, { HelpCardId } from './types/HelpCard';
 
 export async function createHelpCard(
   title: string,
@@ -44,4 +44,10 @@ export async function getHelpCards(): Promise<{ cards: HelpCard[] }> {
   // TODO исправить на получение только для пользователя (+бэк)
   const result = await fetch('/api/cards');
   return result.json();
+}
+
+export async function deleteHelpCard(id: HelpCardId): Promise<void> {
+  await fetch(`/api/cards/${id}`, {
+    method: 'DELETE',
+  });
 }

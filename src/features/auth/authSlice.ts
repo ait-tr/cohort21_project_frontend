@@ -47,7 +47,6 @@ export const getUserCards = createAsyncThunk('api/users/my/cards', () =>
 export const editProfile = createAsyncThunk(
   'users/editProfile',
   async (profile: User) => api.editProfile(profile)
-  // TODO переделать стартовый(тестовый) вариант
 );
 
 const authSlice = createSlice({

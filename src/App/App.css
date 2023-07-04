@@ -8,6 +8,7 @@
 }
 
 .task {
+  color: #d8d8d8;
   display: flex;
 }
 
@@ -16,7 +17,8 @@
   cursor: pointer;
 }
 
-.done-checkbox {}
+.done-checkbox {
+}
 
 .auth-form {
   width: 200px;

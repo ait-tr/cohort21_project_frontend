@@ -54,17 +54,17 @@ export default function HelpCard({
   }, [dispatch, id]);
 
   return (
-    <Box>
+    <Box fontFamily="Literata">
       <Container onClick={handleClick}>
         <Card
           sx={{
             maxWidth: 345,
             minWidth: 345,
             maxHeight: 460,
-            marginBottom: '2rem',
+            marginBottom: '1rem',
             marginTop: '1rem',
-            marginLeft: '2rem',
-            marginRight: '2rem',
+            marginLeft: '1rem',
+            marginRight: '1rem',
           }}
           key={id}
         >
@@ -79,7 +79,7 @@ export default function HelpCard({
               <Box>{user.username}</Box>
 
               <Box
-                fontSize="h5.fontSize"
+                fontSize="1.35rem"
                 component="div"
                 overflow="hidden"
                 whiteSpace="pre-line"
@@ -88,24 +88,24 @@ export default function HelpCard({
               >
                 {title}
               </Box>
-              <Box sx={{ mb: 1.5 }} color="text.secondary">
+              <Box sx={{ mt: 1, mb: 1 }} color="text.secondary">
                 {category.title} / {subCategory.title}
               </Box>
 
               <Typography
                 sx={{
-                  overflow: 'hidden',
+                  fontSize: '1rem',
                   textOverflow: 'ellipsis',
                   WebkitLineClamp: '2',
                   WebkitBoxOrient: 'vertical',
-                  height: 120,
+                  height: 125,
                 }}
               >
                 {description}
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
+          <CardActions sx={{ mt: -1.5, justifyContent: 'right' }}>
             <Box>Price: {price} Euro</Box>
           </CardActions>
         </Card>
