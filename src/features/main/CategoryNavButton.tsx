@@ -63,6 +63,8 @@ function CategoryNavButton({ handleFilter }: CategoryNavButtonProps): JSX.Elemen
             {category.title}
           </Button>
         ))}
+        </Grid>
+        <Grid>
         {selectedCategoryId &&
           subCategories
             ?.filter((subcategory) => subcategory.categoryId === selectedCategoryId)

@@ -242,7 +242,7 @@ export default function AddHelpCardForm({ isEditMode }: AddHelpCardFormProps): J
           {isEditMode ? 'Save Change' : 'Add Card'}
         </Button>
         <Button variant="outlined" color="secondary" onClick={handleCancel}>
-          Cancel Editing
+          Cancel
         </Button>
         <Snackbar
           anchorOrigin={{
