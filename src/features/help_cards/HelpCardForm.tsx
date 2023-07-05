@@ -9,19 +9,26 @@ import {
   MenuItem,
   FormControl,
   SelectChangeEvent,
+  Snackbar,
+  Alert
 } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { selectError } from './selectors';
-import { createHelpCard } from './helpCardsSlice';
+import { useParams, useNavigate } from 'react-router-dom';
+import { selectError, selectHelpCards } from './selectors';
+import { createHelpCard, getHelpCards } from './helpCardsSlice';
 import { useAppDispatch } from '../../store';
 import { getUserCards } from '../auth/authSlice';
 import { selectCategories } from '../categories/selectors';
 import { selectSubCategories } from '../subcategories/selectors';
 import { loadCategories } from '../categories/categoriesSlice';
 import { loadSubCategories } from '../subcategories/subСategoriesSlice';
+import HelpCard from './types/HelpCard';
+import { getHelpCard, updateHelpCard } from './api';
 
-export default function AddHelpCardForm(): JSX.Element {
+interface AddHelpCardFormProps {
+  isEditMode: Boolean;
+}
+export default function AddHelpCardForm({ isEditMode }: AddHelpCardFormProps): JSX.Element {
   const error = useSelector(selectError);
   const [title, setTitle] = useState<string>('');
   const categories = useSelector(selectCategories);
@@ -31,24 +38,60 @@ export default function AddHelpCardForm(): JSX.Element {
   const [price, setPrice] = useState<number>(0);
   const [description, setDescription] = useState<string>('');
   const [fullDescription, setFullDescription] = useState<string>('');
+  const helpCards = useSelector(selectHelpCards);
+  const { id } = useParams<{ id: string }>();
+  console.log('helpCards:', helpCards);
+  console.log('id:', id);
+  const selectedCard = helpCards.find((card: HelpCard) => card.id === Number(id));
+  const [statusMessage, setStatusMessage] = useState<string>(''); // Add new state variable
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent) => {
       event.preventDefault();
 
-      const dispatchResult = await dispatch(
-        createHelpCard({
-          title,
-          categoryId,
-          subCategoryId,
-          price,
-          description,
-          fullDescription,
-        })
-      );
-
+      if (!isEditMode) {
+        const dispatchResult = await dispatch(
+          createHelpCard({
+            title,
+            categoryId,
+            subCategoryId,
+            price,
+            description,
+            fullDescription,
+          })
+        );
+        if (dispatchResult.meta.requestStatus === 'fulfilled') {
+          setStatusMessage('Card added successfully.');
+          const helpCard = dispatchResult.payload as HelpCard;
+          console.log(helpCard.id);
+         setTimeout(() => {
+            setShowSnackbar(false);
+            navigate(`/card-details/${helpCard.id}`);
+          }, 500);
+          setShowSnackbar(true);
+        }
+      } else if (selectedCard) {
+          const updatedCard = {
+            ...selectedCard,
+            title,
+            categoryId,
+            subCategoryId,
+            price,
+            description,
+            fullDescription,
+          };
+          await updateHelpCard(updatedCard);
+          setStatusMessage('Changes saved successfully.');
+          setTimeout(() => {
+            setShowSnackbar(false);
+            // Redirect to the start page
+            navigate('/api/users/my/profile');
+          }, 1000);
+          setShowSnackbar(true);
+      }
       setTitle('');
       setCategoryId(0);
       setSubCategoryId(0);
@@ -56,11 +99,6 @@ export default function AddHelpCardForm(): JSX.Element {
       setDescription('');
       setFullDescription('');
       dispatch(getUserCards());
-
-      if (createHelpCard.fulfilled.match(dispatchResult)) {
-        const cardId = dispatchResult.payload.id.toString();
-        navigate(`/card-details/${cardId}`);
-      }
     },
     [
       dispatch,
@@ -71,6 +109,8 @@ export default function AddHelpCardForm(): JSX.Element {
       description,
       fullDescription,
       navigate,
+      isEditMode,
+      selectedCard,
     ]
   );
   const handleCategoryChange = (event: SelectChangeEvent<number>): void => {
@@ -80,12 +120,35 @@ export default function AddHelpCardForm(): JSX.Element {
   const handleSubCategoryChange = (event: SelectChangeEvent<number>): void => {
     setSubCategoryId(Number(event.target.value));
   };
+  const handleCancel = ():void => {
+    setTitle('');
+    setCategoryId(0);
+    setSubCategoryId(0);
+    setPrice(0);
+    setDescription('');
+    setFullDescription('');
+    navigate('/api/users/my/profile');
+  };
 
   useEffect(() => {
-    dispatch(getUserCards());
     dispatch(loadCategories());
     dispatch(loadSubCategories());
-  }, [dispatch]);
+    dispatch(getHelpCards());
+
+    if (isEditMode && id !== undefined) {
+      // Fetch help card data and populate form fields
+      const cardId = Number(id);
+      getHelpCard(cardId)
+        .then((helpCard) => {
+          setTitle(helpCard.title);
+          setCategoryId(helpCard.category.id);
+          setSubCategoryId(helpCard.subCategory.id);
+          setPrice(helpCard.price);
+          setDescription(helpCard.description);
+          setFullDescription(helpCard.fullDescription);
+        });
+    }
+  }, [dispatch, id, isEditMode]);
 
   return (
     <Box maxWidth={400} mx="auto" p={2}>
@@ -149,7 +212,6 @@ export default function AddHelpCardForm(): JSX.Element {
           value={price}
           onChange={(e) => setPrice(parseFloat(e.target.value))}
         />
-
         <TextField
           required
           fullWidth
@@ -163,7 +225,6 @@ export default function AddHelpCardForm(): JSX.Element {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-
         <TextField
           required
           fullWidth
@@ -177,11 +238,25 @@ export default function AddHelpCardForm(): JSX.Element {
           value={fullDescription}
           onChange={(e) => setFullDescription(e.target.value)}
         />
-
         <Button type="submit" variant="contained" color="primary">
-          Add Card
+          {isEditMode ? 'Save Change' : 'Add Card'}
         </Button>
-
+        <Button variant="outlined" color="secondary" onClick={handleCancel}>
+          Cancel Editing
+        </Button>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open={showSnackbar}
+          autoHideDuration={3000}
+          onClose={() => setShowSnackbar(false)}
+        >
+          <Alert severity="success" onClose={() => setShowSnackbar(false)}>
+            {statusMessage}
+          </Alert>
+        </Snackbar>
         {error && (
           <Typography color="error" mt={2}>
             {error}

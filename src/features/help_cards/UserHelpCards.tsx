@@ -15,12 +15,14 @@ import { getUserCards } from '../auth/authSlice';
 import { selectUserCards } from './selectors';
 import HelpCard from './HelpCard';
 import { deleteHelpCard } from './helpCardsSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserHelpCards(): JSX.Element {
   const userHelpCards = useSelector(selectUserCards);
   const dispatch = useAppDispatch();
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = React.useState(false);
   const [selectedCardId, setSelectedCardId] = React.useState<number>(0);
+  const navigate = useNavigate();
 
   const handleOpenDeleteConfirmation = (cardId: number): void => {
     setSelectedCardId(cardId);
@@ -32,6 +34,9 @@ export default function UserHelpCards(): JSX.Element {
     setDeleteConfirmationOpen(false);
   };
 
+  const handleEditHelpCard = (cardId: number): void => {
+    navigate(`/card/${cardId}`);
+  };
   const handleDeleteCard = (): void => {
     dispatch(deleteHelpCard(selectedCardId));
     handleCloseDeleteConfirmation();
@@ -39,7 +44,7 @@ export default function UserHelpCards(): JSX.Element {
 
   useEffect(() => {
     dispatch(getUserCards());
-  }, [dispatch, deleteConfirmationOpen]);
+  }, [dispatch, selectedCardId]);
 
   return (
     <Container>
@@ -76,7 +81,9 @@ export default function UserHelpCards(): JSX.Element {
                 spacing={1}
               >
                 <Grid item>
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" 
+                  color="primary"
+                  onClick={() => handleEditHelpCard(card.id)}>
                     Edit Card
                   </Button>
                 </Grid>
