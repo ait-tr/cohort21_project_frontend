@@ -10,6 +10,7 @@ import ProfileEdit from './ProfileEdit';
 export default function ProfileInfo(): JSX.Element {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+  const role = user?.role;
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const dispatch = useAppDispatch();
@@ -95,6 +96,7 @@ export default function ProfileInfo(): JSX.Element {
                 >
                   Edit Profile
                 </Button>
+                {role !== 'ADMIN' ?(
                 <Button
                   onClick={handleAddCard}
                   type="button"
@@ -108,6 +110,7 @@ export default function ProfileInfo(): JSX.Element {
                 >
                   Add new Card
                 </Button>
+                ):( <Divider variant="middle" />)}
               </>
             )}
 
