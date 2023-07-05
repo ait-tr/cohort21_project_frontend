@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -70,89 +71,61 @@ export default function Categories(): JSX.Element {
     },
     [categories]
   );
-
-  const handleDelete = React.useCallback(
-    (categoryIdToDelete: number): void => {
-      dispatch(deleteCategories(categoryIdToDelete)).then((dispatchResult) => {
-        if (deleteCategories.fulfilled.match(dispatchResult)) {
-          setCategoryId(null);
-          setDescription('');
-          setTitle('');
-        }
-      });
-    },
-    [dispatch]
-  );
-
   useEffect(() => {
     dispatch(loadCategories());
   }, [dispatch]);
 
   return (
     <>
-      <div>Categories</div>
-      <h3>{isEditing ? 'Edit Categories' : 'Add Categories'}</h3>
-      <form className="mb-3" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <input
+      <Box>
+      <Typography variant="h6">{isEditing ? 'Edit Categories' : 'Add Categories'}</Typography>
+      <form onSubmit={handleSubmit}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+          <TextField
             type="text"
             placeholder="Id..."
             aria-label="Id..."
-            title="id" // Update the title attribute to "title"
+            title="id"
             value={categoryId !== null ? categoryId.toString() : ''}
             onChange={() => setCategoryId(null)}
+            disabled={true}
           />
-          <input
+          <TextField
             type="text"
-            className={`form-control ${error ? 'is-invalid' : ''}`}
             placeholder="Categories..."
             aria-label="Categories..."
-            title="title" // Update the title attribute to "title"
+            title="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <input
+          <TextField
             type="text"
-            className={`form-control ${error ? 'is-invalid' : ''}`}
             placeholder="Описание..."
             aria-label="Описание..."
             title="CategoriesDescription"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-
-          <button type="submit" className="btn btn-primary">
+          <Button type="submit" variant="contained" color="primary">
             {isEditing ? 'Обновить' : 'Добавить'}
-          </button>
-        </div>
+          </Button>
+        </Box>
         {error && (
-          <div className="invalid-feedback text-end" style={{ display: 'block' }}>
+          <Typography variant="body2" color="error">
             {error}
-          </div>
+          </Typography>
         )}
       </form>
-      <h3>Все категории</h3>
+      <Typography variant="h6">All Categories</Typography>
       <ul>
         {categories?.map((element) => (
           <li key={element.id}>
             {element.id} {element.title} {element.description}
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => handleUpdate(element.id)}
-            >
-              <EditIcon />
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => handleDelete(element.id)}
-            >
-              <DeleteIcon />
-            </button>
+            <Button onClick={() => handleUpdate(element.id)}><EditIcon /></Button>
           </li>
         ))}
       </ul>
+    </Box>
     </>
   );
 }
