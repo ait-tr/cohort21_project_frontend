@@ -28,7 +28,14 @@ function Register(): JSX.Element {
       if (register.fulfilled.match(dispatchResult)) {
         await dispatch(login({ username, password }));
         await dispatch(getUserCards());
-        navigate('/api/users/my/profile');
+        
+        if (location.pathname === '/auth/login') {
+          navigate('/api/users/my/profile');
+          console.log('111');
+        } else if (location.pathname.startsWith('/card-details/')) {
+          navigate(location.pathname);
+          console.log('222');
+        }
       }
     },
     [dispatch, username, navigate, password, passwordRepeat]
