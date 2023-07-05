@@ -17,29 +17,23 @@ export default function DetailHelpCard(): JSX.Element {
   const helpCards = useSelector(selectHelpCards);
   const selectedCard = helpCards.find((card: HelpCard) => card.id.toString() === id);
   const dispatch = useAppDispatch();
-
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
-
   const handleShowModalLogin = () => {
     setOpenModalLogin(true);
   };
-
   const handleCloseModalLogin = () => {
     setOpenModalLogin(false);
   };
   const handleShowModalRegister = () => {
     setOpenModalRegister(true);
   };
-
   const handleCloseModalRegister = () => {
     setOpenModalRegister(false);
   };
-
   useEffect(() => {
     dispatch(getHelpCards());
   }, [dispatch, id]);
-
   return (
     <Container>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -61,14 +55,11 @@ export default function DetailHelpCard(): JSX.Element {
             </Box>
           </Box>
         )}
-
         <Divider variant="middle" />
-
         <Box sx={{ mt: 5, p: 2, bgcolor: '#d8d8d8' }}>
           <Typography fontSize="1.2rem" gutterBottom variant="h3">
             In order to obtain Helper contact information, you are required to log in or sign up.
           </Typography>
-
           {user ? (
             // User is authenticated
             selectedCard && (
@@ -94,7 +85,6 @@ export default function DetailHelpCard(): JSX.Element {
             )
           ) : (
             <>
-
               <Button type="button" onClick={handleShowModalLogin}>
                 Login
               </Button>
@@ -106,7 +96,6 @@ export default function DetailHelpCard(): JSX.Element {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-
                 }}>
                 <Box sx={{ bgcolor: 'background.paper', width: 500,padding: '2rem' }}>
                   <Box >
@@ -114,7 +103,6 @@ export default function DetailHelpCard(): JSX.Element {
                   </Box>
                 </Box>
               </Modal>
-
               <Button type="button" onClick={handleShowModalRegister}>
                 Sign In
               </Button>
@@ -126,7 +114,6 @@ export default function DetailHelpCard(): JSX.Element {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-
                 }}>
                 <Box sx={{ bgcolor: 'background.paper', width: 500,padding: '2rem' }}>
                   <Box >
@@ -139,6 +126,5 @@ export default function DetailHelpCard(): JSX.Element {
         </Box>
       </Box>
     </Container>
-
   );
 }
