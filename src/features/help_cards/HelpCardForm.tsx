@@ -10,7 +10,7 @@ import {
   FormControl,
   SelectChangeEvent,
   Snackbar,
-  Alert
+  Alert,
 } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -28,7 +28,9 @@ import { getHelpCard, updateHelpCard } from './api';
 interface AddHelpCardFormProps {
   isEditMode: Boolean;
 }
-export default function AddHelpCardForm({ isEditMode }: AddHelpCardFormProps): JSX.Element {
+export default function AddHelpCardForm({
+  isEditMode,
+}: AddHelpCardFormProps): JSX.Element {
   const error = useSelector(selectError);
   const [title, setTitle] = useState<string>('');
   const categories = useSelector(selectCategories);
@@ -67,30 +69,29 @@ export default function AddHelpCardForm({ isEditMode }: AddHelpCardFormProps): J
           setStatusMessage('Card added successfully.');
           const helpCard = dispatchResult.payload as HelpCard;
           console.log(helpCard.id);
-         setTimeout(() => {
+          setTimeout(() => {
             setShowSnackbar(false);
             navigate(`/card-details/${helpCard.id}`);
           }, 500);
           setShowSnackbar(true);
         }
       } else if (selectedCard) {
-          const updatedCard = {
-            ...selectedCard,
-            title,
-            categoryId,
-            subCategoryId,
-            price,
-            description,
-            fullDescription,
-          };
-          await updateHelpCard(updatedCard);
-          setStatusMessage('Changes saved successfully.');
-          setTimeout(() => {
-            setShowSnackbar(false);
-            // Redirect to the start page
-            navigate('/api/users/my/profile');
-          }, 1000);
-          setShowSnackbar(true);
+        const updatedCard = {
+          ...selectedCard,
+          title,
+          categoryId,
+          subCategoryId,
+          price,
+          description,
+          fullDescription,
+        };
+        await updateHelpCard(updatedCard);
+        setStatusMessage('Changes saved successfully.');
+        setTimeout(() => {
+          setShowSnackbar(false);
+          navigate('/api/users/my/profile');
+        }, 1000);
+        setShowSnackbar(true);
       }
       setTitle('');
       setCategoryId(0);
@@ -120,7 +121,7 @@ export default function AddHelpCardForm({ isEditMode }: AddHelpCardFormProps): J
   const handleSubCategoryChange = (event: SelectChangeEvent<number>): void => {
     setSubCategoryId(Number(event.target.value));
   };
-  const handleCancel = ():void => {
+  const handleCancel = (): void => {
     setTitle('');
     setCategoryId(0);
     setSubCategoryId(0);
@@ -138,15 +139,14 @@ export default function AddHelpCardForm({ isEditMode }: AddHelpCardFormProps): J
     if (isEditMode && id !== undefined) {
       // Fetch help card data and populate form fields
       const cardId = Number(id);
-      getHelpCard(cardId)
-        .then((helpCard) => {
-          setTitle(helpCard.title);
-          setCategoryId(helpCard.category.id);
-          setSubCategoryId(helpCard.subCategory.id);
-          setPrice(helpCard.price);
-          setDescription(helpCard.description);
-          setFullDescription(helpCard.fullDescription);
-        });
+      getHelpCard(cardId).then((helpCard) => {
+        setTitle(helpCard.title);
+        setCategoryId(helpCard.category.id);
+        setSubCategoryId(helpCard.subCategory.id);
+        setPrice(helpCard.price);
+        setDescription(helpCard.description);
+        setFullDescription(helpCard.fullDescription);
+      });
     }
   }, [dispatch, id, isEditMode]);
 
@@ -238,12 +238,14 @@ export default function AddHelpCardForm({ isEditMode }: AddHelpCardFormProps): J
           value={fullDescription}
           onChange={(e) => setFullDescription(e.target.value)}
         />
-        <Button type="submit" variant="contained" color="primary">
-          {isEditMode ? 'Save Change' : 'Add Card'}
-        </Button>
-        <Button variant="outlined" color="secondary" onClick={handleCancel}>
-          Cancel
-        </Button>
+        <Box textAlign="center">
+          <Button sx={{ mr: 1 }} type="submit" variant="contained" color="info">
+            {isEditMode ? 'Save Changes' : 'Add Card'}
+          </Button>
+          <Button variant="outlined" color="error" onClick={handleCancel}>
+            Cancel
+          </Button>
+        </Box>
         <Snackbar
           anchorOrigin={{
             vertical: 'top',

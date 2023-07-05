@@ -47,6 +47,15 @@ export default function DetailHelpCard(): JSX.Element {
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {selectedCard && (
           <Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: '1rem' }}>
+              <img
+                height="400"
+                width="600"
+                src="https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                alt="compuhter"
+                style={{ margin: 'auto' }}
+              />
+            </Box>
             <Box sx={{ mb: 1.5, mt: 2.5 }} color="text.secondary">
               {selectedCard.category.title} / {selectedCard.subCategory.title}
             </Box>

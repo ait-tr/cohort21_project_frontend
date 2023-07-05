@@ -65,7 +65,7 @@ export default function ProfileInfo(): JSX.Element {
             fontWeight={600}
             component="div"
             textAlign="center"
-            bgcolor="#ff9404"
+            bgcolor="#FF9d25"
           >
             Welcome, {user.username}
           </Box>
@@ -107,7 +107,7 @@ export default function ProfileInfo(): JSX.Element {
                   }}
                   onClick={() => setIsEditingProfile(true)}
                 >
-                  Edit Profile
+                  Edit Contacts
                 </Button>
                 <Button
                   onClick={handleAddCard}
@@ -120,7 +120,7 @@ export default function ProfileInfo(): JSX.Element {
                     mr: '1rem', // ? при сжатии переместить
                   }}
                 >
-                  Add new Card
+                  Add Help Offer
                 </Button>
               </>
             )}

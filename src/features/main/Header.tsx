@@ -49,7 +49,7 @@ export default function Header(): JSX.Element {
             color: 'inherit',
             textDecoration: 'none',
             '&:hover': {
-              color: '#ff9444',
+              color: '#ff9d25',
             },
           }}
         >
@@ -58,7 +58,12 @@ export default function Header(): JSX.Element {
         {user ? (
           <>
             <Button
-              sx={{ mr: '1rem' }}
+              sx={{
+                mr: '1rem',
+                '&:hover': {
+                  color: '#ff9d25',
+                },
+              }}
               color="inherit"
               href="#/api/users/my/profile"
               endIcon={<AccountCircle />}
@@ -67,7 +72,12 @@ export default function Header(): JSX.Element {
             </Button>
             <Button
               onClick={handleLogout}
-              sx={{ mr: '1rem' }}
+              sx={{
+                mr: '1rem',
+                '&:hover': {
+                  color: '#ff9d25',
+                },
+              }}
               color="inherit"
               href="#/auth/login"
               endIcon={<Logout />}
@@ -78,7 +88,12 @@ export default function Header(): JSX.Element {
         ) : (
           <>
             <Button
-              sx={{ mr: '1rem' }}
+              sx={{
+                mr: '1rem',
+                '&:hover': {
+                  color: '#ff9d25',
+                },
+              }}
               color="inherit"
               href="#/auth/register"
               endIcon={<Check />}
@@ -86,7 +101,12 @@ export default function Header(): JSX.Element {
               Sign Up
             </Button>
             <Button
-              sx={{ mr: '1rem' }}
+              sx={{
+                mr: '1rem',
+                '&:hover': {
+                  color: '#ff9d25',
+                },
+              }}
               color="inherit"
               href="#/auth/login"
               endIcon={<Login />}

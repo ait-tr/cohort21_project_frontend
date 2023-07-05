@@ -51,7 +51,8 @@ export default function UserHelpCards(): JSX.Element {
       <Typography
         fontFamily="Exo"
         fontWeight={600}
-        borderTop={2}
+        borderTop={1}
+        borderColor="#FF9d25"
         paddingTop={2}
         variant="h5"
         gutterBottom
@@ -75,7 +76,7 @@ export default function UserHelpCards(): JSX.Element {
                 isActive={card.isActive}
               />
               <Grid
-                sx={{ mt: -2, mb: 2 }}
+                sx={{ mt: -1, mb: 2 }}
                 container
                 justifyContent="center"
                 spacing={1}
@@ -83,10 +84,10 @@ export default function UserHelpCards(): JSX.Element {
                 <Grid item>
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="info"
                     onClick={() => handleEditHelpCard(card.id)}
                   >
-                    Edit Card
+                    Edit Offer
                   </Button>
                 </Grid>
                 <Grid item>
@@ -95,7 +96,7 @@ export default function UserHelpCards(): JSX.Element {
                     color="error"
                     onClick={() => handleOpenDeleteConfirmation(card.id)}
                   >
-                    Delete Card
+                    Delete Offer
                   </Button>
                 </Grid>
               </Grid>

@@ -12,6 +12,7 @@ import {
   Box,
   CardActions,
 } from '@mui/material';
+import { EuroRounded } from '@mui/icons-material';
 import User from '../auth/types/User';
 import Category from '../categories/types/Category';
 import Subcategory from '../subcategories/types/SubСategory';
@@ -54,17 +55,14 @@ export default function HelpCard({
   }, [dispatch, id]);
 
   return (
-    <Box fontFamily="Literata">
+    <Box>
       <Container onClick={handleClick}>
         <Card
           sx={{
             maxWidth: 345,
             minWidth: 345,
             maxHeight: 460,
-            marginBottom: '1rem',
-            marginTop: '1rem',
-            marginLeft: '1rem',
-            marginRight: '1rem',
+            my: '1rem',
           }}
           key={id}
         >
@@ -77,7 +75,6 @@ export default function HelpCard({
             />
             <CardContent>
               <Box>{user.username}</Box>
-
               <Box
                 fontSize="1.35rem"
                 component="div"
@@ -96,17 +93,18 @@ export default function HelpCard({
                 sx={{
                   fontSize: '1rem',
                   textOverflow: 'ellipsis',
-                  WebkitLineClamp: '2',
+                  WebkitLineClamp: '3',
                   WebkitBoxOrient: 'vertical',
-                  height: 125,
+                  height: 110,
                 }}
               >
                 {description}
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions sx={{ mt: -1.5, justifyContent: 'right' }}>
-            <Box>Price: {price} Euro</Box>
+          <CardActions sx={{ mr: '0.5rem', justifyContent: 'right' }}>
+            <EuroRounded />
+            <Box fontSize={24}>{price}</Box>
           </CardActions>
         </Card>
       </Container>
