@@ -53,7 +53,8 @@ function App(): JSX.Element {
           <Route path="/auth/register" element={<Register />} />
           <Route path="/card-details/:id" element={<DetailHelpCard />} />
           <Route path="/card/" element={<HelpCardForm isEditMode={false} />} />
-          <Route path="/card/:id" element={<HelpCardForm isEditMode />} />        </Route>
+          <Route path="/card/:id" element={<HelpCardForm isEditMode />} />{' '}
+        </Route>
       </Routes>
     </HashRouter>
   );

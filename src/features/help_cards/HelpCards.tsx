@@ -11,14 +11,14 @@ interface HelpCardsProps {
   selectedCategory: number | null;
   selectedSubCategory: number | null;
 }
+
 export default function HelpCards({
   selectedCategory,
   selectedSubCategory,
 }: HelpCardsProps): JSX.Element {
   const helpCards = useSelector(selectHelpCards);
   const dispatch = useAppDispatch();
-  console.log('selectedCategory' + selectedCategory);
-  console.log('selectedSubCategory' + selectedSubCategory);
+
   useEffect(() => {
     dispatch(getHelpCards());
   }, [dispatch]);
@@ -31,6 +31,7 @@ export default function HelpCards({
     }
     return true;
   });
+
   return (
     <Grid container spacing={1}>
       {filteredHelpCards?.map((helpCard) => (

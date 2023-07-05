@@ -31,10 +31,8 @@ function Login(): JSX.Element {
 
         if (location.pathname === '/auth/login') {
           navigate('/api/users/my/profile');
-          console.log('111');
         } else if (location.pathname.startsWith('/card-details/')) {
           navigate(location.pathname);
-          console.log('222');
         }
       }
 

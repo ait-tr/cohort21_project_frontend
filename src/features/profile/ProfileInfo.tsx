@@ -6,6 +6,7 @@ import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
 import { editProfile, getUserCards } from '../auth/authSlice';
 import ProfileEdit from './ProfileEdit';
+import UploadForm from '../main/UploadForm';
 
 export default function ProfileInfo(): JSX.Element {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function ProfileInfo(): JSX.Element {
   const [phone, setPhone] = useState('');
   const dispatch = useAppDispatch();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [showUploadForm, setShowUploadForm] = useState(false);
 
   const handleAddCard = (): void => {
     navigate('/card');
@@ -69,10 +71,22 @@ export default function ProfileInfo(): JSX.Element {
           </Box>
           <Avatar
             variant="square"
-            alt="Remy Sharp"
-            src="https://avatars.mds.yandex.net/i?id=7808f22d2c74cc72b53378dc5b5479650088c558-7663734-images-thumbs&n=13"
+            alt="avatar"
+            src={`${process.env.PUBLIC_URL}/upload/${user.avatar}`}
             sx={{ width: 128, height: 128, mt: '1rem' }}
           />
+          {!showUploadForm && (
+            <Button
+              sx={{ mt: 1, fontSize: '0.74rem' }}
+              variant="contained"
+              size="small"
+              color="info"
+              onClick={() => setShowUploadForm(true)}
+            >
+              Change image
+            </Button>
+          )}
+          {showUploadForm && <UploadForm onClose={() => setShowUploadForm(false)} />}
           <Box fontWeight={600} mt="0.5rem">
             Email: {user.email}
           </Box>

@@ -10,12 +10,12 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
 import { getUserCards } from '../auth/authSlice';
 import { selectUserCards } from './selectors';
 import HelpCard from './HelpCard';
 import { deleteHelpCard } from './helpCardsSlice';
-import { useNavigate } from 'react-router-dom';
 
 export default function UserHelpCards(): JSX.Element {
   const userHelpCards = useSelector(selectUserCards);
@@ -81,9 +81,11 @@ export default function UserHelpCards(): JSX.Element {
                 spacing={1}
               >
                 <Grid item>
-                  <Button variant="contained" 
-                  color="primary"
-                  onClick={() => handleEditHelpCard(card.id)}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleEditHelpCard(card.id)}
+                  >
                     Edit Card
                   </Button>
                 </Grid>
