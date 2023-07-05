@@ -23,7 +23,7 @@ export async function createHelpCard(
     },
   });
 
-  if (res.status >= 400) {
+  if (res.status >= 400){
     const { message } = await res.json();
     throw Error(message);
   }
@@ -50,4 +50,13 @@ export async function deleteHelpCard(id: HelpCardId): Promise<void> {
   await fetch(`/api/cards/${id}`, {
     method: 'DELETE',
   });
+}
+
+export async function getHelpCard(id: number): Promise<HelpCard> {
+  const res = await fetch(`/api/cards/${id}`);
+  if (res.status >= 400) {
+    const answer = await res.json();
+    throw new Error(answer.message);
+  }
+  return res.json();
 }

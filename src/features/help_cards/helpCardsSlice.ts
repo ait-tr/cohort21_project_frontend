@@ -70,7 +70,6 @@ const helpCardsSlice = createSlice({
       .addCase(createHelpCard.fulfilled, (state, action) => {
         state.helpCards.push(action.payload);
       })
-
       .addCase(getHelpCards.fulfilled, (state, action) => {
         state.helpCards = action.payload.cards;
       })
@@ -83,6 +82,7 @@ const helpCardsSlice = createSlice({
           (card) => card.id !== action.payload
         );
       })
+      
       .addCase(deleteHelpCard.rejected, (state, action) => {
         state.error = action.error.message;
       });
