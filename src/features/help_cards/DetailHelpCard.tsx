@@ -44,26 +44,6 @@ export default function DetailHelpCard(): JSX.Element {
   }, [dispatch, id]);
   return (
     <Container>
-      <Box sx={{ ml: 1, mt: 5 }}>
-        <Box>
-          {selectedCard && (
-            <Box fontSize="1.6rem" component="div">
-              <Avatar
-                variant="square"
-                alt="Remy Sharp"
-                src="https://avatars.mds.yandex.net/i?id=7808f22d2c74cc72b53378dc5b5479650088c558-7663734-images-thumbs&n=13"
-                sx={{ width: 128, height: 128, mt: '0.5rem' }}
-              />
-              <Box sx={{ mt: '1rem' }}>{selectedCard.user.username}</Box>
-            </Box>
-          )}
-        </Box>
-      </Box>
-      <Box>
-        <Button variant="contained" color="info" sx={{ mt: '1rem' }}>
-          Get Contacts
-        </Button>
-      </Box>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {selectedCard && (
           <Box>
@@ -87,29 +67,38 @@ export default function DetailHelpCard(): JSX.Element {
             </Box>
           </Box>
         )}
-        <Divider variant="middle" />
-        <Box sx={{ mt: 5, p: 2, bgcolor: '#d8d8d8' }}>
-          <Typography fontSize="1.2rem" gutterBottom variant="h3">
-            In order to obtain Helper contact information, you are required to log in
-            or sign up.
-          </Typography>
-          {user ? (
-            selectedCard && (
-              <Box fontSize="1.6rem" display="flex" alignItems="center">
+        <Box sx={{ ml: 1, mt: 3 }}>
+          <Box>
+            {selectedCard && (
+              <Box fontSize="1.6rem" component="div">
                 <Avatar
                   variant="square"
                   alt="Remy Sharp"
-                  src="https://avatars.mds.yandex.net/i?id=7808f22d2c74cc72b53378dc5b5479650088c558-7663734-images-thumbs&n=13"
-                  sx={{ width: 128, height: 128, mr: '0.5rem' }}
+                  src={`${process.env.PUBLIC_URL}/upload/${selectedCard.user.avatar}`}
+                  sx={{ width: 128, height: 128, mt: '0.5rem' }}
                 />
+                <Box sx={{ mt: '0.3rem', fontSize: '1.6rem' }}>
+                  {selectedCard.user.username}
+                </Box>
+              </Box>
+            )}
+          </Box>
+        </Box>
+        <Box>
+          {/* <Button variant="contained" color="info" sx={{ mt: '1rem' }}>
+            Get Contacts
+          </Button> */}
+        </Box>
+        <Divider variant="middle" />
+        <Box sx={{ mt: 1, mb: 4, p: 2, bgcolor: '#d8d8d8' }}>
+          {user ? (
+            selectedCard && (
+              <Box display="flex" alignItems="center">
                 <div>
-                  <Typography variant="h6" gutterBottom>
-                    {selectedCard.user.username}
-                  </Typography>
-                  <Typography fontSize="1.6rem" gutterBottom>
+                  <Typography fontSize="1.2rem" gutterBottom>
                     Email: {selectedCard.user.email}
                   </Typography>
-                  <Typography fontSize="1.6rem" gutterBottom>
+                  <Typography fontSize="1.2rem">
                     Phone: {selectedCard.user.phone}
                   </Typography>
                 </div>
@@ -117,6 +106,10 @@ export default function DetailHelpCard(): JSX.Element {
             )
           ) : (
             <>
+              <Typography fontSize="1.2rem" gutterBottom variant="h3">
+                In order to obtain Helper contact information, you are required to
+                log in or sign up.
+              </Typography>
               <Button type="button" onClick={handleShowModalLogin}>
                 Login
               </Button>

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,7 +29,7 @@ function Register(): JSX.Element {
       if (register.fulfilled.match(dispatchResult)) {
         await dispatch(login({ username, password }));
         await dispatch(getUserCards());
-        
+
         if (location.pathname === '/auth/login') {
           navigate('/api/users/my/profile');
           console.log('111');
