@@ -1,13 +1,13 @@
-/* eslint-disable no-restricted-globals */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { register, resetRegisterFormError, login, getUserCards } from './authSlice';
 import { selectRegisterFormError } from './selectors';
 import { useAppDispatch } from '../../store';
 
 function Register(): JSX.Element {
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const error = useSelector(selectRegisterFormError);
@@ -31,12 +31,10 @@ function Register(): JSX.Element {
         await dispatch(login({ username, password }));
         await dispatch(getUserCards());
 
-        if (location.pathname === '/auth/login') {
+        if (location.pathname === '/auth/register') {
           navigate('/api/users/my/profile');
-          console.log('111');
         } else if (location.pathname.startsWith('/card-details/')) {
           navigate(location.pathname);
-          console.log('222');
         }
       }
     },

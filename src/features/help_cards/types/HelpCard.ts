@@ -5,6 +5,7 @@ import Subcategory from '../../subcategories/types/SubСategory';
 export default interface HelpCard {
   id: number;
   user: User;
+  image: string;
   title: string;
   category: Category;
   subCategory: Subcategory;

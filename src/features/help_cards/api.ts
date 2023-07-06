@@ -41,7 +41,6 @@ export async function updateHelpCard(helpCard: HelpCard): Promise<void> {
 }
 
 export async function getHelpCards(): Promise<{ cards: HelpCard[] }> {
-  // TODO исправить на получение только для пользователя (+бэк)
   const result = await fetch('/api/cards');
   return result.json();
 }

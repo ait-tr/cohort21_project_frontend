@@ -39,6 +39,7 @@ export default function HelpCards({
           key={helpCard.id}
           id={helpCard.id}
           user={helpCard.user}
+          image={helpCard.image}
           title={helpCard.title}
           category={helpCard.category}
           subCategory={helpCard.subCategory}

@@ -51,7 +51,7 @@ function UploadForm({ onClose }: UploadFormProps): JSX.Element {
         console.log('Произошла ошибка при загрузке файла на сервер.');
       }
     } catch (error) {
-      console.log('Произошла ошибка при загрузке фрйла на сервер:', error);
+      console.log('Произошла ошибка при загрузке файла на сервер:', error);
     }
   };
 

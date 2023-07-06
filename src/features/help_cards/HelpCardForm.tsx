@@ -33,6 +33,7 @@ export default function AddHelpCardForm({
 }: AddHelpCardFormProps): JSX.Element {
   const error = useSelector(selectError);
   const [title, setTitle] = useState<string>('');
+  const [image, setImage] = useState<File | null>(null);
   const categories = useSelector(selectCategories);
   const subCategories = useSelector(selectSubCategories);
   const [categoryId, setCategoryId] = useState<number>(0);
@@ -42,16 +43,20 @@ export default function AddHelpCardForm({
   const [fullDescription, setFullDescription] = useState<string>('');
   const helpCards = useSelector(selectHelpCards);
   const { id } = useParams<{ id: string }>();
-  console.log('helpCards:', helpCards);
-  console.log('id:', id);
   const selectedCard = helpCards.find((card: HelpCard) => card.id === Number(id));
-  const [statusMessage, setStatusMessage] = useState<string>(''); // Add new state variable
+  const [statusMessage, setStatusMessage] = useState<string>('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [showSnackbar, setShowSnackbar] = useState(false);
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.files && event.target.files.length > 0) {
+      setImage(event.target.files[0]);
+    }
+  };
+
   const handleSubmit = React.useCallback(
-    async (event: React.FormEvent) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
       if (!isEditMode) {
@@ -67,8 +72,28 @@ export default function AddHelpCardForm({
         );
         if (dispatchResult.meta.requestStatus === 'fulfilled') {
           setStatusMessage('Card added successfully.');
-          const helpCard = dispatchResult.payload as HelpCard;
-          console.log(helpCard.id);
+          const helpCard = (await dispatchResult.payload) as HelpCard;
+          if (image) {
+            try {
+              const formData = new FormData();
+              formData.append('image', image);
+              const response = await fetch(`api/files/upload/${helpCard.id}`, {
+                method: 'POST',
+                body: formData,
+              });
+
+              if (response.ok) {
+                console.log('Файл загружен на сервер.');
+              } else {
+                console.log('Произошла ошибка при загрузке файла на сервер.');
+              }
+            } catch (uploadError) {
+              console.log(
+                'Произошла ошибка при загрузке файла на сервер:',
+                uploadError
+              );
+            }
+          }
           setTimeout(() => {
             setShowSnackbar(false);
             navigate(`/card-details/${helpCard.id}`);
@@ -86,6 +111,27 @@ export default function AddHelpCardForm({
           fullDescription,
         };
         await updateHelpCard(updatedCard);
+        if (image) {
+          try {
+            const formData = new FormData();
+            formData.append('image', image);
+            const response = await fetch(`api/files/upload/${id}`, {
+              method: 'POST',
+              body: formData,
+            });
+
+            if (response.ok) {
+              console.log('Файл загружен на сервер.');
+            } else {
+              console.log('Произошла ошибка при загрузке файла на сервер.');
+            }
+          } catch (uploadError) {
+            console.log(
+              'Произошла ошибка при загрузке файла на сервер:',
+              uploadError
+            );
+          }
+        }
         setStatusMessage('Changes saved successfully.');
         setTimeout(() => {
           setShowSnackbar(false);
@@ -93,6 +139,7 @@ export default function AddHelpCardForm({
         }, 1000);
         setShowSnackbar(true);
       }
+
       setTitle('');
       setCategoryId(0);
       setSubCategoryId(0);
@@ -102,6 +149,9 @@ export default function AddHelpCardForm({
       dispatch(getUserCards());
     },
     [
+      isEditMode,
+      selectedCard,
+      image,
       dispatch,
       title,
       categoryId,
@@ -110,8 +160,7 @@ export default function AddHelpCardForm({
       description,
       fullDescription,
       navigate,
-      isEditMode,
-      selectedCard,
+      id,
     ]
   );
   const handleCategoryChange = (event: SelectChangeEvent<number>): void => {
@@ -137,7 +186,6 @@ export default function AddHelpCardForm({
     dispatch(getHelpCards());
 
     if (isEditMode && id !== undefined) {
-      // Fetch help card data and populate form fields
       const cardId = Number(id);
       getHelpCard(cardId).then((helpCard) => {
         setTitle(helpCard.title);
@@ -238,6 +286,20 @@ export default function AddHelpCardForm({
           value={fullDescription}
           onChange={(e) => setFullDescription(e.target.value)}
         />
+
+        <Box>
+          <Typography sx={{ fontSize: '1.0rem' }}>
+            Add or Change offer image
+          </Typography>
+          <InputLabel htmlFor="imageInput" />
+          <TextField
+            type="file"
+            id="imageInput"
+            inputProps={{ accept: 'image/jpeg' }}
+            onChange={handleImageChange}
+          />
+        </Box>
+
         <Box textAlign="center">
           <Button sx={{ mr: 1 }} type="submit" variant="contained" color="info">
             {isEditMode ? 'Save Changes' : 'Add Card'}

@@ -86,12 +86,6 @@ const helpCardsSlice = createSlice({
       .addCase(deleteHelpCard.rejected, (state, action) => {
         state.error = action.error.message;
       });
-
-    // .addCase(updateTask.fulfilled, (state, action) => {
-    //   state.tasks = state.tasks.map((task) =>
-    //     task.id === action.payload.id ? action.payload : task
-    //   );
-    // })
   },
 });
 

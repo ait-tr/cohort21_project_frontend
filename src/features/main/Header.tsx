@@ -3,12 +3,13 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { AccountCircle, Check, Login, Logout } from '@mui/icons-material';
+import { Check, Login, Logout } from '@mui/icons-material';
+import { Avatar, Box, IconButton } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getProfile, logout } from '../auth/authSlice';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
-import { getProfile, logout } from '../auth/authSlice';
 
 export default function Header(): JSX.Element {
   const user = useSelector(selectUser);
@@ -57,19 +58,36 @@ export default function Header(): JSX.Element {
         </Typography>
         {user ? (
           <>
-            <Button
-              sx={{
-                mr: '1rem',
-                '&:hover': {
-                  color: '#ff9d25',
-                },
-              }}
-              color="inherit"
-              href="#/api/users/my/profile"
-              endIcon={<AccountCircle />}
-            >
-              Account
-            </Button>
+            <Box>
+              <IconButton
+                href="#/api/users/my/profile"
+                sx={{
+                  color: 'white',
+                  p: 0,
+                  '&:hover': {
+                    color: '#ff9d25',
+                  },
+                }}
+              >
+                <Avatar
+                  alt="avatar"
+                  src={`${process.env.PUBLIC_URL}/upload/${user.avatar}`}
+                />
+
+                <Button
+                  sx={{
+                    mr: '1rem',
+                    '&:hover': {
+                      color: '#ff9d25',
+                    },
+                  }}
+                  color="inherit"
+                  href="#/api/users/my/profile"
+                >
+                  Account
+                </Button>
+              </IconButton>
+            </Box>
             <Button
               onClick={handleLogout}
               sx={{

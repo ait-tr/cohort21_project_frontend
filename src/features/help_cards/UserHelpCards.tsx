@@ -68,6 +68,7 @@ export default function UserHelpCards(): JSX.Element {
                 id={card.id}
                 title={card.title}
                 user={card.user}
+                image={card.image}
                 category={card.category}
                 subCategory={card.subCategory}
                 price={card.price}

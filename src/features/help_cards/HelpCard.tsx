@@ -20,6 +20,7 @@ import Subcategory from '../subcategories/types/SubСategory';
 export default function HelpCard({
   id,
   user,
+  image,
   title,
   category,
   subCategory,
@@ -32,6 +33,7 @@ export default function HelpCard({
 }: {
   id: number;
   user: User;
+  image: string;
   title: string;
   category: Category;
   subCategory: Subcategory;
@@ -67,12 +69,21 @@ export default function HelpCard({
           key={id}
         >
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-              alt="green iguana"
-            />
+            {image === null ? (
+              <CardMedia
+                component="img"
+                height="140"
+                image="https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                alt="offer_image"
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                height="140"
+                image={`${process.env.PUBLIC_URL}/upload/${image}`}
+                alt="offer_image"
+              />
+            )}
             <CardContent>
               <Box>{user.username}</Box>
               <Box

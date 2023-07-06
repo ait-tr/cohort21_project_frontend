@@ -48,13 +48,23 @@ export default function DetailHelpCard(): JSX.Element {
         {selectedCard && (
           <Box>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: '1rem' }}>
-              <img
-                height="400"
-                width="600"
-                src="https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
-                alt="compuhter"
-                style={{ margin: 'auto' }}
-              />
+              {selectedCard.image === null ? (
+                <img
+                  height="400"
+                  width="600"
+                  src="https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                  alt="offer_image"
+                  style={{ margin: 'auto' }}
+                />
+              ) : (
+                <img
+                  height="400"
+                  width="600"
+                  src={`${process.env.PUBLIC_URL}/upload/${selectedCard.image}`}
+                  alt="offer_image"
+                  style={{ margin: 'auto' }}
+                />
+              )}
             </Box>
             <Box sx={{ mb: 1.5, mt: 2.5 }} color="text.secondary">
               {selectedCard.category.title} / {selectedCard.subCategory.title}
@@ -71,18 +81,28 @@ export default function DetailHelpCard(): JSX.Element {
               <EuroRoundedIcon />
               {selectedCard.price}
             </Box>
-            <Box fontSize={24} textAlign="justify" p={2}>
+            <Box fontSize={24} textAlign="justify" px={4}>
               {selectedCard.fullDescription}
             </Box>
           </Box>
         )}
-        <Box sx={{ ml: 1, mt: 3 }}>
+        <Box sx={{ mt: 5 }}>
           <Box>
             {selectedCard && (
               <Box fontSize="1.6rem" component="div">
+                <Box
+                  sx={{
+                    mt: 1,
+                    px: 2,
+                    fontSize: '1.35rem',
+                    bgcolor: '#d8d8d8',
+                  }}
+                >
+                  Helper info:
+                </Box>
                 <Avatar
                   variant="square"
-                  alt="Remy Sharp"
+                  alt="avatar"
                   src={`${process.env.PUBLIC_URL}/upload/${selectedCard.user.avatar}`}
                   sx={{ width: 128, height: 128, mt: '0.5rem' }}
                 />

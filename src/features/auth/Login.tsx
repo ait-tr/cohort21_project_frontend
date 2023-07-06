@@ -17,7 +17,6 @@ function Login(): JSX.Element {
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent) => {
       event.preventDefault();
-      // 332 делаем диспатч санка
       const dispatchResult = await dispatch(
         login({
           username,
@@ -25,7 +24,6 @@ function Login(): JSX.Element {
         })
       );
 
-      // 332 проверяем, что санк login зарезолвился успешно
       if (login.fulfilled.match(dispatchResult)) {
         dispatch(getProfile());
         dispatch(getUserCards());
@@ -37,7 +35,6 @@ function Login(): JSX.Element {
         }
       }
 
-      // 332 выводим в консоль ошибку если санк login зареджектился
       if (login.rejected.match(dispatchResult)) {
         console.error(dispatchResult.error.message);
       }
@@ -57,7 +54,6 @@ function Login(): JSX.Element {
   const handlePasswordChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setPassword(event.target.value);
-      // 332 очищаем ошибку
       dispatch(resetLoginFormError());
     },
     [dispatch]
