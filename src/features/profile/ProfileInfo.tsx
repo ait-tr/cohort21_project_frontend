@@ -11,7 +11,6 @@ import UploadForm from '../main/UploadForm';
 export default function ProfileInfo(): JSX.Element {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
-
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const dispatch = useAppDispatch();
@@ -119,7 +118,7 @@ export default function ProfileInfo(): JSX.Element {
                     fullWidth={false}
                     sx={{
                       maxWidth: '12rem',
-                      mr: '1rem', // ? при сжатии переместить
+                      mr: '1rem',
                     }}
                   >
                     Add Help Offer

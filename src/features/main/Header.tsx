@@ -2,9 +2,8 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { Check, Login, Logout } from '@mui/icons-material';
-import { Avatar, Box, IconButton } from '@mui/material';
+import { Avatar, Box, Button, IconButton } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getProfile, logout } from '../auth/authSlice';
@@ -74,18 +73,21 @@ export default function Header(): JSX.Element {
                   src={`${process.env.PUBLIC_URL}/upload/${user.avatar}`}
                 />
 
-                <Button
+                <Typography
+                  variant="body1"
+                  component="div"
                   sx={{
-                    mr: '1rem',
-                    '&:hover': {
-                      color: '#ff9d25',
-                    },
+                    display: 'inline-block',
+                    padding: '6px 16px 6px 5px',
+                    fontWeight: '600',
+                    fontSize: '0.875rem',
+                    fontFamily: 'Literata',
+                    textTransform: 'uppercase',
+                    color: 'inherit',
                   }}
-                  color="inherit"
-                  href="#/api/users/my/profile"
                 >
                   Account
-                </Button>
+                </Typography>
               </IconButton>
             </Box>
             <Button

@@ -5,9 +5,13 @@ import { selectUser } from '../auth/selectors';
 import UserHelpCards from '../help_cards/UserHelpCards';
 import ProfileInfo from './ProfileInfo';
 import { getProfile } from '../auth/authSlice';
+import Categories from '../categories/Categories';
+import AdminHelpCards from '../help_cards/AdminHelpCards';
 
 export default function ProfilePage(): JSX.Element {
   const user = useSelector(selectUser);
+  const role = user?.role;
+
   useEffect(() => {
     getProfile();
   }, [user]);
@@ -15,10 +19,18 @@ export default function ProfilePage(): JSX.Element {
   return (
     <Container>
       {user ? (
-        <Container>
-          <ProfileInfo />
-          <UserHelpCards />
-        </Container>
+        role === 'ADMIN' ? (
+          <Container>
+            <ProfileInfo />
+            <Categories />
+            <AdminHelpCards />
+          </Container>
+        ) : (
+          <Container>
+            <ProfileInfo />
+            <UserHelpCards />
+          </Container>
+        )
       ) : (
         <CircularProgress />
       )}

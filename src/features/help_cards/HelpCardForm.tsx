@@ -300,7 +300,7 @@ export default function AddHelpCardForm({
           />
         </Box>
 
-        <Box textAlign="center">
+        <Box sx={{ mt: 2 }} textAlign="center">
           <Button sx={{ mr: 1 }} type="submit" variant="contained" color="info">
             {isEditMode ? 'Save Changes' : 'Add Card'}
           </Button>
