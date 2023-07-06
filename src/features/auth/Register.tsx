@@ -1,5 +1,7 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Box, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { register, resetRegisterFormError, login, getUserCards } from './authSlice';
 import { selectRegisterFormError } from './selectors';
@@ -28,7 +30,7 @@ function Register(): JSX.Element {
       if (register.fulfilled.match(dispatchResult)) {
         await dispatch(login({ username, password }));
         await dispatch(getUserCards());
-        
+
         if (location.pathname === '/auth/login') {
           navigate('/api/users/my/profile');
           console.log('111');
@@ -115,6 +117,13 @@ function Register(): JSX.Element {
       <button type="submit" className="btn btn-primary">
         Sign Up
       </button>
+      <Box sx={{ textAlign: 'center' }}>
+        <Button color="success" sx={{ mt: '1rem' }} href="#/auth/login">
+          <Typography textTransform="capitalize" textAlign="center">
+            Already registred?
+          </Typography>
+        </Button>
+      </Box>
     </form>
   );
 }

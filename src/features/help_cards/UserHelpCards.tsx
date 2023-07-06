@@ -10,12 +10,12 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
 import { getUserCards } from '../auth/authSlice';
 import { selectUserCards } from './selectors';
 import HelpCard from './HelpCard';
 import { deleteHelpCard } from './helpCardsSlice';
-import { useNavigate } from 'react-router-dom';
 
 export default function UserHelpCards(): JSX.Element {
   const userHelpCards = useSelector(selectUserCards);
@@ -51,7 +51,8 @@ export default function UserHelpCards(): JSX.Element {
       <Typography
         fontFamily="Exo"
         fontWeight={600}
-        borderTop={2}
+        borderTop={1}
+        borderColor="#FF9d25"
         paddingTop={2}
         variant="h5"
         gutterBottom
@@ -75,16 +76,18 @@ export default function UserHelpCards(): JSX.Element {
                 isActive={card.isActive}
               />
               <Grid
-                sx={{ mt: -2, mb: 2 }}
+                sx={{ mt: -1, mb: 2 }}
                 container
                 justifyContent="center"
                 spacing={1}
               >
                 <Grid item>
-                  <Button variant="contained" 
-                  color="primary"
-                  onClick={() => handleEditHelpCard(card.id)}>
-                    Edit Card
+                  <Button
+                    variant="contained"
+                    color="info"
+                    onClick={() => handleEditHelpCard(card.id)}
+                  >
+                    Edit Offer
                   </Button>
                 </Grid>
                 <Grid item>
@@ -93,7 +96,7 @@ export default function UserHelpCards(): JSX.Element {
                     color="error"
                     onClick={() => handleOpenDeleteConfirmation(card.id)}
                   >
-                    Delete Card
+                    Delete Offer
                   </Button>
                 </Grid>
               </Grid>

@@ -6,7 +6,7 @@ import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
 import { editProfile, getUserCards } from '../auth/authSlice';
 import ProfileEdit from './ProfileEdit';
-import UserImageUploadForm from '../main/UploadForm';
+import UploadForm from '../main/UploadForm';
 
 export default function ProfileInfo(): JSX.Element {
   const navigate = useNavigate();
@@ -87,9 +87,7 @@ export default function ProfileInfo(): JSX.Element {
               Change image
             </Button>
           )}
-          {showUploadForm && (
-            <UserImageUploadForm onClose={() => setShowUploadForm(false)} />
-          )}
+          {showUploadForm && <UploadForm onClose={() => setShowUploadForm(false)} />}
           <Box fontWeight={600} mt="0.5rem">
             Email: {user.email}
           </Box>
@@ -121,7 +119,7 @@ export default function ProfileInfo(): JSX.Element {
                     fullWidth={false}
                     sx={{
                       maxWidth: '12rem',
-                      mr: '1rem', // ? при сжатии переместить
+                      mr: '1rem',
                     }}
                   >
                     Add Help Offer

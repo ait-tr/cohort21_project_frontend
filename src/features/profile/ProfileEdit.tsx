@@ -19,7 +19,7 @@ export default function ProfileEdit({
   handleSave,
 }: ProfileEditProps): JSX.Element {
   return (
-    <Box ml="15rem">
+    <Box>
       <Box mt="1rem">
         <TextField
           id="email"
@@ -39,16 +39,20 @@ export default function ProfileEdit({
         />
       </Box>
 
-      <Button
-        type="button"
-        sx={{ ml: '1rem', mt: '0.5rem' }}
-        onClick={() => handleProfileUpdate(email, phone)}
-      >
-        Save
-      </Button>
-      <Button type="button" sx={{ ml: '1rem', mt: '0.5rem' }} onClick={handleSave}>
-        Cancel
-      </Button>
+      <Box sx={{ mt: '0.5rem' }}>
+        <Button
+          variant="contained"
+          type="button"
+          color="success"
+          sx={{ mr: '0.5rem' }}
+          onClick={() => handleProfileUpdate(email, phone)}
+        >
+          Save
+        </Button>
+        <Button variant="outlined" color="error" type="button" onClick={handleSave}>
+          Cancel
+        </Button>
+      </Box>
     </Box>
   );
 }

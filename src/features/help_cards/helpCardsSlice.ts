@@ -82,7 +82,7 @@ const helpCardsSlice = createSlice({
           (card) => card.id !== action.payload
         );
       })
-      
+
       .addCase(deleteHelpCard.rejected, (state, action) => {
         state.error = action.error.message;
       });

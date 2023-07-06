@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, Typography } from '@mui/material';
 import { getProfile, getUserCards, login, resetLoginFormError } from './authSlice';
 import { selectLoginFormError } from './selectors';
 import { useAppDispatch } from '../../store';
@@ -31,10 +32,8 @@ function Login(): JSX.Element {
 
         if (location.pathname === '/auth/login') {
           navigate('/api/users/my/profile');
-          console.log('111');
         } else if (location.pathname.startsWith('/card-details/')) {
           navigate(location.pathname);
-          console.log('222');
         }
       }
 
@@ -101,6 +100,13 @@ function Login(): JSX.Element {
       <button type="submit" className="btn btn-primary">
         Log in
       </button>
+      <Box sx={{ textAlign: 'center' }}>
+        <Button color="success" sx={{ mt: '1rem' }} href="#/auth/register">
+          <Typography textTransform="capitalize" textAlign="center">
+            Not registred?
+          </Typography>
+        </Button>
+      </Box>
     </form>
   );
 }

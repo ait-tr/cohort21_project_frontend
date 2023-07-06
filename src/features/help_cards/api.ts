@@ -23,7 +23,7 @@ export async function createHelpCard(
     },
   });
 
-  if (res.status >= 400){
+  if (res.status >= 400) {
     const { message } = await res.json();
     throw Error(message);
   }
