@@ -11,6 +11,7 @@ import UploadForm from '../main/UploadForm';
 export default function ProfileInfo(): JSX.Element {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
+
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const dispatch = useAppDispatch();
@@ -109,19 +110,23 @@ export default function ProfileInfo(): JSX.Element {
                 >
                   Edit Contacts
                 </Button>
-                <Button
-                  onClick={handleAddCard}
-                  type="button"
-                  variant="contained"
-                  color="info"
-                  fullWidth={false}
-                  sx={{
-                    maxWidth: '12rem',
-                    mr: '1rem', // ? при сжатии переместить
-                  }}
-                >
-                  Add Help Offer
-                </Button>
+                {user.role !== 'ADMIN' ? (
+                  <Button
+                    onClick={handleAddCard}
+                    type="button"
+                    variant="contained"
+                    color="info"
+                    fullWidth={false}
+                    sx={{
+                      maxWidth: '12rem',
+                      mr: '1rem',
+                    }}
+                  >
+                    Add Help Offer
+                  </Button>
+                ) : (
+                  <Divider variant="middle" />
+                )}
               </>
             )}
 
