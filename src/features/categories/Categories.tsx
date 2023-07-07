@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { selectError, selectCategories } from './selectors';
@@ -45,7 +45,7 @@ export default function Categories(): JSX.Element {
         }
       }
     },
-    [dispatch, description, title]
+    [isEditing, dispatch, categoryId, title, description]
   );
 
   const handleUpdate = React.useCallback(
@@ -65,18 +65,20 @@ export default function Categories(): JSX.Element {
     },
     [categories]
   );
+
   useEffect(() => {
     dispatch(loadCategories());
   }, [dispatch]);
 
   return (
-    <Box>
+    <Container>
       <Typography variant="h6">
         {isEditing ? 'Edit Categories' : 'Add Categories'}
       </Typography>
       <form onSubmit={handleSubmit}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
           <TextField
+            sx={{ maxWidth: '3rem' }}
             type="text"
             placeholder="Id..."
             aria-label="Id..."
@@ -95,14 +97,14 @@ export default function Categories(): JSX.Element {
           />
           <TextField
             type="text"
-            placeholder="Описание..."
-            aria-label="Описание..."
-            title="CategoriesDescription"
+            placeholder="Description..."
+            aria-label="Description..."
+            title="CategoryDescription"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <Button type="submit" variant="contained" color="primary">
-            {isEditing ? 'Обновить' : 'Добавить'}
+          <Button sx={{ ml: 1 }} type="submit" variant="contained" color="primary">
+            {isEditing ? 'Update category' : 'Add category'}
           </Button>
         </Box>
         {error && (
@@ -115,13 +117,13 @@ export default function Categories(): JSX.Element {
       <ul>
         {categories?.map((element) => (
           <li key={element.id}>
-            {element.id} {element.title} {element.description}
+            {element.id} {element.title}
             <Button onClick={() => handleUpdate(element.id)}>
               <EditIcon />
             </Button>
           </li>
         ))}
       </ul>
-    </Box>
+    </Container>
   );
 }

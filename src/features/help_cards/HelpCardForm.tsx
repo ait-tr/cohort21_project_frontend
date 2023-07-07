@@ -15,15 +15,15 @@ import {
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { selectError, selectHelpCards } from './selectors';
-import { createHelpCard, getHelpCards } from './helpCardsSlice';
-import { useAppDispatch } from '../../store';
+import { createHelpCard, getHelpCards, updateHelpCard } from './helpCardsSlice';
 import { getUserCards } from '../auth/authSlice';
 import { selectCategories } from '../categories/selectors';
 import { selectSubCategories } from '../subcategories/selectors';
 import { loadCategories } from '../categories/categoriesSlice';
 import { loadSubCategories } from '../subcategories/subСategoriesSlice';
 import HelpCard from './types/HelpCard';
-import { getHelpCard, updateHelpCard } from './api';
+import { getHelpCard } from './api';
+import { useAppDispatch } from '../../store';
 
 interface AddHelpCardFormProps {
   isEditMode: Boolean;
@@ -110,48 +110,49 @@ export default function AddHelpCardForm({
           description,
           fullDescription,
         };
-        await updateHelpCard(updatedCard);
-        if (image) {
-          try {
-            const formData = new FormData();
-            formData.append('image', image);
-            const response = await fetch(`api/files/upload/${id}`, {
-              method: 'POST',
-              body: formData,
-            });
 
-            if (response.ok) {
-              console.log('Файл загружен на сервер.');
-            } else {
-              console.log('Произошла ошибка при загрузке файла на сервер.');
+        const dispatchUpdateResult = await dispatch(updateHelpCard(updatedCard));
+
+        if (updateHelpCard.fulfilled.match(dispatchUpdateResult)) {
+          if (image) {
+            try {
+              const formData = new FormData();
+              formData.append('image', image);
+              const response = await fetch(`api/files/upload/${id}`, {
+                method: 'POST',
+                body: formData,
+              });
+
+              if (response.ok) {
+                console.log('Файл загружен на сервер.');
+                setStatusMessage('Changes saved successfully.');
+              } else {
+                console.log('Произошла ошибка при загрузке файла на сервер.');
+              }
+            } catch (uploadError) {
+              console.log(
+                'Произошла ошибка при загрузке файла на сервер.',
+                uploadError
+              );
             }
-          } catch (uploadError) {
-            console.log(
-              'Произошла ошибка при загрузке файла на сервер:',
-              uploadError
-            );
           }
         }
-        setStatusMessage('Changes saved successfully.');
-        setTimeout(() => {
-          setShowSnackbar(false);
-          navigate('/api/users/my/profile');
-        }, 1000);
-        setShowSnackbar(true);
+        if (updateHelpCard.rejected.match(dispatchUpdateResult)) {
+          console.error(dispatchUpdateResult.error.message);
+        }
       }
 
-      setTitle('');
-      setCategoryId(0);
-      setSubCategoryId(0);
-      setPrice(0);
-      setDescription('');
-      setFullDescription('');
       dispatch(getUserCards());
+      setStatusMessage('Changes saved successfully.');
+      setTimeout(() => {
+        setShowSnackbar(false);
+        navigate('/api/users/my/profile');
+      }, 1000);
+      setShowSnackbar(true);
     },
     [
       isEditMode,
       selectedCard,
-      image,
       dispatch,
       title,
       categoryId,
@@ -159,6 +160,7 @@ export default function AddHelpCardForm({
       price,
       description,
       fullDescription,
+      image,
       navigate,
       id,
     ]

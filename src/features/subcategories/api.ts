@@ -1,4 +1,4 @@
-import SubCategory from './types/SubСategory';
+import SubCategory, { SubCategoryId } from './types/SubСategory';
 
 export async function getSubCategories(): Promise<{
   subCategories: SubCategory[];
@@ -28,6 +28,18 @@ export async function createSubCategory(
     const { message } = await res.json();
     throw Error(message);
   }
-
   return res.json();
+}
+
+export async function updateSubCategory(
+  id: SubCategoryId,
+  updatedSubCategory: SubCategory
+): Promise<void> {
+  await fetch(`/api/subcategories/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(updatedSubCategory),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 }

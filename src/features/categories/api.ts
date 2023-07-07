@@ -33,16 +33,6 @@ export async function updateCategory(
   });
 }
 
-export async function deleteCategories(id: CategoryId): Promise<void> {
-  try {
-    await fetch(`/api/categories/${id}`, {
-      method: 'DELETE',
-    });
-  } catch (error) {
-    throw new Error('Failed to delete category.');
-  }
-}
-
 export async function getCategories(): Promise<{
   [x: string]: any;
   categories: Categories[];

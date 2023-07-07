@@ -4,3 +4,5 @@ export default interface SubCategory {
   description: string;
   categoryId: number;
 }
+
+export type SubCategoryId = SubCategory['id'];

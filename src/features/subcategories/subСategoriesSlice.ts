@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import SubCategoriesState from './types/SubСategoriesState';
 import * as api from './api';
+import SubCategory, { SubCategoryId } from './types/SubСategory';
 
 const initialState: SubCategoriesState = {
   subCategories: [],
@@ -30,6 +31,20 @@ export const createSubCategory = createAsyncThunk(
   }
 );
 
+export const updateSubCategory = createAsyncThunk(
+  'categories/updateSubCategory',
+  async ({
+    id,
+    updatedSubCategory,
+  }: {
+    id: SubCategoryId;
+    updatedSubCategory: SubCategory;
+  }) => {
+    await api.updateSubCategory(id, updatedSubCategory);
+    return { id, updatedSubCategory };
+  }
+);
+
 const subCategoriesSlice = createSlice({
   name: 'subCategories',
   initialState,
@@ -52,6 +67,15 @@ const subCategoriesSlice = createSlice({
       })
       .addCase(createSubCategory.fulfilled, (state, action) => {
         state.subCategories.push(action.payload);
+      })
+
+      .addCase(updateSubCategory.fulfilled, (state, action) => {
+        const { id, updatedSubCategory } = action.payload;
+        state.subCategories = state.subCategories.map((subCategory) =>
+          subCategory.id === id
+            ? { ...subCategory, ...updatedSubCategory }
+            : subCategory
+        );
       });
   },
 });

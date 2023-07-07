@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import HelpCardsState from './types/HelpCardsState';
 import * as api from './api';
-import { HelpCardId } from './types/HelpCard';
+import HelpCard, { HelpCardId } from './types/HelpCard';
 
 const initialState: HelpCardsState = {
   helpCards: [],
@@ -26,10 +26,10 @@ export const createHelpCard = createAsyncThunk(
     fullDescription: string;
   }) => {
     if (categoryId === 0 || subCategoryId === 0) {
-      throw new Error('Категория или подкатегория не выбраны');
+      throw new Error('Category or Subcategory not selected');
     }
     if (!description.trim()) {
-      throw new Error('Описание не должно быть пустым');
+      throw new Error('Description cannot be empty');
     }
     return api.createHelpCard(
       title,
@@ -39,6 +39,22 @@ export const createHelpCard = createAsyncThunk(
       description,
       fullDescription
     );
+  }
+);
+
+export const updateHelpCard = createAsyncThunk(
+  'helpCards/updateHelpCard',
+  async (card: HelpCard) => {
+    if (card.category.id === 0 || card.subCategory.id === 0) {
+      throw new Error('Category or Subcategory not selected');
+    }
+    if (card.category.id !== card.subCategory.categoryId) {
+      throw new Error('SubCategory does not match to this Category');
+    }
+    if (!card.description.trim()) {
+      throw new Error('Description cannot be empty');
+    }
+    return api.updateHelpCard(card.id, card);
   }
 );
 
@@ -70,6 +86,18 @@ const helpCardsSlice = createSlice({
       .addCase(createHelpCard.fulfilled, (state, action) => {
         state.helpCards.push(action.payload);
       })
+
+      .addCase(updateHelpCard.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
+      .addCase(updateHelpCard.fulfilled, (state, action) => {
+        const updatedCard = action.payload;
+        const updatedHelpCards = state.helpCards.map((card) =>
+          card.id === updatedCard.id ? updatedCard : card
+        );
+        state.helpCards = updatedHelpCards;
+      })
+
       .addCase(getHelpCards.fulfilled, (state, action) => {
         state.helpCards = action.payload.cards;
       })

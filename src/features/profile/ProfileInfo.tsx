@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, Box, Button, Divider } from '@mui/material';
+import { Avatar, Box, Button } from '@mui/material';
 import { selectUser } from '../auth/selectors';
 import { useAppDispatch } from '../../store';
 import { editProfile, getUserCards } from '../auth/authSlice';
@@ -69,78 +69,81 @@ export default function ProfileInfo(): JSX.Element {
           >
             Welcome, {user.username}
           </Box>
-          <Avatar
-            variant="square"
-            alt="avatar"
-            src={`${process.env.PUBLIC_URL}/upload/${user.avatar}`}
-            sx={{ width: 128, height: 128, mt: '1rem' }}
-          />
-          {!showUploadForm && (
-            <Button
-              sx={{ mt: 1, fontSize: '0.74rem' }}
-              variant="contained"
-              size="small"
-              color="info"
-              onClick={() => setShowUploadForm(true)}
-            >
-              Change image
-            </Button>
-          )}
-          {showUploadForm && <UploadForm onClose={() => setShowUploadForm(false)} />}
-          <Box fontWeight={600} mt="0.5rem">
-            Email: {user.email}
-          </Box>
-          <Box fontWeight={600} mb="0.5rem">
-            Phone: {user.phone}
-          </Box>
-          <Box>
-            {!isEditingProfile && (
-              <>
-                <Button
-                  type="button"
-                  variant="contained"
-                  color="info"
-                  fullWidth={false}
-                  sx={{
-                    maxWidth: '10rem',
-                    mr: '1rem',
-                  }}
-                  onClick={() => setIsEditingProfile(true)}
-                >
-                  Edit Contacts
-                </Button>
-                {user.role !== 'ADMIN' ? (
-                  <Button
-                    onClick={handleAddCard}
-                    type="button"
-                    variant="contained"
-                    color="info"
-                    fullWidth={false}
-                    sx={{
-                      maxWidth: '12rem',
-                      mr: '1rem',
-                    }}
-                  >
-                    Add Help Offer
-                  </Button>
-                ) : (
-                  <Divider variant="middle" />
-                )}
-              </>
-            )}
-
-            <Divider variant="middle" />
-            {isEditingProfile && (
-              <ProfileEdit
-                email={email}
-                phone={phone}
-                setEmail={setEmail}
-                setPhone={setPhone}
-                handleProfileUpdate={handleProfileUpdate}
-                handleSave={handleSave}
+          {user.role === 'USER' ? (
+            <>
+              <Avatar
+                variant="square"
+                alt="avatar"
+                src={`${process.env.PUBLIC_URL}/upload/${user.avatar}`}
+                sx={{ width: 128, height: 128, mt: '1rem' }}
               />
-            )}
-          </Box>
+              {!showUploadForm && (
+                <Button
+                  sx={{ mt: 1, fontSize: '0.74rem' }}
+                  variant="contained"
+                  size="small"
+                  color="info"
+                  onClick={() => setShowUploadForm(true)}
+                >
+                  Change image
+                </Button>
+              )}
+              {showUploadForm && (
+                <UploadForm onClose={() => setShowUploadForm(false)} />
+              )}
+              <Box fontWeight={600} mt="0.5rem">
+                Email: {user.email}
+              </Box>
+              <Box fontWeight={600} mb="0.5rem">
+                Phone: {user.phone}
+              </Box>
+              <Box>
+                {!isEditingProfile && (
+                  <>
+                    <Button
+                      type="button"
+                      variant="contained"
+                      color="info"
+                      fullWidth={false}
+                      sx={{
+                        maxWidth: '10rem',
+                        mr: '1rem',
+                      }}
+                      onClick={() => setIsEditingProfile(true)}
+                    >
+                      Edit Contacts
+                    </Button>
+                    <Button
+                      onClick={handleAddCard}
+                      type="button"
+                      variant="contained"
+                      color="info"
+                      fullWidth={false}
+                      sx={{
+                        maxWidth: '12rem',
+                        mr: '1rem',
+                      }}
+                    >
+                      Add Help Offer
+                    </Button>
+                  </>
+                )}
+
+                {isEditingProfile && (
+                  <ProfileEdit
+                    email={email}
+                    phone={phone}
+                    setEmail={setEmail}
+                    setPhone={setPhone}
+                    handleProfileUpdate={handleProfileUpdate}
+                    handleSave={handleSave}
+                  />
+                )}
+              </Box>
+            </>
+          ) : (
+            <span />
+          )}
         </Box>
       )}
     </Box>

@@ -29,23 +29,9 @@ export const loadCategoriesOfAll = createAsyncThunk(
 
 export const updateCategory = createAsyncThunk(
   'categories/updateCategory',
-  async ({
-    id,
-    updatedCategory,
-  }: {
-    id: CategoryId;
-    updatedCategory: Category;
-  }) => {
+  async ({ id, updatedCategory }: { id: CategoryId; updatedCategory: Category }) => {
     await api.updateCategory(id, updatedCategory);
     return { id, updatedCategory };
-  }
-);
-
-export const deleteCategories = createAsyncThunk(
-  'categories/deleteCategories',
-  async (id: CategoryId) => {
-    await api.deleteCategories(id);
-    return id;
   }
 );
 
@@ -74,12 +60,6 @@ const categoriesSlice = createSlice({
         const { id, updatedCategory } = action.payload;
         state.categories = state.categories.map((category) =>
           category.id === id ? { ...category, ...updatedCategory } : category
-        );
-      })
-
-      .addCase(deleteCategories.fulfilled, (state, action) => {
-        state.categories = state.categories.filter(
-          (categories) => categories.id !== action.payload
         );
       });
   },

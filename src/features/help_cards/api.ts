@@ -30,14 +30,18 @@ export async function createHelpCard(
 
   return res.json();
 }
-export async function updateHelpCard(helpCard: HelpCard): Promise<void> {
-  await fetch(`/api/cards/${helpCard.id}`, {
+export async function updateHelpCard(
+  id: number,
+  helpCard: HelpCard
+): Promise<HelpCard> {
+  const res = await fetch(`/api/cards/${helpCard.id}`, {
     method: 'PUT',
     body: JSON.stringify(helpCard),
     headers: {
       'Content-Type': 'application/json',
     },
   });
+  return res.json();
 }
 
 export async function getHelpCards(): Promise<{ cards: HelpCard[] }> {

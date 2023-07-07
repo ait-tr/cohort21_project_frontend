@@ -7,6 +7,7 @@ import ProfileInfo from './ProfileInfo';
 import { getProfile } from '../auth/authSlice';
 import Categories from '../categories/Categories';
 import AdminHelpCards from '../help_cards/AdminHelpCards';
+import SubCategories from '../subcategories/SubСategories';
 
 export default function ProfilePage(): JSX.Element {
   const user = useSelector(selectUser);
@@ -22,8 +23,9 @@ export default function ProfilePage(): JSX.Element {
         role === 'ADMIN' ? (
           <Container>
             <ProfileInfo />
-            <Categories />
             <AdminHelpCards />
+            <Categories />
+            <SubCategories />
           </Container>
         ) : (
           <Container>
