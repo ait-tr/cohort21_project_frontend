@@ -16,6 +16,9 @@ import ProfilePage from '../features/profile/Profile';
 import Subcategories from '../features/subcategories/SubСategories';
 import DetailHelpCard from '../features/help_cards/DetailHelpCard';
 import HelpCardForm from '../features/help_cards/HelpCardForm';
+import Imprint from '../features/page/Imprint';
+import Faq from '../features/page/Faq';
+import Contact from '../features/page/Contact';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -54,6 +57,9 @@ function App(): JSX.Element {
           <Route path="/card-details/:id" element={<DetailHelpCard />} />
           <Route path="/card/" element={<HelpCardForm isEditMode={false} />} />
           <Route path="/card/:id" element={<HelpCardForm isEditMode />} />
+          <Route path="/imprint" element={<Imprint />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/contact" element={<Contact />} />
         </Route>
       </Routes>
     </HashRouter>
