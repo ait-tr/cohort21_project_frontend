@@ -1,18 +1,31 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Link,
+  Button,
+  TextField,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { getProfile, getUserCards, login, resetLoginFormError } from './authSlice';
 import { selectLoginFormError } from './selectors';
 import { useAppDispatch } from '../../store';
 
-function Login(): JSX.Element {
+export default function Login(): JSX.Element {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
   const error = useSelector(selectLoginFormError);
-  const [username, setName] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setName] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
+
+  const handleTogglePasswordVisibility = (): void => {
+    setShowPassword((prevShowPassword: boolean) => !prevShowPassword);
+  };
 
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent) => {
@@ -60,51 +73,60 @@ function Login(): JSX.Element {
   );
 
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
-      <h2>Log in</h2>
-      {error && (
-        <div className="invalid-feedback mb-3" style={{ display: 'block' }}>
-          {error}
-        </div>
-      )}
-      <div className="mb-3">
-        <label htmlFor="name-input" className="form-label">
-          Name
-        </label>
-        <input
-          type="text"
-          className={`form-control ${error ? 'is-invalid' : ''}`}
-          id="name-input"
-          name="username"
-          value={username}
-          onChange={handleNameChange}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="password-input" className="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          className={`form-control ${error ? 'is-invalid' : ''}`}
-          id="password-input"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">
-        Log in
-      </button>
-      <Box sx={{ textAlign: 'center' }}>
-        <Button color="success" sx={{ mt: '1rem' }} href="#/auth/register">
-          <Typography textTransform="capitalize" textAlign="center">
-            Not registred?
-          </Typography>
-        </Button>
-      </Box>
-    </form>
+    <Box sx={{ fontFamily: 'Literata', my: 2 }}>
+      <form className="auth-form" onSubmit={handleSubmit}>
+        <Box sx={{ fontSize: 32, fontWeight: 500, textAlign: 'center' }}>
+          Login page
+        </Box>
+        <Box sx={{ margin: '0 auto' }}>
+          <TextField
+            autoComplete="false"
+            required
+            fullWidth
+            margin="normal"
+            id="username"
+            label="Username"
+            variant="outlined"
+            value={username}
+            onChange={handleNameChange}
+          />
+        </Box>
+        <Box sx={{ margin: '0 auto' }}>
+          <TextField
+            required
+            fullWidth
+            margin="normal"
+            id="password"
+            label="Password"
+            variant="outlined"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={handlePasswordChange}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleTogglePasswordVisibility}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
+        <Box sx={{ textAlign: 'center', my: 2 }}>
+          <Button variant="contained" type="submit" color="info">
+            Log in
+          </Button>
+          {error && <Box sx={{ display: 'block' }}>{error}</Box>}
+        </Box>
+        <Box sx={{ textAlign: 'center', my: 2 }}>
+          <Link href="#/auth/register">Not registred? Join us!</Link>
+        </Box>
+      </form>
+    </Box>
   );
 }
-
-export default Login;

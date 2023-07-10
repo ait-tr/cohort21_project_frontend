@@ -17,7 +17,7 @@ function Homepage(): JSX.Element {
   };
 
   return (
-    <Box sx={{ mt: '0.5rem' }}>
+    <Box sx={{ mt: '0.5rem', mb: 7 }}>
       <CategoryNavButton handleFilter={handleFilter} />
       <HelpCards
         selectedCategory={selectedCategory}

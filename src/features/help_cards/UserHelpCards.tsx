@@ -40,6 +40,7 @@ export default function UserHelpCards(): JSX.Element {
   const handleDeleteCard = (): void => {
     dispatch(deleteHelpCard(selectedCardId));
     handleCloseDeleteConfirmation();
+    setSelectedCardId(0);
   };
 
   useEffect(() => {

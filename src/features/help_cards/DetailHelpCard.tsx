@@ -43,7 +43,7 @@ export default function DetailHelpCard(): JSX.Element {
     dispatch(getHelpCards());
   }, [dispatch, id]);
   return (
-    <Container>
+    <Container sx={{ mb: 10 }}>
       <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {selectedCard && (
           <Box>

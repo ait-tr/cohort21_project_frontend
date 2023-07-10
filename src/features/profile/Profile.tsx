@@ -18,7 +18,7 @@ export default function ProfilePage(): JSX.Element {
   }, [user]);
 
   return (
-    <Container>
+    <Container sx={{ mb: 7 }}>
       {user ? (
         role === 'ADMIN' ? (
           <Container>

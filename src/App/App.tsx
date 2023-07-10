@@ -19,6 +19,7 @@ import HelpCardForm from '../features/help_cards/HelpCardForm';
 import Imprint from '../features/page/Imprint';
 import Faq from '../features/page/Faq';
 import Contact from '../features/page/Contact';
+import Disclaimer from '../features/page/Disclaimer';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -60,6 +61,7 @@ function App(): JSX.Element {
           <Route path="/imprint" element={<Imprint />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
         </Route>
       </Routes>
     </HashRouter>

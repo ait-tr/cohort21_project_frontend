@@ -40,9 +40,9 @@ export default function Header(): JSX.Element {
           component="a"
           href="/"
           sx={{
-            ml: '1.2rem',
+            ml: '1rem',
             flexGrow: 1,
-            fontSize: '1.8rem',
+            fontSize: '2rem',
             fontFamily: 'Exo',
             fontWeight: 600,
             letterSpacing: '.15rem',

@@ -49,13 +49,14 @@ export default function AdminHelpCards(): JSX.Element {
 
   const handleCloseDeleteConfirmation = (): void => {
     setselectedHelpCardId(0);
+    setChoosedId(0);
     setDeleteConfirmationOpen(false);
   };
 
   const handleDeleteCard = (): void => {
     dispatch(deleteHelpCard(selectedHelpCardId));
-    setselectedHelpCardId(0);
     handleCloseDeleteConfirmation();
+    setselectedHelpCardId(0);
   };
 
   useEffect(() => {
