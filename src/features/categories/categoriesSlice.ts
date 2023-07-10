@@ -11,8 +11,8 @@ const initialState: CategoriesState = {
 export const createCategory = createAsyncThunk(
   'categories/createCategory',
   async ({ title, description }: { title: string; description: string }) => {
-    if (!title.trim() || !description.trim()) {
-      throw new Error('Заголовок задачи и описание не должны быть пустыми');
+    if (!title.trim()) {
+      throw new Error('Название категории не должно быть пустым');
     }
     return api.createCategory(title, description);
   }

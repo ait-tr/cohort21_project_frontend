@@ -41,6 +41,7 @@ export default function UserHelpCards(): JSX.Element {
     dispatch(deleteHelpCard(selectedCardId));
     handleCloseDeleteConfirmation();
     setSelectedCardId(0);
+    dispatch(getUserCards());
   };
 
   useEffect(() => {

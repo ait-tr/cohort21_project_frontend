@@ -24,8 +24,8 @@ export const createSubCategory = createAsyncThunk(
     description: string;
     categoryId: number;
   }) => {
-    if (!title.trim() || !description.trim()) {
-      throw new Error('Заголовок задачи и описание не должны быть пустыми');
+    if (!title.trim()) {
+      throw new Error('Название подкатегории не должно быть пустым');
     }
     return api.createSubCategory(title, description, categoryId);
   }

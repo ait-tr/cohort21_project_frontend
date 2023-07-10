@@ -85,6 +85,7 @@ const helpCardsSlice = createSlice({
       })
       .addCase(createHelpCard.fulfilled, (state, action) => {
         state.helpCards.push(action.payload);
+        state.error = undefined;
       })
 
       .addCase(updateHelpCard.rejected, (state, action) => {
@@ -100,6 +101,7 @@ const helpCardsSlice = createSlice({
 
       .addCase(getHelpCards.fulfilled, (state, action) => {
         state.helpCards = action.payload.cards;
+        state.error = undefined;
       })
       .addCase(getHelpCards.rejected, (state, action) => {
         state.error = action.error.message;

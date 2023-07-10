@@ -199,14 +199,14 @@ export default function AddHelpCardForm({
   }, [dispatch, id, isEditMode]);
 
   return (
-    <Box maxWidth={400} mx="auto" p={2}>
+    <Box maxWidth={400} mx="auto" p={2} marginBottom={7}>
       <form onSubmit={handleSubmit}>
         <TextField
           required
           fullWidth
           margin="normal"
           id="title"
-          label="Title"
+          label="Title (max. 45 characters)"
           variant="outlined"
           size="small"
           value={title}
@@ -220,6 +220,7 @@ export default function AddHelpCardForm({
             id="category-select"
             value={categoryId}
             label="Category"
+            size="small"
             onChange={handleCategoryChange}
           >
             {categories?.map((element) => (
@@ -237,6 +238,7 @@ export default function AddHelpCardForm({
             id="subcategory-select"
             value={subCategoryId}
             label="Subcategory"
+            size="small"
             onChange={handleSubCategoryChange}
           >
             {subCategories?.map((element) =>
@@ -267,7 +269,7 @@ export default function AddHelpCardForm({
           rows={4}
           margin="normal"
           id="description"
-          label="Description"
+          label="Description (max. 170 characters)"
           variant="outlined"
           size="small"
           value={description}
@@ -280,7 +282,7 @@ export default function AddHelpCardForm({
           rows={4}
           margin="normal"
           id="full_description"
-          label="Full Description"
+          label="Full Description (max. 5000 characters)"
           variant="outlined"
           size="small"
           value={fullDescription}

@@ -34,7 +34,7 @@ export default function HelpCards({
 
   return (
     <Grid container p={2} spacing={1}>
-      {filteredHelpCards?.map((helpCard) => (
+      {filteredHelpCards?.reverse().map((helpCard) => (
         <HelpCard
           key={helpCard.id}
           id={helpCard.id}
