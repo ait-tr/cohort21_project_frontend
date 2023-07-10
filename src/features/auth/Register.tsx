@@ -38,7 +38,7 @@ function Register(): JSX.Element {
         }
       }
     },
-    [dispatch, username, navigate, password, passwordRepeat]
+    [dispatch, username, password, passwordRepeat, location.pathname, navigate]
   );
 
   const handleNameChange = React.useCallback(

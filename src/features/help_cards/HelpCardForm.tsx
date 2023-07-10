@@ -136,19 +136,17 @@ export default function AddHelpCardForm({
               );
             }
           }
-        }
-        if (updateHelpCard.rejected.match(dispatchUpdateResult)) {
+          dispatch(getUserCards());
+          setStatusMessage('Changes saved successfully.');
+          setTimeout(() => {
+            setShowSnackbar(false);
+            navigate('/api/users/my/profile');
+          }, 1000);
+          setShowSnackbar(true);
+        } else if (updateHelpCard.rejected.match(dispatchUpdateResult)) {
           console.error(dispatchUpdateResult.error.message);
         }
       }
-
-      dispatch(getUserCards());
-      setStatusMessage('Changes saved successfully.');
-      setTimeout(() => {
-        setShowSnackbar(false);
-        navigate('/api/users/my/profile');
-      }, 1000);
-      setShowSnackbar(true);
     },
     [
       isEditMode,

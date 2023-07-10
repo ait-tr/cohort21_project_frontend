@@ -39,7 +39,7 @@ function Login(): JSX.Element {
         console.error(dispatchResult.error.message);
       }
     },
-    [dispatch, username, navigate, password]
+    [dispatch, username, password, location.pathname, navigate]
   );
 
   const handleNameChange = React.useCallback(

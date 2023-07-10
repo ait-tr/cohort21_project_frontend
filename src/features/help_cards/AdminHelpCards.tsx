@@ -59,8 +59,15 @@ export default function AdminHelpCards(): JSX.Element {
   };
 
   useEffect(() => {
+    fetchHelpCard(choosedId);
     dispatch(getUserCards());
-  }, [dispatch, setselectedHelpCardId]);
+  }, [
+    dispatch,
+    setselectedHelpCardId,
+    deleteConfirmationOpen,
+    selectedHelpCardId,
+    choosedId,
+  ]);
 
   return (
     <Container>

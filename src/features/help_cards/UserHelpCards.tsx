@@ -20,8 +20,7 @@ import { deleteHelpCard } from './helpCardsSlice';
 export default function UserHelpCards(): JSX.Element {
   const userHelpCards = useSelector(selectUserCards);
   const dispatch = useAppDispatch();
-  const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
-    React.useState(false);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = React.useState(false);
   const [selectedCardId, setSelectedCardId] = React.useState<number>(0);
   const navigate = useNavigate();
 
@@ -45,7 +44,7 @@ export default function UserHelpCards(): JSX.Element {
 
   useEffect(() => {
     dispatch(getUserCards());
-  }, [dispatch, selectedCardId]);
+  }, [dispatch, selectedCardId, deleteConfirmationOpen]);
 
   return (
     <Container>
@@ -111,10 +110,7 @@ export default function UserHelpCards(): JSX.Element {
         )}
       </Grid>
 
-      <Dialog
-        open={deleteConfirmationOpen}
-        onClose={handleCloseDeleteConfirmation}
-      >
+      <Dialog open={deleteConfirmationOpen} onClose={handleCloseDeleteConfirmation}>
         <DialogTitle>Delete offer</DialogTitle>
         <DialogContent>
           <Typography variant="body1">
